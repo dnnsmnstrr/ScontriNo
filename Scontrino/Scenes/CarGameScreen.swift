@@ -1,5 +1,5 @@
 //
-//  CarGameScene.swift
+//  CarGameScreen.swift
 //  Scontrino
 //
 //  Created by Eduardo Yutaka Nakanishi on 26/04/2018.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-class CarGameScene: GameScene {
-
+class CarGameScreen: GameScene {
+    
 }

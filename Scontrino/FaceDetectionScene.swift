@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class FaceDetectionScene: SKScene {
+class FaceDetectionScreen: SKScene {
     
     override init() {
         super.init(size: CGSize(width: 375, height: 667))
