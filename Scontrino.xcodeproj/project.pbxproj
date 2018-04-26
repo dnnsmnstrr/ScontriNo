@@ -17,6 +17,8 @@
 		2A2B4A44209214F4009B81FB /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A43209214F4009B81FB /* Consts.swift */; };
 		2A2B4A46209217F6009B81FB /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A45209217F6009B81FB /* StartScreen.swift */; };
 		2A2B4A4B2092286F009B81FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A2B4A4A2092286F009B81FB /* Assets.xcassets */; };
+		2A2B4A4D20924A10009B81FB /* MovingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A4C20924A10009B81FB /* MovingNode.swift */; };
+		2A2B4A4F209252FB009B81FB /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A4E209252FB009B81FB /* ButtonNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		2A2B4A43209214F4009B81FB /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		2A2B4A45209217F6009B81FB /* StartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
 		2A2B4A4A2092286F009B81FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2A2B4A4C20924A10009B81FB /* MovingNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingNode.swift; sourceTree = "<group>"; };
+		2A2B4A4E209252FB009B81FB /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,9 +71,6 @@
 				2A2B4A4920922272009B81FB /* Supporting Files */,
 				2A2B4A4820922256009B81FB /* Scenes */,
 				2A2B4A4720922241009B81FB /* Resources */,
-				2A2B4A3B2091FF42009B81FB /* FaceDetectionScene.swift */,
-				2A2B4A3D2091FF5A009B81FB /* SpeechRecognitionScene.swift */,
-				2A2B4A3F2091FF86009B81FB /* GameScene.swift */,
 				2A2B4A352091FBD7009B81FB /* Info.plist */,
 			);
 			path = Scontrino;
@@ -89,6 +90,8 @@
 			children = (
 				2A2B4A45209217F6009B81FB /* StartScreen.swift */,
 				2A2B4A41209213C2009B81FB /* CarGameScreen.swift */,
+				2A2B4A3B2091FF42009B81FB /* FaceDetectionScene.swift */,
+				2A2B4A3D2091FF5A009B81FB /* SpeechRecognitionScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -99,6 +102,9 @@
 				2A2B4A292091FBD4009B81FB /* AppDelegate.swift */,
 				2A2B4A43209214F4009B81FB /* Consts.swift */,
 				2A2B4A2B2091FBD4009B81FB /* RootViewController.swift */,
+				2A2B4A3F2091FF86009B81FB /* GameScene.swift */,
+				2A2B4A4C20924A10009B81FB /* MovingNode.swift */,
+				2A2B4A4E209252FB009B81FB /* ButtonNode.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -176,11 +182,13 @@
 			files = (
 				2A2B4A402091FF86009B81FB /* GameScene.swift in Sources */,
 				2A2B4A3C2091FF42009B81FB /* FaceDetectionScene.swift in Sources */,
+				2A2B4A4F209252FB009B81FB /* ButtonNode.swift in Sources */,
 				2A2B4A46209217F6009B81FB /* StartScreen.swift in Sources */,
 				2A2B4A2C2091FBD4009B81FB /* RootViewController.swift in Sources */,
 				2A2B4A42209213C2009B81FB /* CarGameScreen.swift in Sources */,
 				2A2B4A44209214F4009B81FB /* Consts.swift in Sources */,
 				2A2B4A3E2091FF5A009B81FB /* SpeechRecognitionScene.swift in Sources */,
+				2A2B4A4D20924A10009B81FB /* MovingNode.swift in Sources */,
 				2A2B4A2A2091FBD4009B81FB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

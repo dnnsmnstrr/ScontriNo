@@ -45,20 +45,17 @@ class StartScreen: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let location = touch.location(in: self)
-            let nodes = self.nodes(at: location)
+            let node = self.atPoint(location)
             
-            if let node = nodes.first {
-                switch node.name {
-                case "topNode":
-                    RootViewController.shared.skView.presentScene(CarGameScreen())
-                case "middleNode":
-                    RootViewController.shared.skView.presentScene(SpeechRecognitionScreen())
-                case "bottomNode":
-                    RootViewController.shared.skView.presentScene(FaceDetectionScreen())
-                default:
-                    break
-                }
-                
+            switch node.name {
+            case "topNode":
+                RootViewController.shared.skView.presentScene(CarGameScreen())
+            case "middleNode":
+                RootViewController.shared.skView.presentScene(SpeechRecognitionScreen())
+            case "bottomNode":
+                RootViewController.shared.skView.presentScene(FaceDetectionScreen())
+            default:
+                break
             }
         }
     }
