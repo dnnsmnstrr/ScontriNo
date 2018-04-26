@@ -12,7 +12,12 @@ class GameScene: SKScene {
     
     override init() {
         super.init(size: CGSize(width: 375, height: 667))
-        backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+        
+        let backButton = SKShapeNode(rect: CGRect(x: 100, y: 100, width: 100, height: 100))
+        backButton.fillColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+        backButton.position = CGPoint(x: 100, y: 100)
+        self.addChild(backButton)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,8 @@
 		2A2B4A3C2091FF42009B81FB /* FaceDetectionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A3B2091FF42009B81FB /* FaceDetectionScene.swift */; };
 		2A2B4A3E2091FF5A009B81FB /* SpeechRecognitionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A3D2091FF5A009B81FB /* SpeechRecognitionScene.swift */; };
 		2A2B4A402091FF86009B81FB /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A3F2091FF86009B81FB /* GameScene.swift */; };
+		2A2B4A42209213C2009B81FB /* CarGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A41209213C2009B81FB /* CarGameScene.swift */; };
+		2A2B4A44209214F4009B81FB /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A43209214F4009B81FB /* Consts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		2A2B4A3B2091FF42009B81FB /* FaceDetectionScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectionScene.swift; sourceTree = "<group>"; };
 		2A2B4A3D2091FF5A009B81FB /* SpeechRecognitionScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionScene.swift; sourceTree = "<group>"; };
 		2A2B4A3F2091FF86009B81FB /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		2A2B4A41209213C2009B81FB /* CarGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarGameScene.swift; sourceTree = "<group>"; };
+		2A2B4A43209214F4009B81FB /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,11 +62,13 @@
 		2A2B4A282091FBD4009B81FB /* Scontrino */ = {
 			isa = PBXGroup;
 			children = (
+				2A2B4A43209214F4009B81FB /* Consts.swift */,
 				2A2B4A292091FBD4009B81FB /* AppDelegate.swift */,
 				2A2B4A2B2091FBD4009B81FB /* ViewController.swift */,
 				2A2B4A3B2091FF42009B81FB /* FaceDetectionScene.swift */,
 				2A2B4A3D2091FF5A009B81FB /* SpeechRecognitionScene.swift */,
 				2A2B4A3F2091FF86009B81FB /* GameScene.swift */,
+				2A2B4A41209213C2009B81FB /* CarGameScene.swift */,
 				2A2B4A302091FBD7009B81FB /* Assets.xcassets */,
 				2A2B4A322091FBD7009B81FB /* LaunchScreen.storyboard */,
 				2A2B4A352091FBD7009B81FB /* Info.plist */,
@@ -102,11 +108,12 @@
 				TargetAttributes = {
 					2A2B4A252091FBD4009B81FB = {
 						CreatedOnToolsVersion = 9.3;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = 2A2B4A212091FBD4009B81FB /* Build configuration list for PBXProject "Scontrino" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -143,6 +150,8 @@
 				2A2B4A402091FF86009B81FB /* GameScene.swift in Sources */,
 				2A2B4A3C2091FF42009B81FB /* FaceDetectionScene.swift in Sources */,
 				2A2B4A2C2091FBD4009B81FB /* ViewController.swift in Sources */,
+				2A2B4A42209213C2009B81FB /* CarGameScene.swift in Sources */,
+				2A2B4A44209214F4009B81FB /* Consts.swift in Sources */,
 				2A2B4A3E2091FF5A009B81FB /* SpeechRecognitionScene.swift in Sources */,
 				2A2B4A2A2091FBD4009B81FB /* AppDelegate.swift in Sources */,
 			);
@@ -270,8 +279,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -283,10 +291,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4NM7H49NAJ;
 				INFOPLIST_FILE = Scontrino/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ADA.Scontrino;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -301,10 +306,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4NM7H49NAJ;
 				INFOPLIST_FILE = Scontrino/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ADA.Scontrino;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

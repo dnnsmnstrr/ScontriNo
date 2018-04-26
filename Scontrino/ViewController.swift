@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         // Add additional scene contents here.
         let topNode = SKShapeNode(rect: CGRect(x: -100, y: -50, width: 200, height: 100))
         topNode.name = "topNode"
-        topNode.fillColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        topNode.fillColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
         topNode.position = CGPoint(x: scene.size.width / 2, y: 3 * scene.size.height / 4)
         scene.addChild(topNode)
         
@@ -62,7 +62,7 @@ class ViewController: UIViewController {
             if let node = nodes.first {
                 switch node.name {
                 case "topNode":
-                    skView.presentScene(GameScene())
+                    skView.presentScene(CarGameScene())
                 case "middleNode":
                     skView.presentScene(SpeechRecognitionScene())
                 case "bottomNode":
