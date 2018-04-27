@@ -6,8 +6,11 @@
 //  Copyright © 2018 Eduardo Yutaka Nakanishi. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Consts {
-    
+    struct Graphics {
+        static let screenWidth = UIScreen.main.bounds.width
+        static let screenHeight = UIScreen.main.bounds.height
+    }
 }

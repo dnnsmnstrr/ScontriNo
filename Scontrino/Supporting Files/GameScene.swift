@@ -11,7 +11,7 @@ import SpriteKit
 class GameScene: SKScene {
     
     override init() {
-        super.init(size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        super.init(size: CGSize(width: Consts.Graphics.screenWidth, height: Consts.Graphics.screenHeight))
         createSceneContents()
     }
     

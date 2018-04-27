@@ -8,11 +8,10 @@
 
 import SpriteKit
 
-class FaceDetectionScreen: SKScene {
+class FaceDetectionScreen: GameScene {
     
     override init() {
-        super.init(size: CGSize(width: 375, height: 667))
-        backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        super.init()
     }
     
     required init?(coder aDecoder: NSCoder) {
