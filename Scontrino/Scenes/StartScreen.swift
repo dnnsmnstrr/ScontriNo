@@ -11,8 +11,7 @@ import SpriteKit
 class StartScreen: SKScene {
     
     override init() {
-//        super.init(size: CGSize(width: 768, height: 1024))
-        super.init(size: CGSize(width: 375, height: 667))
+        super.init(size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         createSceneContent()
     }
     
@@ -21,7 +20,7 @@ class StartScreen: SKScene {
     }
     
     func createSceneContent() {
-        self.scaleMode = .aspectFit
+        self.scaleMode = .resizeFill
         // Add additional scene contents here.
         let topNode = SKShapeNode(rect: CGRect(x: -100, y: -50, width: 200, height: 100))
         topNode.name = "topNode"
@@ -53,7 +52,8 @@ class StartScreen: SKScene {
             case "middleNode":
                 RootViewController.shared.skView.presentScene(SpeechRecognitionScreen())
             case "bottomNode":
-                RootViewController.shared.skView.presentScene(FaceDetectionScreen())
+                RootViewController.shared.skView.removeFromSuperview()
+//                RootViewController.shared.skView.scene?
             default:
                 break
             }

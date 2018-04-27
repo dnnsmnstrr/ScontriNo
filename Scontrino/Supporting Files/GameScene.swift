@@ -11,7 +11,7 @@ import SpriteKit
 class GameScene: SKScene {
     
     override init() {
-        super.init(size: CGSize(width: 375, height: 667))
+        super.init(size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         createSceneContents()
     }
     
@@ -20,8 +20,6 @@ class GameScene: SKScene {
     }
     
     func createSceneContents() {
-        backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
-        
         let backButton = ButtonNode(imageNamed: "green star")
         backButton.position = CGPoint(x: 80, y: self.size.height - 80)
         backButton.name = "backButton"

@@ -18,9 +18,9 @@ class MovingNode: SKSpriteNode {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
-            if let parent = self.parent as? CarGameScreen {
-                let location = touch.location(in: parent)
-                parent.nodePosition = location
+            if let scene = self.scene as? CarGameScreen {
+                let location = touch.location(in: scene)
+                scene.squarePosition = location
             }
         }
     }
