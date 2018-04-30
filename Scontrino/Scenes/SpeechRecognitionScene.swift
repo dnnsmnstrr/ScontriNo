@@ -10,9 +10,14 @@ import SpriteKit
 import Speech
 
 class SpeechRecognitionScreen: GameScene, SFSpeechRecognizerDelegate {
+    let tempDataModel = ["stella", "luna", "sole"] // all the possible words
+    var wordIndex = 0
+    var currentWordOnScreen: String?
+    
     var isRecording = false
     let recordingNode = SKSpriteNode(imageNamed: "recording off")
-    var recognizedWord = ""
+    var recognizedSentence = ""
+    var recognizedWords = [Substring]()
     
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "it-IT"))!
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
@@ -21,6 +26,7 @@ class SpeechRecognitionScreen: GameScene, SFSpeechRecognizerDelegate {
     
     override init() {
         super.init()
+        currentWordOnScreen = tempDataModel[wordIndex]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -103,21 +109,35 @@ class SpeechRecognitionScreen: GameScene, SFSpeechRecognizerDelegate {
             var isFinal = false
             
             if let result = result {
-                self.recognizedWord = result.bestTranscription.formattedString
-                isFinal = result.isFinal
-            }
-            
-            if self.recognizedWord == "Stella" {
-                let starCardNode = self.childNode(withName: "star card")
-                let fadeAway = SKAction.fadeOut(withDuration: 1.0)
-                let removeNode = SKAction.removeFromParent()
-                let sequence = SKAction.sequence([fadeAway, removeNode])
-                starCardNode?.run(sequence)
                 
-                let moonCardNode = SKSpriteNode(imageNamed: "moon card")
-                moonCardNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight / 2)
-                self.addChild(moonCardNode)
-                moonCardNode.run(SKAction.sequence([SKAction.fadeOut(withDuration: 0.0), SKAction.wait(forDuration: 1.0), SKAction.fadeIn(withDuration: 1.0)]))
+                // Recognized sentence from speech recognition session
+                self.recognizedSentence = result.bestTranscription.formattedString
+                isFinal = result.isFinal
+                
+                // Getting recognized words from the sentence above
+                self.recognizedWords = self.recognizedSentence.split(separator: " ")
+                
+                // Control if the array of words has the current word (needs to be set empty or to reinitialize the session)
+                if self.recognizedWords.contains(Substring(self.currentWordOnScreen!)) {
+                    self.wordIndex += 1
+                    let i = self.recognizedWords.index(of: Substring(self.currentWordOnScreen!))
+                    print(self.wordIndex)
+                    print(self.recognizedWords[i!])
+                    self.currentWordOnScreen = self.tempDataModel[self.wordIndex]
+                    if self.currentWordOnScreen == "sole" {
+                        print("it worked!")
+                    }
+                    let starCardNode = self.childNode(withName: "star card")
+                    let fadeAway = SKAction.fadeOut(withDuration: 1.0)
+                    let removeNode = SKAction.removeFromParent()
+                    let sequence = SKAction.sequence([fadeAway, removeNode])
+                    starCardNode?.run(sequence)
+                    
+                    let moonCardNode = SKSpriteNode(imageNamed: "moon card")
+                    moonCardNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight / 2)
+                    self.addChild(moonCardNode)
+                    moonCardNode.run(SKAction.sequence([SKAction.fadeOut(withDuration: 0.0), SKAction.wait(forDuration: 1.0), SKAction.fadeIn(withDuration: 1.0)]))
+                }
             }
             
             if error != nil || isFinal {
