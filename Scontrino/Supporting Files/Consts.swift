@@ -9,6 +9,18 @@
 import UIKit
 
 struct Consts {
+    static let words = [
+        "luna",
+        "stella"
+    ]
+    static let shapes = [
+        "blue triangle",
+        "green star",
+        "orange circle",
+        "red square",
+        "teal blue pentagon",
+        "yellow rounded"
+    ]
     struct Graphics {
         static let screenWidth = UIScreen.main.bounds.width
         static let screenHeight = UIScreen.main.bounds.height
