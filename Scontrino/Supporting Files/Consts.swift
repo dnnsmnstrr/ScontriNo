@@ -10,8 +10,8 @@ import UIKit
 
 struct Consts {
     static let words = [
-        "luna",
-        "stella"
+        "moon",
+        "star"
     ]
     static let shapes = [
         "blue triangle",

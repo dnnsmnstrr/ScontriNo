@@ -10,23 +10,19 @@ import SpriteKit
 import Speech
 
 class SpeechRecognitionScreen: GameScene, SFSpeechRecognizerDelegate {
-    let tempDataModel = ["stella", "luna", "sole"] // all the possible words
-    var wordIndex = 0
-    var currentWordOnScreen: String?
+    var currentWordOnScreen: String!
     
-    var isRecording = false
     let recordingNode = SKSpriteNode(imageNamed: "recording off")
     var recognizedSentence = ""
     var recognizedWords = [Substring]()
     
-    private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "it-IT"))!
+    private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))!
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private var audio = AVAudioEngine()
     
     override init() {
         super.init()
-        currentWordOnScreen = tempDataModel[wordIndex]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,10 +31,24 @@ class SpeechRecognitionScreen: GameScene, SFSpeechRecognizerDelegate {
     
     override func createSceneContents() {
         super.createSceneContents()
-        let starCardNode = SKSpriteNode(imageNamed: "star card")
-        starCardNode.name = "star card"
-        starCardNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight / 2)
-        self.addChild(starCardNode)
+        currentWordOnScreen = GameDataSource.shared.nextWord()
+        
+        let cardNode = SKSpriteNode(imageNamed: "card")
+        cardNode.name = "card"
+        cardNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight / 2)
+        self.addChild(cardNode)
+        
+        let illustrationNode = SKSpriteNode(imageNamed: currentWordOnScreen)
+        illustrationNode.name = "illustration"
+        illustrationNode.position = CGPoint(x: 0, y: 33.5 * cardNode.size.height / 267)
+        cardNode.addChild(illustrationNode)
+        
+        let captionNode = SKLabelNode(text: currentWordOnScreen)
+        captionNode.fontSize = 36
+        captionNode.fontColor = .black
+        captionNode.name = "caption"
+        captionNode.position = CGPoint(x: 0, y: -100 * cardNode.size.height / 267)
+        cardNode.addChild(captionNode)
         
         recordingNode.name = "recording"
         recordingNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight / 5)
@@ -111,32 +121,34 @@ class SpeechRecognitionScreen: GameScene, SFSpeechRecognizerDelegate {
             if let result = result {
                 
                 // Recognized sentence from speech recognition session
-                self.recognizedSentence = result.bestTranscription.formattedString
+                self.recognizedSentence = result.bestTranscription.formattedString.lowercased()
+                print(self.recognizedSentence)
                 isFinal = result.isFinal
                 
-                // Getting recognized words from the sentence above
-                self.recognizedWords = self.recognizedSentence.split(separator: " ")
-                
                 // Control if the array of words has the current word (needs to be set empty or to reinitialize the session)
-                if self.recognizedWords.contains(Substring(self.currentWordOnScreen!)) {
-                    self.wordIndex += 1
-                    let i = self.recognizedWords.index(of: Substring(self.currentWordOnScreen!))
-                    print(self.wordIndex)
-                    print(self.recognizedWords[i!])
-                    self.currentWordOnScreen = self.tempDataModel[self.wordIndex]
-                    if self.currentWordOnScreen == "sole" {
-                        print("it worked!")
-                    }
-                    let starCardNode = self.childNode(withName: "star card")
-                    let fadeAway = SKAction.fadeOut(withDuration: 1.0)
-                    let removeNode = SKAction.removeFromParent()
-                    let sequence = SKAction.sequence([fadeAway, removeNode])
-                    starCardNode?.run(sequence)
+                if self.recognizedSentence.contains(self.currentWordOnScreen) {
+//                    self.wordIndex += 1
+//                    let i = self.recognizedWords.index(of: Substring(self.currentWordOnScreen!))
+//                    print(self.wordIndex)
+//                    print(self.recognizedWords[i!])
+                    self.currentWordOnScreen = GameDataSource.shared.nextWord()
+                    print(self.currentWordOnScreen)
+//                    if self.currentWordOnScreen == "sole" {
+//                        print("it worked!")
+//                    }
                     
-                    let moonCardNode = SKSpriteNode(imageNamed: "moon card")
-                    moonCardNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight / 2)
-                    self.addChild(moonCardNode)
-                    moonCardNode.run(SKAction.sequence([SKAction.fadeOut(withDuration: 0.0), SKAction.wait(forDuration: 1.0), SKAction.fadeIn(withDuration: 1.0)]))
+                    let cardNode = self.childNode(withName: "card")
+                    let illustrationNode = cardNode?.childNode(withName: "illustration")
+                    let captionNode = cardNode?.childNode(withName: "caption") as! SKLabelNode
+                    
+                    let cardAnimation = SKAction.sequence([SKAction.fadeOut(withDuration: 1.0),
+                                                           SKAction.fadeIn(withDuration: 1.0)])
+                    let illustrationAnimation = SKAction.sequence([SKAction.wait(forDuration: 1.0),
+                                                                   SKAction.setTexture(SKTexture(imageNamed: self.currentWordOnScreen))])
+                    
+                    cardNode?.run(cardAnimation)
+                    illustrationNode?.run(illustrationAnimation)
+                    captionNode.text = self.currentWordOnScreen
                 }
             }
             
