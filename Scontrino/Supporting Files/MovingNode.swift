@@ -20,7 +20,7 @@ class MovingNode: SKSpriteNode {
         if let touch = touches.first {
             if let scene = self.scene as? CarGameScreen {
                 let location = touch.location(in: scene)
-                scene.squarePosition = location
+                scene.coloredShapesPositions[self.name!] = location
             }
         }
     }
