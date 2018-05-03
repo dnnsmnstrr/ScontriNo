@@ -20,7 +20,6 @@ class CarGameScreen: GameScene {
     
     
     override init() {
-        
         super.init()
     }
     

@@ -14,12 +14,20 @@ struct Consts {
         "star"
     ]
     static let shapes = [
-        "blue triangle",
-        "green star",
-        "orange circle",
-        "red square",
-        "teal blue pentagon",
-        "yellow rounded"
+        "triangle",
+        "star",
+        "circle",
+        "square",
+        "polygon",
+        "rounded"
+    ]
+    static let colors = [
+        "blue",
+        "green",
+        "orange",
+        "red",
+        "teal blue",
+        "yellow"
     ]
     struct Graphics {
         static let screenWidth = UIScreen.main.bounds.width
