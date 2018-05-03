@@ -16,6 +16,7 @@ class CarGameScreen: GameScene {
     //shape arrays
     var coloredShapesNodes: [MovingNode] = []
     var coloredShapesPositions: [String: CGPoint] = [:]
+    var coloredShapesInitialPositions: [String: CGPoint] = [:] //using a different type
     
     
     
@@ -67,7 +68,8 @@ class CarGameScreen: GameScene {
             debugPrint("line 48 index:\(index)")
             debugPrint(" coloredShapesNodes.count:\(coloredShapesNodes.count)")
             coloredShapesNodes[index].name = Consts.Id.CarGameScreen.coloredShapeNode + "\(index)"
-            coloredShapesPositions[coloredShapesNodes[index].name!] = (CGPoint(x: CGFloat(UIScreen.main.bounds.width / CGFloat(shapeNumber) + spacing + (CGFloat(index) * coloredShapesNodes[index].size.width ) ), y: UIScreen.main.bounds.height / 2))
+            coloredShapesInitialPositions[coloredShapesNodes[index].name!] = (CGPoint(x: CGFloat(UIScreen.main.bounds.width / CGFloat(shapeNumber) + spacing + (CGFloat(index) * coloredShapesNodes[index].size.width ) ), y: UIScreen.main.bounds.height / 2))
+            coloredShapesPositions[coloredShapesNodes[index].name!] = coloredShapesInitialPositions[coloredShapesNodes[index].name!]
             coloredShapesNodes[index].position = coloredShapesPositions[coloredShapesNodes[index].name!]!
             self.addChild(coloredShapesNodes[index])
         }

@@ -9,6 +9,7 @@
 import SpriteKit
 
 class MovingNode: SKSpriteNode {
+    var isInTheRightHole = false
     
     convenience init(imageNamed: String) {
         let texture = SKTexture(imageNamed: imageNamed)
@@ -23,5 +24,15 @@ class MovingNode: SKSpriteNode {
                 scene.coloredShapesPositions[self.name!] = location
             }
         }
+    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        if let touch = touches.first {
+            if isInTheRightHole == false{
+                if let scene = self.scene as? CarGameScreen {
+//                    let location = touch.location(in: scene)
+                    scene.coloredShapesPositions[self.name!] = scene.coloredShapesInitialPositions[self.name!]
+                }
+            }
+//        }
     }
 }
