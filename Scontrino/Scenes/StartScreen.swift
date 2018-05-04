@@ -28,17 +28,17 @@ class StartScreen: SKScene, ButtonNodeDelegate {
         self.addChild(cameraNode)
         self.camera = cameraNode
         
-        let extraNode = ButtonNode(imageNamed: "blue triangle")
-        extraNode.delegate = self
-        extraNode.name = "CategoriseGameScreen"
-        extraNode.position = CGPoint(x: self.size.width / 2, y: 5.5 * self.size.height / 8)
-        self.addChild(extraNode)
-        
         let topNode = ButtonNode(imageNamed: "red square")
         topNode.delegate = self
         topNode.name = "CarGameScreen"
-        topNode.position = CGPoint(x: self.size.width / 2, y: 4.5 * self.size.height / 8)
+        topNode.position = CGPoint(x: self.size.width / 2, y: 5.5 * self.size.height / 8)
         self.addChild(topNode)
+        
+        let extraNode = ButtonNode(imageNamed: "blue triangle")
+        extraNode.delegate = self
+        extraNode.name = "CategorizationGameScreen"
+        extraNode.position = CGPoint(x: self.size.width / 2, y: 4.5 * self.size.height / 8)
+        self.addChild(extraNode)
         
         let middleNode = ButtonNode(imageNamed: "orange circle")
         middleNode.delegate = self
@@ -76,6 +76,8 @@ class StartScreen: SKScene, ButtonNodeDelegate {
             switch name {
             case "CarGameScreen":
                 RootViewController.shared.skView.presentScene(CarGameScreen())
+            case "CategorizationGameScreen":
+                RootViewController.shared.skView.presentScene(CategorizationGameScreen())
             case "FaceDetectionScreen":
                 RootViewController.shared.skView.presentScene(FaceDetectionScreen())
             case "SpeechRecognitionScreen":
