@@ -11,7 +11,10 @@ import SpriteKit
 class CarGameScreen: GameScene {
     
     let squareNode = MovingNode(imageNamed: "red square")
-    var squarePosition: CGPoint!
+    
+    var holePosition: CGPoint!
+    
+    var holeNode = GameDataSource.shared.nextStaticNode()
     
     //shape arrays
     var coloredShapesNodes: [MovingNode] = []
@@ -72,10 +75,16 @@ class CarGameScreen: GameScene {
             coloredShapesNodes[index].position = coloredShapesPositions[coloredShapesNodes[index].name!]!
             self.addChild(coloredShapesNodes[index])
         }
-        squarePosition = CGPoint(x: CGFloat(UIScreen.main.bounds.width / 2), y: UIScreen.main.bounds.height / 2)
-        squareNode.position = squarePosition
-//        self.addChild(squareNode)
+        createHole()
         
+        
+    }
+    
+    func createHole(){
+        holePosition = CGPoint(x: CGFloat(UIScreen.main.bounds.width / 2), y: UIScreen.main.bounds.height / 3)
+        holeNode.position = holePosition
+        holeNode.zPosition = -1
+        self.addChild(holeNode)
     }
     
     override func update(_ currentTime: TimeInterval) {
