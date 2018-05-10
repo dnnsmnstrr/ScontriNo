@@ -12,16 +12,13 @@ import SpriteKit
 class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     
     let squareNode = MovingNode(imageNamed: "red square")
-    
-//    var holePosition: CGPoint!
-    
     var holeNode = GameDataSource.shared.nextStaticNode()
-    
+    let textureWidth = MovingNode(imageNamed: "red square").size.width
     //shape arrays
     var coloredShapesNodes: [MovingNode] = []
     var coloredShapesPositions: [String: CGPoint] = [:]
     var coloredShapesInitialPositions: [String: CGPoint] = [:] //using a different type
-    let textureWidth = MovingNode(imageNamed: "red square").size.width
+    
     
     override init() {
         super.init()
@@ -42,7 +39,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
 //    }
     
     func setDifficulty() -> Int {
-        let difficulty = 1 //example for difficulty
+        let difficulty = 2 //example for difficulty
         var numberOfShapes: Int
         switch difficulty {
         case 1:
@@ -79,14 +76,8 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     override func createSceneContents() {
         super.createSceneContents()
         self.physicsWorld.contactDelegate = self
-        debugPrint(self.scene?.view)
         createShapes()
-//        mainView.showsPhysics = true
-//        mainView.ignoresSiblingOrder = true
-        
         createHole()
-        
-        
     }
     
     func createHole(){
@@ -94,16 +85,13 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
         holeNode.zPosition = -1
         if let texture = holeNode.texture {
             var texSize = texture.size()
-            debugPrint("texsize wid: \(texSize.width)")
             texSize.width = (texSize.width) * 0.55
-            debugPrint("texsize wid: \(texSize.width)")
             texSize.height = (texSize.height) * 0.55
             holeNode.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "red square"), size: texSize)
             holeNode.physicsBody?.isDynamic = false
             holeNode.physicsBody?.affectedByGravity = false
             holeNode.physicsBody?.categoryBitMask = Consts.PhysicsMask.holeNode
             holeNode.physicsBody?.contactTestBitMask = Consts.PhysicsMask.shapeNodes
-            debugPrint("line 96")
         }
         self.addChild(holeNode)
     }
@@ -112,13 +100,13 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
         var i = 0
         while i < coloredShapesNodes.count {
             if coloredShapesNodes[i].name == nodeName {
+                debugPrint("new Shape")
                 coloredShapesNodes[i].removeFromParent()
                 coloredShapesNodes[i] = GameDataSource.shared.nextMovingNode()
                 createOneShape(index: i, numberOfShapes: setDifficulty())
-//                coloredShapesNodes[i].name = Consts.Id.CarGameScreen.coloredShapeNode + "\(i)"
-//                coloredShapesNodes[i].position = coloredShapesInitialPositions[coloredShapesNodes[i].name!]!
-//                coloredShapesPositions[coloredShapesNodes[i].name!] = coloredShapesInitialPositions[coloredShapesNodes[i].name!]
-//                self.addChild(coloredShapesNodes[i])
+                holeNode.removeFromParent()
+                holeNode = GameDataSource.shared.nextStaticNode()
+                createHole()
             }
             i += 1
         }
@@ -126,10 +114,9 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     }
     
     public func didBegin(_ contact: SKPhysicsContact) {
-//        contact.contactPoint
         if contact.bodyA.categoryBitMask == Consts.PhysicsMask.shapeNodes{
             if contact.bodyB.categoryBitMask == Consts.PhysicsMask.holeNode{
-                debugPrint("scontro punot:\(contact.contactPoint)")
+                debugPrint("scontro")
                 let contactNode = contact.bodyA.node as! MovingNode
                 contactNode.isInTheRightHole = true
             }
@@ -147,8 +134,6 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
-//        squareNode.position = squarePosition
-//        coloredShapesNodes[0].position = squarePosition
         for index in  0..<coloredShapesNodes.count {
             coloredShapesNodes[index].position = coloredShapesPositions[coloredShapesNodes[index].name!]!
         }
