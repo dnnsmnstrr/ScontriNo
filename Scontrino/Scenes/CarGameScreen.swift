@@ -32,7 +32,7 @@ class CarGameScreen: GameScene {
     }
     
     func setDifficulty() -> Int {
-        let difficulty = 3 //example for difficulty
+        let difficulty = 1 //example for difficulty
         var numberOfShapes: Int
         switch difficulty {
         case 1:
@@ -50,29 +50,40 @@ class CarGameScreen: GameScene {
     }
     
     func createShape() {
-        debugPrint("line 59")
+//        debugPrint("line 59")
 //        let randomShape = arc4random_uniform(UInt32(Consts.shapes.count))
 //        let randomNode = MovingNode(imageNamed: (Consts.shapes[Int(randomShape)]))
 //        debugPrint(" randomNode:\(randomNode)")
         coloredShapesNodes.append(GameDataSource.shared.nextMovingNode())
-        debugPrint(" coloredShapesNodes:\(coloredShapesNodes[0])")
-        debugPrint(" coloredShapesNodes.count:\(coloredShapesNodes.count)")
+//        debugPrint(" coloredShapesNodes:\(coloredShapesNodes[0])")
+//        debugPrint(" coloredShapesNodes.count:\(coloredShapesNodes.count)")
         
         
     }
     
     override func createSceneContents() {
         super.createSceneContents()
+        self.view?.showsPhysics = true
+//        mainView.showsPhysics = true
+//        mainView.ignoresSiblingOrder = true
         let shapeNumber = setDifficulty()
         let spacing: CGFloat = 10
         for index in  0..<shapeNumber{
             createShape()
-            debugPrint("line 48 index:\(index)")
-            debugPrint(" coloredShapesNodes.count:\(coloredShapesNodes.count)")
+//            debugPrint("line 48 index:\(index)")
+//            debugPrint(" coloredShapesNodes.count:\(coloredShapesNodes.count)")
             coloredShapesNodes[index].name = Consts.Id.CarGameScreen.coloredShapeNode + "\(index)"
             coloredShapesInitialPositions[coloredShapesNodes[index].name!] = (CGPoint(x: CGFloat(UIScreen.main.bounds.width / CGFloat(shapeNumber) + spacing + (CGFloat(index) * coloredShapesNodes[index].size.width ) ), y: UIScreen.main.bounds.height / 2))
             coloredShapesPositions[coloredShapesNodes[index].name!] = coloredShapesInitialPositions[coloredShapesNodes[index].name!]
             coloredShapesNodes[index].position = coloredShapesPositions[coloredShapesNodes[index].name!]!
+            if let texture = coloredShapesNodes[index].texture {
+                var texSize = texture.size()
+                coloredShapesNodes[index].physicsBody = SKPhysicsBody(texture: texture, size: texSize)
+                coloredShapesNodes[index].physicsBody?.affectedByGravity = false
+//                debugPrint("line 88")
+            }
+            
+            
             self.addChild(coloredShapesNodes[index])
         }
         createHole()
@@ -84,7 +95,25 @@ class CarGameScreen: GameScene {
         holePosition = CGPoint(x: CGFloat(UIScreen.main.bounds.width / 2), y: UIScreen.main.bounds.height / 3)
         holeNode.position = holePosition
         holeNode.zPosition = -1
+        if let texture = holeNode.texture {
+            var texSize = texture.size()
+            debugPrint("texsize wid: \(texSize.width)")
+            texSize.width = (texSize.width) * 0.33
+            debugPrint("texsize wid: \(texSize.width)")
+            texSize.height = (texSize.height) * 0.33
+            holeNode.physicsBody = SKPhysicsBody(texture: texture, size: texSize)
+//            holeNode.physicsBody = SKPhysicsBody(rectangleOf: texSize)
+//            holeNode.physicsBody = SKPhysicsBody(rectangleOf: texSize, center: holeNode.position)
+            holeNode.physicsBody?.affectedByGravity = false
+            debugPrint("line 96")
+        }
+        
+        
         self.addChild(holeNode)
+    }
+    
+    public func didBegin(_ contact: SKPhysicsContact) {
+        
     }
     
     override func update(_ currentTime: TimeInterval) {
