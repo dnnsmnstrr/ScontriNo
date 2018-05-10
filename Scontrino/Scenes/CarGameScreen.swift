@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class CarGameScreen: GameScene {
+class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     
     let squareNode = MovingNode(imageNamed: "red square")
     
@@ -21,8 +21,6 @@ class CarGameScreen: GameScene {
     var coloredShapesPositions: [String: CGPoint] = [:]
     var coloredShapesInitialPositions: [String: CGPoint] = [:] //using a different type
     
-    
-    
     override init() {
         super.init()
     }
@@ -30,6 +28,16 @@ class CarGameScreen: GameScene {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
+//    override public func sceneDidLoad() {
+//        debugPrint("line 33")
+//        self.physicsWorld.contactDelegate = self
+//    }
+//
+//    override public func didMove(to view: SKView) {
+//        self.physicsWorld.contactDelegate = self
+//        debugPrint("line 39")
+//    }
     
     func setDifficulty() -> Int {
         let difficulty = 1 //example for difficulty
@@ -63,7 +71,8 @@ class CarGameScreen: GameScene {
     
     override func createSceneContents() {
         super.createSceneContents()
-        self.view?.showsPhysics = true
+        self.physicsWorld.contactDelegate = self
+        debugPrint(self.scene?.view)
 //        mainView.showsPhysics = true
 //        mainView.ignoresSiblingOrder = true
         let shapeNumber = setDifficulty()
@@ -76,14 +85,6 @@ class CarGameScreen: GameScene {
             coloredShapesInitialPositions[coloredShapesNodes[index].name!] = (CGPoint(x: CGFloat(UIScreen.main.bounds.width / CGFloat(shapeNumber) + spacing + (CGFloat(index) * coloredShapesNodes[index].size.width ) ), y: UIScreen.main.bounds.height / 2))
             coloredShapesPositions[coloredShapesNodes[index].name!] = coloredShapesInitialPositions[coloredShapesNodes[index].name!]
             coloredShapesNodes[index].position = coloredShapesPositions[coloredShapesNodes[index].name!]!
-            if let texture = coloredShapesNodes[index].texture {
-                var texSize = texture.size()
-                coloredShapesNodes[index].physicsBody = SKPhysicsBody(texture: texture, size: texSize)
-                coloredShapesNodes[index].physicsBody?.affectedByGravity = false
-//                debugPrint("line 88")
-            }
-            
-            
             self.addChild(coloredShapesNodes[index])
         }
         createHole()
@@ -98,22 +99,38 @@ class CarGameScreen: GameScene {
         if let texture = holeNode.texture {
             var texSize = texture.size()
             debugPrint("texsize wid: \(texSize.width)")
-            texSize.width = (texSize.width) * 0.33
+            texSize.width = (texSize.width) * 0.55
             debugPrint("texsize wid: \(texSize.width)")
-            texSize.height = (texSize.height) * 0.33
+            texSize.height = (texSize.height) * 0.55
             holeNode.physicsBody = SKPhysicsBody(texture: texture, size: texSize)
-//            holeNode.physicsBody = SKPhysicsBody(rectangleOf: texSize)
-//            holeNode.physicsBody = SKPhysicsBody(rectangleOf: texSize, center: holeNode.position)
+            holeNode.physicsBody?.isDynamic = false
             holeNode.physicsBody?.affectedByGravity = false
+            holeNode.physicsBody?.categoryBitMask = Consts.PhysicsMask.holeNode
+            holeNode.physicsBody?.contactTestBitMask = Consts.PhysicsMask.shapeNodes
             debugPrint("line 96")
         }
-        
-        
         self.addChild(holeNode)
     }
     
     public func didBegin(_ contact: SKPhysicsContact) {
-        
+        contact.contactPoint
+        if contact.bodyA.categoryBitMask == Consts.PhysicsMask.shapeNodes{
+            if contact.bodyB.categoryBitMask == Consts.PhysicsMask.holeNode{
+                debugPrint("scontro punot:\(contact.contactPoint)")
+                let contactNode = contact.bodyA.node as! MovingNode
+                contactNode.isInTheRightHole = true
+            }
+        }
+    }
+    
+    public func didEnd(_ contact: SKPhysicsContact) {
+        if contact.bodyA.categoryBitMask == Consts.PhysicsMask.shapeNodes{
+            if contact.bodyB.categoryBitMask == Consts.PhysicsMask.holeNode{
+                debugPrint("end scontro")
+                let contactNode = contact.bodyA.node as! MovingNode
+                contactNode.isInTheRightHole = false
+            }
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {

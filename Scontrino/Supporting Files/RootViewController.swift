@@ -14,11 +14,19 @@ class RootViewController: UIViewController {
     var skView: SKView {
         return view as! SKView
     }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         view = SKView()
+        if let mainView = self.view as! SKView? {
+            debugPrint("mainView: \(mainView.frame)")
+            mainView.showsFPS = true
+            mainView.showsNodeCount = true
+            mainView.showsPhysics = true
+//                        mainView.ignoresSiblingOrder = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -38,4 +38,8 @@ struct Consts {
             static let coloredShapeNode = "100-"
         }
     }
+    enum PhysicsMask {
+        static let shapeNodes: UInt32 = 0x1 << 1 //2
+        static let holeNode: UInt32 = 0x1 << 2 // 4
+    }
 }
