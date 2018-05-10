@@ -21,6 +21,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     var coloredShapesNodes: [MovingNode] = []
     var coloredShapesPositions: [String: CGPoint] = [:]
     var coloredShapesInitialPositions: [String: CGPoint] = [:] //using a different type
+    let textureWidth = MovingNode(imageNamed: "red square").size.width
     
     override init() {
         super.init()
@@ -68,7 +69,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     func createOneShape(index: Int, numberOfShapes: Int){
         let spacing: CGFloat = 10
         coloredShapesNodes[index].name = Consts.Id.CarGameScreen.coloredShapeNode + "\(index)"
-        coloredShapesInitialPositions[coloredShapesNodes[index].name!] = (CGPoint(x: CGFloat(UIScreen.main.bounds.width / CGFloat(numberOfShapes) + spacing + (CGFloat(index) * coloredShapesNodes[index].size.width ) ), y: UIScreen.main.bounds.height / 2))
+        coloredShapesInitialPositions[coloredShapesNodes[index].name!] = (CGPoint(x: CGFloat(UIScreen.main.bounds.width / CGFloat(numberOfShapes) + spacing + (CGFloat(index) * textureWidth ) ), y: UIScreen.main.bounds.height / 2))
         coloredShapesPositions[coloredShapesNodes[index].name!] = coloredShapesInitialPositions[coloredShapesNodes[index].name!]
         coloredShapesNodes[index].position = coloredShapesPositions[coloredShapesNodes[index].name!]!
         self.addChild(coloredShapesNodes[index])
