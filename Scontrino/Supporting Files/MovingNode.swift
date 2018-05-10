@@ -15,13 +15,13 @@ class MovingNode: SKSpriteNode {
         let texture = SKTexture(imageNamed: imageNamed)
         self.init(texture: texture)
         self.isUserInteractionEnabled = true
-        if imageNamed.contains("star"){
-            debugPrint("cacca")
-            self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "red polygon"), size: SKTexture(imageNamed: "red polygon").size())
-        }
-        else{
-            self.physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
-        }
+//        if imageNamed.contains("star"){
+//            debugPrint("cacca")
+//            self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "red polygon"), size: SKTexture(imageNamed: "red polygon").size())
+//        }
+//        else{
+            self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "red square"), size: SKTexture(imageNamed: "red square").size())
+//        }
         
 //        self.physicsBody?.isDynamic = false
         self.physicsBody?.affectedByGravity = false
