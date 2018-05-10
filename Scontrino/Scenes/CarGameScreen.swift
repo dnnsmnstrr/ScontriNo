@@ -12,7 +12,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     
     let squareNode = MovingNode(imageNamed: "red square")
     
-    var holePosition: CGPoint!
+//    var holePosition: CGPoint!
     
     var holeNode = GameDataSource.shared.nextStaticNode()
     
@@ -93,8 +93,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     }
     
     func createHole(){
-        holePosition = CGPoint(x: CGFloat(UIScreen.main.bounds.width / 2), y: UIScreen.main.bounds.height / 3)
-        holeNode.position = holePosition
+        holeNode.position = CGPoint(x: CGFloat(UIScreen.main.bounds.width / 2), y: UIScreen.main.bounds.height / 3)
         holeNode.zPosition = -1
         if let texture = holeNode.texture {
             var texSize = texture.size()
@@ -112,8 +111,20 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
         self.addChild(holeNode)
     }
     
+    func controlIfRightShapeInHole(nodeName: String) {
+        var i = 0
+        while i < coloredShapesNodes.count {
+            if coloredShapesNodes[i].name == nodeName {
+                coloredShapesNodes[i].removeFromParent()
+                coloredShapesNodes.remove(at: i)
+            }
+            i += 1
+        }
+        
+    }
+    
     public func didBegin(_ contact: SKPhysicsContact) {
-        contact.contactPoint
+//        contact.contactPoint
         if contact.bodyA.categoryBitMask == Consts.PhysicsMask.shapeNodes{
             if contact.bodyB.categoryBitMask == Consts.PhysicsMask.holeNode{
                 debugPrint("scontro punot:\(contact.contactPoint)")
