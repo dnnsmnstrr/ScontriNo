@@ -15,19 +15,15 @@ class MovingNode: SKSpriteNode {
         let texture = SKTexture(imageNamed: imageNamed)
         self.init(texture: texture)
         self.isUserInteractionEnabled = true
-//        if imageNamed.contains("star"){
-//            debugPrint("cacca")
-//            self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "red polygon"), size: SKTexture(imageNamed: "red polygon").size())
-//        }
-//        else{
-            self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "red square"), size: SKTexture(imageNamed: "red square").size())
-//        }
-        
-//        self.physicsBody?.isDynamic = false
+        self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "red square"), size: SKTexture(imageNamed: "red square").size())
         self.physicsBody?.affectedByGravity = false
         self.physicsBody?.categoryBitMask = Consts.PhysicsMask.shapeNodes
         self.physicsBody?.contactTestBitMask = Consts.PhysicsMask.holeNode
         self.physicsBody?.collisionBitMask = 0
+        let presentationAnimation = SKAction.sequence([SKAction.scale(to: CGSize.zero, duration: 0),
+                                                       SKAction.scale(to: self.size, duration: 0.5)
+            ])
+        self.run(presentationAnimation)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {

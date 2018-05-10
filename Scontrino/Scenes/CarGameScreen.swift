@@ -5,20 +5,18 @@
 //  Created by Eduardo Yutaka Nakanishi on 26/04/2018.
 //  Copyright © 2018 Eduardo Yutaka Nakanishi. All rights reserved.
 //
-//MARK: add end game, add score
+//MARK: add end game, add score, decrease size of moving node physics body
 
 import SpriteKit
 
 class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     
-    let squareNode = MovingNode(imageNamed: "red square")
     var holeNode = GameDataSource.shared.nextStaticNode()
     let textureWidth = MovingNode(imageNamed: "red square").size.width
     //shape arrays
     var coloredShapesNodes: [MovingNode] = []
     var coloredShapesPositions: [String: CGPoint] = [:]
     var coloredShapesInitialPositions: [String: CGPoint] = [:] //using a different type
-    
     
     override init() {
         super.init()
@@ -27,16 +25,6 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
-//    override public func sceneDidLoad() {
-//        debugPrint("line 33")
-//        self.physicsWorld.contactDelegate = self
-//    }
-//
-//    override public func didMove(to view: SKView) {
-//        self.physicsWorld.contactDelegate = self
-//        debugPrint("line 39")
-//    }
     
     func setDifficulty() -> Int {
         let difficulty = 2 //example for difficulty
@@ -70,7 +58,6 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
         coloredShapesPositions[coloredShapesNodes[index].name!] = coloredShapesInitialPositions[coloredShapesNodes[index].name!]
         coloredShapesNodes[index].position = coloredShapesPositions[coloredShapesNodes[index].name!]!
         self.addChild(coloredShapesNodes[index])
-        
     }
     
     override func createSceneContents() {
@@ -93,6 +80,10 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
             holeNode.physicsBody?.categoryBitMask = Consts.PhysicsMask.holeNode
             holeNode.physicsBody?.contactTestBitMask = Consts.PhysicsMask.shapeNodes
         }
+        let presentationAnimation = SKAction.sequence([SKAction.scale(to: CGSize.zero, duration: 0),
+                                                       SKAction.scale(to: holeNode.size, duration: 0.5)
+            ])
+        holeNode.run(presentationAnimation)
         self.addChild(holeNode)
     }
     
@@ -110,7 +101,6 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
             }
             i += 1
         }
-        
     }
     
     public func didBegin(_ contact: SKPhysicsContact) {
