@@ -101,7 +101,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
             texSize.width = (texSize.width) * 0.55
             debugPrint("texsize wid: \(texSize.width)")
             texSize.height = (texSize.height) * 0.55
-            holeNode.physicsBody = SKPhysicsBody(texture: texture, size: texSize)
+            holeNode.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "red square"), size: texSize)
             holeNode.physicsBody?.isDynamic = false
             holeNode.physicsBody?.affectedByGravity = false
             holeNode.physicsBody?.categoryBitMask = Consts.PhysicsMask.holeNode
