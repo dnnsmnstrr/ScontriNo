@@ -5,6 +5,7 @@
 //  Created by Eduardo Yutaka Nakanishi on 26/04/2018.
 //  Copyright © 2018 Eduardo Yutaka Nakanishi. All rights reserved.
 //
+//MARK: add end game, add score
 
 import SpriteKit
 
@@ -57,15 +58,20 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
         return numberOfShapes
     }
     
-    func createShape() {
-//        debugPrint("line 59")
-//        let randomShape = arc4random_uniform(UInt32(Consts.shapes.count))
-//        let randomNode = MovingNode(imageNamed: (Consts.shapes[Int(randomShape)]))
-//        debugPrint(" randomNode:\(randomNode)")
-        coloredShapesNodes.append(GameDataSource.shared.nextMovingNode())
-//        debugPrint(" coloredShapesNodes:\(coloredShapesNodes[0])")
-//        debugPrint(" coloredShapesNodes.count:\(coloredShapesNodes.count)")
-        
+    func createShapes() {
+        let numberOfShapes = setDifficulty()
+        for index in  0..<numberOfShapes{
+            coloredShapesNodes.append(GameDataSource.shared.nextMovingNode())
+            createOneShape(index: index, numberOfShapes: numberOfShapes)
+        }
+    }
+    func createOneShape(index: Int, numberOfShapes: Int){
+        let spacing: CGFloat = 10
+        coloredShapesNodes[index].name = Consts.Id.CarGameScreen.coloredShapeNode + "\(index)"
+        coloredShapesInitialPositions[coloredShapesNodes[index].name!] = (CGPoint(x: CGFloat(UIScreen.main.bounds.width / CGFloat(numberOfShapes) + spacing + (CGFloat(index) * coloredShapesNodes[index].size.width ) ), y: UIScreen.main.bounds.height / 2))
+        coloredShapesPositions[coloredShapesNodes[index].name!] = coloredShapesInitialPositions[coloredShapesNodes[index].name!]
+        coloredShapesNodes[index].position = coloredShapesPositions[coloredShapesNodes[index].name!]!
+        self.addChild(coloredShapesNodes[index])
         
     }
     
@@ -73,20 +79,10 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
         super.createSceneContents()
         self.physicsWorld.contactDelegate = self
         debugPrint(self.scene?.view)
+        createShapes()
 //        mainView.showsPhysics = true
 //        mainView.ignoresSiblingOrder = true
-        let shapeNumber = setDifficulty()
-        let spacing: CGFloat = 10
-        for index in  0..<shapeNumber{
-            createShape()
-//            debugPrint("line 48 index:\(index)")
-//            debugPrint(" coloredShapesNodes.count:\(coloredShapesNodes.count)")
-            coloredShapesNodes[index].name = Consts.Id.CarGameScreen.coloredShapeNode + "\(index)"
-            coloredShapesInitialPositions[coloredShapesNodes[index].name!] = (CGPoint(x: CGFloat(UIScreen.main.bounds.width / CGFloat(shapeNumber) + spacing + (CGFloat(index) * coloredShapesNodes[index].size.width ) ), y: UIScreen.main.bounds.height / 2))
-            coloredShapesPositions[coloredShapesNodes[index].name!] = coloredShapesInitialPositions[coloredShapesNodes[index].name!]
-            coloredShapesNodes[index].position = coloredShapesPositions[coloredShapesNodes[index].name!]!
-            self.addChild(coloredShapesNodes[index])
-        }
+        
         createHole()
         
         
@@ -116,7 +112,12 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
         while i < coloredShapesNodes.count {
             if coloredShapesNodes[i].name == nodeName {
                 coloredShapesNodes[i].removeFromParent()
-                coloredShapesNodes.remove(at: i)
+                coloredShapesNodes[i] = GameDataSource.shared.nextMovingNode()
+                createOneShape(index: i, numberOfShapes: setDifficulty())
+//                coloredShapesNodes[i].name = Consts.Id.CarGameScreen.coloredShapeNode + "\(i)"
+//                coloredShapesNodes[i].position = coloredShapesInitialPositions[coloredShapesNodes[i].name!]!
+//                coloredShapesPositions[coloredShapesNodes[i].name!] = coloredShapesInitialPositions[coloredShapesNodes[i].name!]
+//                self.addChild(coloredShapesNodes[i])
             }
             i += 1
         }
