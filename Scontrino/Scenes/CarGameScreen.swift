@@ -27,7 +27,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     }
     
     func setDifficulty() -> Int {
-        let difficulty = 2 //example for difficulty
+        let difficulty = 1 //example for difficulty
         var numberOfShapes: Int
         switch difficulty {
         case 1:
@@ -80,6 +80,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
             holeNode.physicsBody?.categoryBitMask = Consts.PhysicsMask.holeNode
             holeNode.physicsBody?.contactTestBitMask = Consts.PhysicsMask.shapeNodes
         }
+        
         let presentationAnimation = SKAction.sequence([SKAction.scale(to: CGSize.zero, duration: 0),
                                                        SKAction.scale(to: holeNode.size, duration: 0.5)
             ])
