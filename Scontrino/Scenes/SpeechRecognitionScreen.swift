@@ -66,24 +66,7 @@ class SpeechRecognitionScreen: GameScene, SFSpeechRecognizerDelegate {
     override func sceneDidLoad() {
         super.sceneDidLoad()
         
-        SFSpeechRecognizer.requestAuthorization { authStatus in
-            
-            OperationQueue.main.addOperation {
-                switch authStatus {
-                case .authorized:
-                    self.recordingNode.texture = SKTexture(imageNamed: "recording off")
-                case .denied:
-                    self.recordingNode.texture = SKTexture(imageNamed: "recording denied")
-                case .restricted:
-                    self.recordingNode.texture = SKTexture(imageNamed: "recording denied")
-                case .notDetermined:
-                    self.recordingNode.texture = SKTexture(imageNamed: "recording denied")
-                }
-            }
-        }
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        checkAuthorization()
         
         if SFSpeechRecognizer.authorizationStatus() != .authorized {
             // Speech Recognition not authorized
@@ -97,7 +80,42 @@ class SpeechRecognitionScreen: GameScene, SFSpeechRecognizerDelegate {
             }
             
         }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
+       /* if SFSpeechRecognizer.authorizationStatus() != .authorized {
+            // Speech Recognition not authorized
+        } else {
+            if audio.isRunning {
+                audio.stop()
+                recognitionRequest?.endAudio()
+            } else {
+                self.recordingNode.texture = SKTexture(imageNamed: "recording on")
+                try! startRecording()
+            }
+            
+        }
+        */
+    }
+    
+    func checkAuthorization() {
+        
+        SFSpeechRecognizer.requestAuthorization { authStatus in
+            
+            OperationQueue.main.addOperation {
+                switch authStatus {
+                case .authorized:
+                    self.recordingNode.texture = SKTexture(imageNamed: "recording on")
+                case .denied:
+                    self.recordingNode.texture = SKTexture(imageNamed: "recording denied")
+                case .restricted:
+                    self.recordingNode.texture = SKTexture(imageNamed: "recording denied")
+                case .notDetermined:
+                    self.recordingNode.texture = SKTexture(imageNamed: "recording denied")
+                }
+            }
+        }
     }
     
     private func startRecording() throws {
@@ -130,33 +148,31 @@ class SpeechRecognitionScreen: GameScene, SFSpeechRecognizerDelegate {
                 
                 // Recognized sentence from speech recognition session
                 self.recognizedSentence = result.bestTranscription.formattedString.lowercased()
-                print(self.recognizedSentence)
+                print("The recognized sentence until now is: \(self.recognizedSentence)\n")
                 isFinal = result.isFinal
                 
                 // Control if the array of words has the current word (needs to be set empty or to reinitialize the session)
                 if self.recognizedSentence.contains(self.currentWordOnScreen) {
+                    
+                    self.audio.stop()
+                    self.recognitionRequest?.endAudio()
+                    
+                    self.recognitionRequest = nil
+                    self.recognitionTask = nil
+                    
+                    
 //                    self.wordIndex += 1
 //                    let i = self.recognizedWords.index(of: Substring(self.currentWordOnScreen!))
 //                    print(self.wordIndex)
 //                    print(self.recognizedWords[i!])
                     self.currentWordOnScreen = GameDataSource.shared.nextWord()
-                    print(self.currentWordOnScreen)
+                    print("Entered the control, the current word on screen is: \(self.currentWordOnScreen!)\n")
 //                    if self.currentWordOnScreen == "sole" {
 //                        print("it worked!")
 //                    }
                     
-                    let cardNode = self.childNode(withName: "card")
-                    let illustrationNode = cardNode?.childNode(withName: "illustration")
-                    let captionNode = cardNode?.childNode(withName: "caption") as! SKLabelNode
                     
-                    let cardAnimation = SKAction.sequence([SKAction.fadeOut(withDuration: 1.0),
-                                                           SKAction.fadeIn(withDuration: 1.0)])
-                    let illustrationAnimation = SKAction.sequence([SKAction.wait(forDuration: 1.0),
-                                                                   SKAction.setTexture(SKTexture(imageNamed: self.currentWordOnScreen))])
-                    
-                    cardNode?.run(cardAnimation)
-                    illustrationNode?.run(illustrationAnimation)
-                    captionNode.text = self.currentWordOnScreen
+                
                 }
             }
             
@@ -169,7 +185,20 @@ class SpeechRecognitionScreen: GameScene, SFSpeechRecognizerDelegate {
                 self.recognitionRequest = nil
                 self.recognitionTask = nil
                 
-                self.recordingNode.texture = SKTexture(imageNamed: "recording off")
+                let cardNode = self.childNode(withName: "card")
+                let illustrationNode = cardNode?.childNode(withName: "illustration")
+                let captionNode = cardNode?.childNode(withName: "caption") as! SKLabelNode
+                
+                let cardAnimation = SKAction.sequence([SKAction.fadeOut(withDuration: 1.0),
+                                                       SKAction.fadeIn(withDuration: 1.0)])
+                let illustrationAnimation = SKAction.sequence([SKAction.wait(forDuration: 1.0),
+                                                               SKAction.setTexture(SKTexture(imageNamed: self.currentWordOnScreen))])
+                
+                cardNode?.run(cardAnimation)
+                illustrationNode?.run(illustrationAnimation)
+                captionNode.text = self.currentWordOnScreen
+                
+                try! self.startRecording()
             }
         }
         
