@@ -16,6 +16,18 @@ struct GameDataSource {
     }
     
     func nextMovingNode() -> MovingNode {
-        return MovingNode(imageNamed: Consts.shapes[GKRandomSource.sharedRandom().nextInt(upperBound: Consts.shapes.count)])
+        return MovingNode(imageNamed: nextColor() + " " + nextShape())
+    }
+    
+    func nextStaticNode() -> SKSpriteNode {
+        return SKSpriteNode(imageNamed: "gray" + " " + nextShape())
+    }
+    
+    private func nextShape() -> String {
+        return Consts.shapes[GKRandomSource.sharedRandom().nextInt(upperBound: Consts.shapes.count)]
+    }
+    
+    private func nextColor() -> String {
+        return Consts.colors[GKRandomSource.sharedRandom().nextInt(upperBound: Consts.colors.count)]
     }
 }

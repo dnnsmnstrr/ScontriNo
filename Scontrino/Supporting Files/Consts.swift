@@ -14,15 +14,32 @@ struct Consts {
         "stella"
     ]
     static let shapes = [
-        "blue triangle",
-        "green star",
-        "orange circle",
-        "red square",
-        "teal blue pentagon",
-        "yellow rounded"
+        "triangle",
+        "star",
+        "circle",
+        "square",
+        "polygon",
+        "rounded"
+    ]
+    static let colors = [
+        "blue",
+        "green",
+        "orange",
+        "red",
+        "teal blue",
+        "yellow"
     ]
     struct Graphics {
         static let screenWidth = UIScreen.main.bounds.width
         static let screenHeight = UIScreen.main.bounds.height
+    }
+    struct Id {
+        struct CarGameScreen {
+            static let coloredShapeNode = "100-"
+        }
+    }
+    enum PhysicsMask {
+        static let shapeNodes: UInt32 = 0x1 << 1 //2
+        static let holeNode: UInt32 = 0x1 << 2 // 4
     }
 }

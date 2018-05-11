@@ -8,10 +8,11 @@
 
 import SpriteKit
 
-class StartScreen: SKScene {
+class StartScreen: SKScene, ButtonNodeDelegate {
+    var touchLocation: CGPoint!
     
     override init() {
-        super.init(size: CGSize(width: Consts.Graphics.screenWidth, height: Consts.Graphics.screenHeight))
+        super.init(size: CGSize(width: Consts.Graphics.screenWidth * 2, height: 2 * Consts.Graphics.screenHeight))
         createSceneContent()
     }
     
@@ -20,30 +21,42 @@ class StartScreen: SKScene {
     }
     
     func createSceneContent() {
+        self.scaleMode = .resizeFill
         // Add additional scene contents here.
-        let topNode = SKShapeNode(rect: CGRect(x: -100, y: -50, width: 200, height: 100))
-        topNode.name = "topNode"
-        topNode.fillColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
-        topNode.position = CGPoint(x: self.size.width / 2, y: 3 * self.size.height / 4)
+        let cameraNode = SKCameraNode()
+        cameraNode.position = CGPoint(x: Consts.Graphics.screenWidth, y: Consts.Graphics.screenHeight)
+        self.addChild(cameraNode)
+        self.camera = cameraNode
+        
+        let topNode = ButtonNode(imageNamed: "red square")
+        topNode.delegate = self
+        topNode.name = "CarGameScreen"
+        topNode.position = CGPoint(x: self.size.width / 2, y: 5.5 * self.size.height / 8)
         self.addChild(topNode)
         
-        let middleNode = SKShapeNode(rect: CGRect(x: -100, y: -50, width: 200, height: 100))
-        middleNode.name = "middleNode"
-        middleNode.fillColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
-        middleNode.position = CGPoint(x: self.size.width / 2, y: 2 * self.size.height / 4)
+        let extraNode = ButtonNode(imageNamed: "blue triangle")
+        extraNode.delegate = self
+        extraNode.name = "CategorizationGameScreen"
+        extraNode.position = CGPoint(x: self.size.width / 2, y: 4.5 * self.size.height / 8)
+        self.addChild(extraNode)
+        
+        let middleNode = ButtonNode(imageNamed: "orange circle")
+        middleNode.delegate = self
+        middleNode.name = "FaceDetectionScreen"
+        middleNode.position = CGPoint(x: self.size.width / 2, y: 3.5 * self.size.height / 8)
         self.addChild(middleNode)
         
-        let bottomNode = SKShapeNode(rect: CGRect(x: -100, y: -50, width: 200, height: 100))
-        bottomNode.name = "bottomNode"
-        bottomNode.fillColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
-        bottomNode.position = CGPoint(x: self.size.width / 2, y: self.size.height / 4)
+        let bottomNode = ButtonNode(imageNamed: "yellow rounded")
+        bottomNode.delegate = self
+        bottomNode.name = "SpeechRecognitionScreen"
+        bottomNode.position = CGPoint(x: self.size.width / 2, y: 2.5 * self.size.height / 8)
         self.addChild(bottomNode)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
-            let location = touch.location(in: self)
-            let node = self.atPoint(location)
+            touchLocation = touch.location(in: self)
+            let node = self.atPoint(touchLocation)
             
             switch node.name {
             case "topNode":
@@ -54,6 +67,38 @@ class StartScreen: SKScene {
                 RootViewController.shared.skView.presentScene(SpeechRecognitionScreen())
             default:
                 break
+            }
+        }
+    }
+    
+    func tapButtonNode(_ sender: ButtonNode) {
+        if let name = sender.name {
+            switch name {
+            case "CarGameScreen":
+                RootViewController.shared.skView.presentScene(CarGameScreen())
+            case "CategorizationGameScreen":
+                RootViewController.shared.skView.presentScene(CategorizationGameScreen())
+            case "FaceDetectionScreen":
+                RootViewController.shared.skView.presentScene(FaceDetectionScreen())
+            case "SpeechRecognitionScreen":
+                RootViewController.shared.skView.presentScene(SpeechRecognitionScreen())
+            default:
+                print("default")
+            }
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            let location = touch.location(in: self)
+            
+            if let cameraNode = self.camera {
+                let (dx, dy) = (location.x - touchLocation.x, location.y - touchLocation.y)
+                
+                cameraNode.position.x -= dx
+                cameraNode.position.y -= dy
+                
+                touchLocation = CGPoint(x: location.x - dx, y: location.y - dy)
             }
         }
     }

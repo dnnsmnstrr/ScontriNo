@@ -8,15 +8,20 @@
 
 import SpriteKit
 
+protocol ButtonNodeDelegate: class {
+    func tapButtonNode(_ sender: ButtonNode)
+}
+
 class ButtonNode: SKSpriteNode {
+    weak var delegate: ButtonNodeDelegate?
     
     convenience init(imageNamed: String) {
         let texture = SKTexture(imageNamed: imageNamed)
         self.init(texture: texture)
         self.isUserInteractionEnabled = true
     }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        RootViewController.shared.skView.presentScene(StartScreen())
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        delegate?.tapButtonNode(self)
     }
 }
