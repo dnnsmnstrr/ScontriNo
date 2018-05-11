@@ -93,9 +93,26 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
         while i < coloredShapesNodes.count {
             if coloredShapesNodes[i].name == nodeName {
                 debugPrint("new Shape")
-                coloredShapesNodes[i].removeFromParent()
-                coloredShapesNodes[i] = GameDataSource.shared.nextMovingNode()
-                createOneShape(index: i, numberOfShapes: setDifficulty())
+                debugPrint("i:\(i)")
+                let index = i
+                let removeShapeNode = SKAction.run{
+                    debugPrint("inside closure i:\(i)")
+                    
+                    self.coloredShapesNodes[index].removeFromParent()
+                    self.coloredShapesNodes[index] = GameDataSource.shared.nextMovingNode()
+                    self.createOneShape(index: index, numberOfShapes: self.setDifficulty())
+                }
+                let fillInHoleAnimation = SKAction.sequence([
+//                    SKAction.speed(by:2, duration: 0),
+                    SKAction.move(to: holeNode.position, duration: 1),
+//                    SKAction.wait(forDuration: 2),
+                    removeShapeNode
+                    ])
+                coloredShapesNodes[i].run(fillInHoleAnimation)
+                
+//                coloredShapesNodes[i].removeFromParent()
+//                coloredShapesNodes[i] = GameDataSource.shared.nextMovingNode()
+                //                createOneShape(index: i, numberOfShapes: setDifficulty())
                 holeNode.removeFromParent()
                 holeNode = GameDataSource.shared.nextStaticNode()
                 createHole()
