@@ -14,8 +14,13 @@ class MovingNode: SKSpriteNode {
     convenience init(imageNamed: String) {
         let texture = SKTexture(imageNamed: imageNamed)
         self.init(texture: texture)
+        
+        var texSize = texture.size()
+        texSize.width = (texSize.width) * 0.65
+        texSize.height = (texSize.height) * 0.65
+        
         self.isUserInteractionEnabled = true
-        self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "red square"), size: SKTexture(imageNamed: "red square").size())
+        self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "red square"), size: texSize)
         self.physicsBody?.affectedByGravity = false
         self.physicsBody?.categoryBitMask = Consts.PhysicsMask.shapeNodes
         self.physicsBody?.contactTestBitMask = Consts.PhysicsMask.holeNode

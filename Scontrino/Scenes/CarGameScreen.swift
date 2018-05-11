@@ -103,7 +103,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
                     self.createOneShape(index: index, numberOfShapes: self.setDifficulty())
                 }
                 let fillInHoleAnimation = SKAction.sequence([
-//                    SKAction.speed(by:2, duration: 0),
+                    SKAction.speed(by:2, duration: 0),
                     SKAction.move(to: holeNode.position, duration: 1),
 //                    SKAction.wait(forDuration: 2),
                     removeShapeNode
