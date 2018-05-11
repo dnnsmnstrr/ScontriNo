@@ -5,7 +5,6 @@
 //  Created by Eduardo Yutaka Nakanishi on 26/04/2018.
 //  Copyright © 2018 Eduardo Yutaka Nakanishi. All rights reserved.
 //
-//  TODO: Make back button visible
 //
 
 import UIKit
@@ -15,8 +14,6 @@ import Vision
 
 class FaceDetectionScreen: GameScene {
     
-    internal var backgroundLayer = CALayer()
-    internal var gameLayer = CALayer()
     
     // MARK: AVSession Management
     
@@ -40,14 +37,15 @@ class FaceDetectionScreen: GameScene {
         captureSession = AVCaptureSession()
         
         self.configureSession()
+        
+        let videoView = UIView(frame: CGRect(x: 0, y: 160, width: Consts.Graphics.screenWidth, height: Consts.Graphics.screenHeight/1.8))
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = view.layer.bounds
+        previewLayer.frame = videoView.layer.bounds
         previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        view.layer.addSublayer(previewLayer)
-        //        view.layer.addSublayer(gameLayer)
-        //        view.layer.insertSublayer(gameLayer, above: previewLayer)
-        //        view.layer.insertSublayer(previewLayer, at: 1)
-        //        view.layer.insertSublayer(previewLayer, below: gameLayer)
+        videoView.layer.addSublayer(previewLayer)
+        videoView.tag = 0451
+        view.addSubview(videoView)
+        view.sendSubview(toBack: videoView)
         captureSession.startRunning()
         
     }

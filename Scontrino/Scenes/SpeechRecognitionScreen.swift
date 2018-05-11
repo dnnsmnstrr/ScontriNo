@@ -21,6 +21,14 @@ class SpeechRecognitionScreen: GameScene, SFSpeechRecognizerDelegate {
     private var recognitionTask: SFSpeechRecognitionTask?
     private var audio = AVAudioEngine()
     
+    var listen = false {
+        didSet {
+            if !listen {
+                audio.stop()
+            }
+        }
+    }
+    
     override init() {
         super.init()
     }
@@ -153,6 +161,8 @@ class SpeechRecognitionScreen: GameScene, SFSpeechRecognizerDelegate {
             }
             
             if error != nil || isFinal {
+                self.listen = false
+
                 self.audio.stop()
                 inputNode.removeTap(onBus: 0)
                 
@@ -171,6 +181,7 @@ class SpeechRecognitionScreen: GameScene, SFSpeechRecognizerDelegate {
         audio.prepare()
         
         try audio.start()
+        self.listen = true
     }
     
     
