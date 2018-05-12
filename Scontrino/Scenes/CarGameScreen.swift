@@ -10,8 +10,9 @@
 import SpriteKit
 
 class CarGameScreen: GameScene, SKPhysicsContactDelegate {
+    let dataSource = GameDataSource()
     
-    var holeNode = GameDataSource.shared.nextStaticNode()
+    var holeNode: SKSpriteNode!
     let textureWidth = MovingNode(imageNamed: "red square").size.width
     //shape arrays
     var coloredShapesNodes: [MovingNode] = []
@@ -47,7 +48,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     func createShapes() {
         let numberOfShapes = setDifficulty()
         for index in  0..<numberOfShapes{
-            coloredShapesNodes.append(GameDataSource.shared.nextMovingNode())
+            coloredShapesNodes.append(dataSource.nextMovingNode())
             createOneShape(index: index, numberOfShapes: numberOfShapes)
         }
     }
@@ -68,6 +69,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     }
     
     func createHole(){
+        holeNode = dataSource.nextStaticNode(from: coloredShapesNodes)
         holeNode.position = CGPoint(x: CGFloat(UIScreen.main.bounds.width / 2), y: UIScreen.main.bounds.height / 3)
         holeNode.zPosition = -1
         if let texture = holeNode.texture {
@@ -99,7 +101,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
                     debugPrint("inside closure i:\(i)")
                     
                     self.coloredShapesNodes[index].removeFromParent()
-                    self.coloredShapesNodes[index] = GameDataSource.shared.nextMovingNode()
+                    self.coloredShapesNodes[index] = self.dataSource.nextMovingNode()
                     self.createOneShape(index: index, numberOfShapes: self.setDifficulty())
                 }
                 let fillInHoleAnimation = SKAction.sequence([
@@ -114,7 +116,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
 //                coloredShapesNodes[i] = GameDataSource.shared.nextMovingNode()
                 //                createOneShape(index: i, numberOfShapes: setDifficulty())
                 holeNode.removeFromParent()
-                holeNode = GameDataSource.shared.nextStaticNode()
+                holeNode = dataSource.nextStaticNode(from: coloredShapesNodes)
                 createHole()
             }
             i += 1
@@ -139,6 +141,8 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
                 contactNode.isInTheRightHole = false
             }
         }
+        print(coloredShapesNodes.first!.texture!.description.split(separator: "\'"))
+        print(coloredShapesNodes.first!.texture!.description.split(separator: "\'")[1])
     }
     
     override func update(_ currentTime: TimeInterval) {

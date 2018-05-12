@@ -10,6 +10,7 @@ import SpriteKit
 import Speech
 
 class SpeechRecognitionScreen: GameScene, SFSpeechRecognizerDelegate {
+    let dataSource = GameDataSource()
     var currentWordOnScreen: String!
     
     let recordingNode = SKSpriteNode(imageNamed: "recording off")
@@ -39,7 +40,7 @@ class SpeechRecognitionScreen: GameScene, SFSpeechRecognizerDelegate {
     
     override func createSceneContents() {
         super.createSceneContents()
-        currentWordOnScreen = GameDataSource.shared.nextWord()
+        currentWordOnScreen = dataSource.nextWord()
         
         let cardNode = SKSpriteNode(imageNamed: "card")
         cardNode.name = "card"
@@ -165,7 +166,7 @@ class SpeechRecognitionScreen: GameScene, SFSpeechRecognizerDelegate {
 //                    let i = self.recognizedWords.index(of: Substring(self.currentWordOnScreen!))
 //                    print(self.wordIndex)
 //                    print(self.recognizedWords[i!])
-                    self.currentWordOnScreen = GameDataSource.shared.nextWord()
+                    self.currentWordOnScreen = self.dataSource.nextWord()
                     print("Entered the control, the current word on screen is: \(self.currentWordOnScreen!)\n")
 //                    if self.currentWordOnScreen == "sole" {
 //                        print("it worked!")
