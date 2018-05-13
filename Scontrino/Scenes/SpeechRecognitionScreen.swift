@@ -177,6 +177,9 @@ class SpeechRecognitionScreen: GameScene, SFSpeechRecognizerDelegate {
             }
             
             if error != nil || isFinal {
+                
+                print("The word on the screen was just recognized\n")
+                
                 self.listen = false
 
                 self.audio.stop()
