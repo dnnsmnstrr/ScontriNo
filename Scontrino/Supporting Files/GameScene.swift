@@ -29,10 +29,11 @@ class GameScene: SKScene, ButtonNodeDelegate {
     
     func tapButtonNode(_ sender: ButtonNode) {
         RootViewController.shared.view.viewWithTag(0451)?.removeFromSuperview()
-//        if let speech = RootViewController.shared.skView.scene as? SpeechRecognitionScreen {
-//            speech.listen = false
-//        }
-//        
+        
+        if let speech = RootViewController.shared.skView.scene as? SpeechRecognitionScreen {
+            speech.listen = false
+        }
+
         RootViewController.shared.skView.presentScene(StartScreen())
     }
 }
