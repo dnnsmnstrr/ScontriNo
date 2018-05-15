@@ -27,6 +27,30 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
         super.init(coder: aDecoder)
     }
     
+    override func createSceneContents() {
+        super.createSceneContents()
+        self.physicsWorld.contactDelegate = self
+        createShapes()
+        createHole()
+    }
+    
+    func createShapes() {
+        let numberOfShapes = setDifficulty()
+        for index in  0..<numberOfShapes{
+            coloredShapesNodes.append(dataSource.nextMovingNode())
+            createOneShape(index: index, numberOfShapes: numberOfShapes)
+        }
+    }
+    
+    func createOneShape(index: Int, numberOfShapes: Int){
+        let spacing: CGFloat = 10
+        coloredShapesNodes[index].name = Consts.Id.CarGameScreen.coloredShapeNode + "\(index)"
+        coloredShapesInitialPositions[coloredShapesNodes[index].name!] = (CGPoint(x: CGFloat(UIScreen.main.bounds.width / CGFloat(numberOfShapes) + spacing + (CGFloat(index) * textureWidth ) ), y: UIScreen.main.bounds.height / 2))
+        coloredShapesPositions[coloredShapesNodes[index].name!] = coloredShapesInitialPositions[coloredShapesNodes[index].name!]
+        coloredShapesNodes[index].position = coloredShapesPositions[coloredShapesNodes[index].name!]!
+        self.addChild(coloredShapesNodes[index])
+    }
+    
     func setDifficulty() -> Int {
         let difficulty = 1 //example for difficulty
         var numberOfShapes: Int
@@ -45,33 +69,11 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
         return numberOfShapes
     }
     
-    func createShapes() {
-        let numberOfShapes = setDifficulty()
-        for index in  0..<numberOfShapes{
-            coloredShapesNodes.append(dataSource.nextMovingNode())
-            createOneShape(index: index, numberOfShapes: numberOfShapes)
-        }
-    }
-    func createOneShape(index: Int, numberOfShapes: Int){
-        let spacing: CGFloat = 10
-        coloredShapesNodes[index].name = Consts.Id.CarGameScreen.coloredShapeNode + "\(index)"
-        coloredShapesInitialPositions[coloredShapesNodes[index].name!] = (CGPoint(x: CGFloat(UIScreen.main.bounds.width / CGFloat(numberOfShapes) + spacing + (CGFloat(index) * textureWidth ) ), y: UIScreen.main.bounds.height / 2))
-        coloredShapesPositions[coloredShapesNodes[index].name!] = coloredShapesInitialPositions[coloredShapesNodes[index].name!]
-        coloredShapesNodes[index].position = coloredShapesPositions[coloredShapesNodes[index].name!]!
-        self.addChild(coloredShapesNodes[index])
-    }
-    
-    override func createSceneContents() {
-        super.createSceneContents()
-        self.physicsWorld.contactDelegate = self
-        createShapes()
-        createHole()
-    }
-    
     func createHole(){
         holeNode = dataSource.nextStaticNode(from: coloredShapesNodes)
         holeNode.position = CGPoint(x: CGFloat(UIScreen.main.bounds.width / 2), y: UIScreen.main.bounds.height / 3)
         holeNode.zPosition = -1
+//        holeNode.isHidden = true why u no work?
         if let texture = holeNode.texture {
             var texSize = texture.size()
             texSize.width = (texSize.width) * 0.55
@@ -82,12 +84,17 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
             holeNode.physicsBody?.categoryBitMask = Consts.PhysicsMask.holeNode
             holeNode.physicsBody?.contactTestBitMask = Consts.PhysicsMask.shapeNodes
         }
-        
-        let presentationAnimation = SKAction.sequence([SKAction.scale(to: CGSize.zero, duration: 0),
-                                                       SKAction.scale(to: holeNode.size, duration: 0.5)
+        let isVisible = SKAction.run{
+            self.isHidden = false
+        }
+        let presentationAnimation = SKAction.sequence([
+            SKAction.scale(to: CGSize.zero, duration: 0),
+            isVisible,
+            SKAction.scale(to: holeNode.size, duration: 0.5)
             ])
         holeNode.run(presentationAnimation)
         self.addChild(holeNode)
+        
     }
     
     func controlIfRightShapeInHole(nodeName: String) {
@@ -97,48 +104,61 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
                 debugPrint("new Shape")
                 debugPrint("i:\(i)")
                 let index = i
-                let removeShapeNode = SKAction.run{
-                    debugPrint("inside closure i:\(i)")
-                    
-                    self.coloredShapesNodes[index].removeFromParent()
+                let createNewShapeNode = SKAction.run{
+//                    self.coloredShapesNodes[index].removeFromParent()
                     self.coloredShapesNodes[index] = self.dataSource.nextMovingNode()
                     self.createOneShape(index: index, numberOfShapes: self.setDifficulty())
                 }
                 let fillInHoleAnimation = SKAction.sequence([
-                    SKAction.speed(by:2, duration: 0),
-                    SKAction.move(to: holeNode.position, duration: 1),
-//                    SKAction.wait(forDuration: 2),
-                    removeShapeNode
+//                    SKAction.speed(by:2, duration: 0),
+                    SKAction.move(to: holeNode.position, duration: 0.5),
+                    SKAction.removeFromParent(),
+                    createNewShapeNode
                     ])
                 coloredShapesNodes[i].run(fillInHoleAnimation)
                 
-//                coloredShapesNodes[i].removeFromParent()
-//                coloredShapesNodes[i] = GameDataSource.shared.nextMovingNode()
-                //                createOneShape(index: i, numberOfShapes: setDifficulty())
-                holeNode.removeFromParent()
-                holeNode = dataSource.nextStaticNode(from: coloredShapesNodes)
-                createHole()
+                let createNewHole = SKAction.run{
+//                    self.holeNode = self.dataSource.nextStaticNode(from: self.coloredShapesNodes)
+                    self.createHole()
+                }
+                
+                let changeHoleAnimation = SKAction.sequence([
+                    SKAction.wait(forDuration: fillInHoleAnimation.duration),
+                    SKAction.wait(forDuration: 0.2),
+                    SKAction.removeFromParent(),
+                    createNewHole
+                    ])
+
+                self.holeNode.run(changeHoleAnimation)
+            
             }
             i += 1
         }
     }
     
     public func didBegin(_ contact: SKPhysicsContact) {
-        if contact.bodyA.categoryBitMask == Consts.PhysicsMask.shapeNodes{
-            if contact.bodyB.categoryBitMask == Consts.PhysicsMask.holeNode{
+        if contact.bodyA.categoryBitMask == Consts.PhysicsMask.shapeNodes {
+            if contact.bodyB.categoryBitMask == Consts.PhysicsMask.holeNode {
                 debugPrint("scontro")
-                let contactNode = contact.bodyA.node as! MovingNode
-                contactNode.isInTheRightHole = true
+                if contact.bodyA.node?.name == contact.bodyB.node?.name {
+                    debugPrint("same Shape")
+                    let contactNode = contact.bodyA.node as! MovingNode
+                    contactNode.isInTheRightHole = true
+                }
+                
             }
         }
     }
     
     public func didEnd(_ contact: SKPhysicsContact) {
         if contact.bodyA.categoryBitMask == Consts.PhysicsMask.shapeNodes{
-            if contact.bodyB.categoryBitMask == Consts.PhysicsMask.holeNode{
+            if contact.bodyB.categoryBitMask == Consts.PhysicsMask.holeNode {
                 debugPrint("end scontro")
-                let contactNode = contact.bodyA.node as! MovingNode
-                contactNode.isInTheRightHole = false
+                if contact.bodyA.node?.name == contact.bodyB.node?.name {
+                    debugPrint("same Shape")
+                    let contactNode = contact.bodyA.node as! MovingNode
+                    contactNode.isInTheRightHole = false
+                }
             }
         }
         print(coloredShapesNodes.first!.texture!.description.split(separator: "\'"))

@@ -18,14 +18,18 @@ class MovingNode: SKSpriteNode {
         var texSize = texture.size()
         texSize.width = (texSize.width) * 0.65
         texSize.height = (texSize.height) * 0.65
-        
+        self.isHidden = true
         self.isUserInteractionEnabled = true
         self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "red square"), size: texSize)
         self.physicsBody?.affectedByGravity = false
         self.physicsBody?.categoryBitMask = Consts.PhysicsMask.shapeNodes
         self.physicsBody?.contactTestBitMask = Consts.PhysicsMask.holeNode
         self.physicsBody?.collisionBitMask = 0
+        let isVisible = SKAction.run{
+            self.isHidden = false
+        }
         let presentationAnimation = SKAction.sequence([SKAction.scale(to: CGSize.zero, duration: 0),
+                                                       isVisible,
                                                        SKAction.scale(to: self.size, duration: 0.5)
             ])
         self.run(presentationAnimation)
