@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15ED90F920AB2A0E00A3072E /* HoleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15ED90F820AB2A0E00A3072E /* HoleNode.swift */; };
 		2A2B4A2A2091FBD4009B81FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A292091FBD4009B81FB /* AppDelegate.swift */; };
 		2A2B4A2C2091FBD4009B81FB /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A2B2091FBD4009B81FB /* RootViewController.swift */; };
 		2A2B4A342091FBD7009B81FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A2B4A322091FBD7009B81FB /* LaunchScreen.storyboard */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		15ED90F820AB2A0E00A3072E /* HoleNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleNode.swift; sourceTree = "<group>"; };
 		2A2B4A262091FBD4009B81FB /* Scontrino.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scontrino.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A2B4A292091FBD4009B81FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2A2B4A2B2091FBD4009B81FB /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				2A2B4A292091FBD4009B81FB /* AppDelegate.swift */,
 				2A2B4A43209214F4009B81FB /* Consts.swift */,
 				2A2B4A5520976FCF009B81FB /* GameDataSource.swift */,
+				15ED90F820AB2A0E00A3072E /* HoleNode.swift */,
 				2A2B4A2B2091FBD4009B81FB /* RootViewController.swift */,
 				2A5B5E4C20AB2435001D4985 /* CameraViewController.swift */,
 				2A2B4A3F2091FF86009B81FB /* GameScene.swift */,
@@ -194,6 +197,7 @@
 				2A2B4A4F209252FB009B81FB /* ButtonNode.swift in Sources */,
 				2A2B4A46209217F6009B81FB /* StartScreen.swift in Sources */,
 				2A5B5E4D20AB2435001D4985 /* CameraViewController.swift in Sources */,
+				15ED90F920AB2A0E00A3072E /* HoleNode.swift in Sources */,
 				2A2B4A5620976FCF009B81FB /* GameDataSource.swift in Sources */,
 				2A2B4A2C2091FBD4009B81FB /* RootViewController.swift in Sources */,
 				2A2B4A42209213C2009B81FB /* CarGameScreen.swift in Sources */,
