@@ -32,7 +32,7 @@ class GameScene: SKScene, ButtonNodeDelegate {
 //        if let speech = RootViewController.shared.skView.scene as? SpeechRecognitionScreen {
 //            speech.listen = false
 //        }
-//        
+
         RootViewController.shared.skView.presentScene(StartScreen())
     }
 }
