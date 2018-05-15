@@ -45,8 +45,7 @@ class MovingNode: SKSpriteNode {
                     if isInTheRightHole == false {
                         scene.coloredShapesPositions[self.name!] = scene.coloredShapesInitialPositions[self.name!]
                     }
-                    else
-                    {
+                    else {
                         scene.controlIfRightShapeInHole(nodeName: self.name!)
                     }
                 }
