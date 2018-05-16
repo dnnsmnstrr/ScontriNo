@@ -111,11 +111,11 @@
 				2A2B4A292091FBD4009B81FB /* AppDelegate.swift */,
 				2A2B4A43209214F4009B81FB /* Consts.swift */,
 				2A2B4A5520976FCF009B81FB /* GameDataSource.swift */,
-				15ED90F820AB2A0E00A3072E /* HoleNode.swift */,
 				2A2B4A2B2091FBD4009B81FB /* RootViewController.swift */,
 				2A5B5E4C20AB2435001D4985 /* CameraViewController.swift */,
 				2A2B4A3F2091FF86009B81FB /* GameScene.swift */,
 				2A2B4A4C20924A10009B81FB /* MovingNode.swift */,
+				15ED90F820AB2A0E00A3072E /* HoleNode.swift */,
 				2A2B4A4E209252FB009B81FB /* ButtonNode.swift */,
 			);
 			path = "Supporting Files";

@@ -12,7 +12,7 @@ import SpriteKit
 class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     let dataSource = GameDataSource()
     
-    var holeNode: SKSpriteNode!
+    var holeNode: HoleNode!
     let textureWidth = MovingNode(imageNamed: "red square").size.width
     //shape arrays
     var coloredShapesNodes: [MovingNode] = []
@@ -71,30 +71,8 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     
     func createHole(){
         holeNode = dataSource.nextStaticNode(from: coloredShapesNodes)
-        holeNode.position = CGPoint(x: CGFloat(UIScreen.main.bounds.width / 2), y: UIScreen.main.bounds.height / 3)
-        holeNode.zPosition = -1
-//        holeNode.isHidden = true why u no work?
-        if let texture = holeNode.texture {
-            var texSize = texture.size()
-            texSize.width = (texSize.width) * 0.55
-            texSize.height = (texSize.height) * 0.55
-            holeNode.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "red square"), size: texSize)
-            holeNode.physicsBody?.isDynamic = false
-            holeNode.physicsBody?.affectedByGravity = false
-            holeNode.physicsBody?.categoryBitMask = Consts.PhysicsMask.holeNode
-            holeNode.physicsBody?.contactTestBitMask = Consts.PhysicsMask.shapeNodes
-        }
-        let isVisible = SKAction.run{
-            self.isHidden = false
-        }
-        let presentationAnimation = SKAction.sequence([
-            SKAction.scale(to: CGSize.zero, duration: 0),
-            isVisible,
-            SKAction.scale(to: holeNode.size, duration: 0.5)
-            ])
-        holeNode.run(presentationAnimation)
+        holeNode.setup(pos: CGPoint(x: CGFloat(UIScreen.main.bounds.width / 2), y: UIScreen.main.bounds.height / 3))
         self.addChild(holeNode)
-        
     }
     
     func controlIfRightShapeInHole(nodeName: String) {
@@ -104,21 +82,24 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
                 debugPrint("new Shape")
                 debugPrint("i:\(i)")
                 let index = i
-                let createNewShapeNode = SKAction.run{
+                let createNewShapeNode = SKAction.run {
 //                    self.coloredShapesNodes[index].removeFromParent()
                     self.coloredShapesNodes[index] = self.dataSource.nextMovingNode()
                     self.createOneShape(index: index, numberOfShapes: self.setDifficulty())
                 }
+                coloredShapesNodes[i].isFitting = true
+                let path = UIBezierPath()
+                path.move(to: coloredShapesNodes[i].position)
+                path.addLine(to: holeNode.position)
+                
                 let fillInHoleAnimation = SKAction.sequence([
-//                    SKAction.speed(by:2, duration: 0),
-                    SKAction.move(to: holeNode.position, duration: 0.5),
+                    SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: 100),
                     SKAction.removeFromParent(),
                     createNewShapeNode
                     ])
                 coloredShapesNodes[i].run(fillInHoleAnimation)
                 
                 let createNewHole = SKAction.run{
-//                    self.holeNode = self.dataSource.nextStaticNode(from: self.coloredShapesNodes)
                     self.createHole()
                 }
                 
@@ -137,26 +118,47 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     }
     
     public func didBegin(_ contact: SKPhysicsContact) {
-        if contact.bodyA.categoryBitMask == Consts.PhysicsMask.shapeNodes {
-            if contact.bodyB.categoryBitMask == Consts.PhysicsMask.holeNode {
+        var bodyA = contact.bodyA
+        var bodyB = contact.bodyB
+        if contact.bodyA.categoryBitMask > contact.bodyB.categoryBitMask {
+            bodyA = contact.bodyB
+            bodyB = contact.bodyA
+            debugPrint("A Better then B")
+        }else{
+            debugPrint("B Better then A")
+//            nodeA = contact.bodyA.node
+//            nodeB = contact.bodyB.node
+        }
+        if bodyA.categoryBitMask == Consts.PhysicsMask.shapeNodes {
+            if bodyB.categoryBitMask == Consts.PhysicsMask.holeNode {
                 debugPrint("scontro")
-                if contact.bodyA.node?.name == contact.bodyB.node?.name {
+                if bodyA.node?.name == bodyB.node?.name {
                     debugPrint("same Shape")
-                    let contactNode = contact.bodyA.node as! MovingNode
+                    let contactNode = bodyA.node as! MovingNode
                     contactNode.isInTheRightHole = true
                 }
-                
             }
         }
     }
     
     public func didEnd(_ contact: SKPhysicsContact) {
-        if contact.bodyA.categoryBitMask == Consts.PhysicsMask.shapeNodes{
-            if contact.bodyB.categoryBitMask == Consts.PhysicsMask.holeNode {
+        var bodyA = contact.bodyA
+        var bodyB = contact.bodyB
+        if contact.bodyA.categoryBitMask > contact.bodyB.categoryBitMask {
+            bodyA = contact.bodyB
+            bodyB = contact.bodyA
+            debugPrint("A Better then B")
+        }else{
+            debugPrint("B Better then A")
+            //            nodeA = contact.bodyA.node
+            //            nodeB = contact.bodyB.node
+        }
+        if bodyA.categoryBitMask == Consts.PhysicsMask.shapeNodes {
+            if bodyB.categoryBitMask == Consts.PhysicsMask.holeNode {
                 debugPrint("end scontro")
-                if contact.bodyA.node?.name == contact.bodyB.node?.name {
+                if bodyA.node?.name == bodyB.node?.name {
                     debugPrint("same Shape")
-                    let contactNode = contact.bodyA.node as! MovingNode
+                    let contactNode = bodyA.node as! MovingNode
                     contactNode.isInTheRightHole = false
                 }
             }
@@ -166,8 +168,11 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
+        
         for index in  0..<coloredShapesNodes.count {
-            coloredShapesNodes[index].position = coloredShapesPositions[coloredShapesNodes[index].name!]!
+            if !coloredShapesNodes[index].isFitting{
+                coloredShapesNodes[index].position = coloredShapesPositions[coloredShapesNodes[index].name!]!
+            }
         }
     }
 }

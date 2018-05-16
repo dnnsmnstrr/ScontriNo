@@ -10,6 +10,7 @@ import SpriteKit
 
 class MovingNode: SKSpriteNode {
     var isInTheRightHole = false
+    var isFitting = false
     
     convenience init(imageNamed: String) {
         let texture = SKTexture(imageNamed: imageNamed)

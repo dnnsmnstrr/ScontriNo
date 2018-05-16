@@ -21,12 +21,12 @@ struct GameDataSource {
     }
     
     // This method returns a gray shape based on an array of moving nodes received as parameter
-    func nextStaticNode(from movingNodes: [MovingNode]) -> SKSpriteNode {
+    func nextStaticNode(from movingNodes: [MovingNode]) -> HoleNode { // changed from skspritenode in holenode
         //ALESSIO: I'm Modifing this
         let index = GKRandomSource.sharedRandom().nextInt(upperBound: movingNodes.count)
         let node = movingNodes[index]
         let shape = node.texture!.description.split(separator: "\'")[1].split(separator: " ").last!
-        let grayNode = SKSpriteNode(imageNamed: "gray" + " " + shape)
+        let grayNode = HoleNode(imageNamed: "gray" + " " + shape)
         debugPrint("Shape of the gray node is: \(shape)")
         debugPrint("name of gray node is: \(node.name)")
         grayNode.name = node.name
