@@ -11,6 +11,7 @@ import SpriteKit
 class MovingShapeNode: MovingNode {
     var isInTheRightHole = false
     var isFitting = false
+    var fittingSpeed: CGFloat = 150
     
     convenience init(imageNamed: String) {
         let texture = SKTexture(imageNamed: imageNamed)
@@ -26,7 +27,7 @@ class MovingShapeNode: MovingNode {
         self.physicsBody?.categoryBitMask = Consts.PhysicsMask.shapeNodes
         self.physicsBody?.contactTestBitMask = Consts.PhysicsMask.holeNode
         self.physicsBody?.collisionBitMask = 0
-        let isVisible = SKAction.run{
+        let isVisible = SKAction.run {
             self.isHidden = false
         }
         let presentationAnimation = SKAction.sequence([SKAction.scale(to: CGSize.zero, duration: 0),
@@ -34,6 +35,26 @@ class MovingShapeNode: MovingNode {
                                                        SKAction.scale(to: self.size, duration: 0.5)
             ])
         self.run(presentationAnimation)
+    }
+    
+    func moveTo(position: CGPoint) -> SKAction {
+        
+        isFitting = true
+        let path = UIBezierPath()
+        path.move(to: self.position)
+        path.addLine(to: position)
+        
+        let fillInHoleAnimation = SKAction.sequence([
+            SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: fittingSpeed),
+            SKAction.removeFromParent(),
+            ])
+        return fillInHoleAnimation
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let scene = self.scene as? CarGameScreen {
+            scene.coloredShapesInitialPositions = scene.coloredShapesPositions[self.name!]!
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -48,7 +69,7 @@ class MovingShapeNode: MovingNode {
         
         if let scene = self.scene as? CarGameScreen {
             if isInTheRightHole == false {
-                scene.coloredShapesPositions[self.name!] = scene.coloredShapesInitialPositions[self.name!]
+                scene.coloredShapesPositions[self.name!] = scene.coloredShapesInitialPositions
             }
             else {
                 scene.controlIfRightShapeInHole(nodeName: self.name!)

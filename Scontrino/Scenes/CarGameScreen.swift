@@ -17,7 +17,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     //shape arrays
     var coloredShapesNodes: [MovingShapeNode] = []
     var coloredShapesPositions: [String: CGPoint] = [:]
-    var coloredShapesInitialPositions: [String: CGPoint] = [:] //using a different type
+    var coloredShapesInitialPositions = CGPoint.zero
     
     override init() {
         super.init()
@@ -45,8 +45,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     func createOneShape(index: Int, numberOfShapes: Int){
         let spacing: CGFloat = 10
         coloredShapesNodes[index].name = Consts.Id.CarGameScreen.coloredShapeNode + "\(index)"
-        coloredShapesInitialPositions[coloredShapesNodes[index].name!] = (CGPoint(x: CGFloat(UIScreen.main.bounds.width / CGFloat(numberOfShapes) + spacing + (CGFloat(index) * textureWidth ) ), y: UIScreen.main.bounds.height / 2))
-        coloredShapesPositions[coloredShapesNodes[index].name!] = coloredShapesInitialPositions[coloredShapesNodes[index].name!]
+        coloredShapesPositions[coloredShapesNodes[index].name!] = (CGPoint(x: CGFloat(UIScreen.main.bounds.width / CGFloat(numberOfShapes) + spacing + (CGFloat(index) * textureWidth ) ), y: UIScreen.main.bounds.height / 2))
         coloredShapesNodes[index].position = coloredShapesPositions[coloredShapesNodes[index].name!]!
         self.addChild(coloredShapesNodes[index])
     }
@@ -79,39 +78,45 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
         var i = 0
         while i < coloredShapesNodes.count {
             if coloredShapesNodes[i].name == nodeName {
-                debugPrint("new Shape")
-                debugPrint("i:\(i)")
                 let index = i
+                //creating animation to get a new shape
                 let createNewShapeNode = SKAction.run {
-//                    self.coloredShapesNodes[index].removeFromParent()
                     self.coloredShapesNodes[index] = self.dataSource.nextMovingShapeNode()
                     self.createOneShape(index: index, numberOfShapes: self.setDifficulty())
                 }
-                coloredShapesNodes[i].isFitting = true
-                let path = UIBezierPath()
-                path.move(to: coloredShapesNodes[i].position)
-                path.addLine(to: holeNode.position)
                 
-                let fillInHoleAnimation = SKAction.sequence([
-                    SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: 100),
-                    SKAction.removeFromParent(),
+                
+                
+                //                coloredShapesNodes[i].isFitting = true
+                //                let path = UIBezierPath()
+                //                path.move(to: coloredShapesNodes[i].position)
+                //                path.addLine(to: holeNode.position)
+                //
+                //                let fillInHoleAnimation = SKAction.sequence([
+                //                    SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: 100),
+                //                    SKAction.removeFromParent(),
+                //                    createNewShapeNode
+                //                    ])
+                //creating animation sequence to move the shape to the hole and than creating a new shape
+                let newSequence = SKAction.sequence([
+                    coloredShapesNodes[index].moveTo(position: holeNode.position),
                     createNewShapeNode
                     ])
-                coloredShapesNodes[i].run(fillInHoleAnimation)
+                coloredShapesNodes[index].run(newSequence)
                 
+                //creating animation to get a new hole after the shape is in his center
                 let createNewHole = SKAction.run{
                     self.createHole()
                 }
-                
                 let changeHoleAnimation = SKAction.sequence([
-                    SKAction.wait(forDuration: fillInHoleAnimation.duration),
+                    SKAction.wait(forDuration: newSequence.duration),
                     SKAction.wait(forDuration: 0.2),
                     SKAction.removeFromParent(),
                     createNewHole
                     ])
-
+                
                 self.holeNode.run(changeHoleAnimation)
-            
+                
             }
             i += 1
         }
@@ -126,8 +131,8 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
             debugPrint("A Better then B")
         }else{
             debugPrint("B Better then A")
-//            nodeA = contact.bodyA.node
-//            nodeB = contact.bodyB.node
+            //            nodeA = contact.bodyA.node
+            //            nodeB = contact.bodyB.node
         }
         if bodyA.categoryBitMask == Consts.PhysicsMask.shapeNodes {
             if bodyB.categoryBitMask == Consts.PhysicsMask.holeNode {
