@@ -13,9 +13,9 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     let dataSource = GameDataSource()
     
     var holeNode: HoleNode!
-    let textureWidth = MovingNode(imageNamed: "red square").size.width
+    let textureWidth = MovingShapeNode(imageNamed: "red square").size.width
     //shape arrays
-    var coloredShapesNodes: [MovingNode] = []
+    var coloredShapesNodes: [MovingShapeNode] = []
     var coloredShapesPositions: [String: CGPoint] = [:]
     var coloredShapesInitialPositions: [String: CGPoint] = [:] //using a different type
     
@@ -37,7 +37,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     func createShapes() {
         let numberOfShapes = setDifficulty()
         for index in  0..<numberOfShapes{
-            coloredShapesNodes.append(dataSource.nextMovingNode())
+            coloredShapesNodes.append(dataSource.nextMovingShapeNode())
             createOneShape(index: index, numberOfShapes: numberOfShapes)
         }
     }
@@ -84,7 +84,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
                 let index = i
                 let createNewShapeNode = SKAction.run {
 //                    self.coloredShapesNodes[index].removeFromParent()
-                    self.coloredShapesNodes[index] = self.dataSource.nextMovingNode()
+                    self.coloredShapesNodes[index] = self.dataSource.nextMovingShapeNode()
                     self.createOneShape(index: index, numberOfShapes: self.setDifficulty())
                 }
                 coloredShapesNodes[i].isFitting = true
@@ -134,7 +134,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
                 debugPrint("scontro")
                 if bodyA.node?.name == bodyB.node?.name {
                     debugPrint("same Shape")
-                    let contactNode = bodyA.node as! MovingNode
+                    let contactNode = bodyA.node as! MovingShapeNode
                     contactNode.isInTheRightHole = true
                 }
             }
@@ -158,7 +158,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
                 debugPrint("end scontro")
                 if bodyA.node?.name == bodyB.node?.name {
                     debugPrint("same Shape")
-                    let contactNode = bodyA.node as! MovingNode
+                    let contactNode = bodyA.node as! MovingShapeNode
                     contactNode.isInTheRightHole = false
                 }
             }

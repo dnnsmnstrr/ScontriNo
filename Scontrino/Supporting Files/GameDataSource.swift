@@ -20,8 +20,13 @@ struct GameDataSource {
         return MovingNode(imageNamed: nextColor() + " " + nextShape())
     }
     
+    //ALessio: added this one
+    func nextMovingShapeNode() -> MovingShapeNode {
+        return MovingShapeNode(imageNamed: nextColor() + " " + nextShape())
+    }
+    
     // This method returns a gray shape based on an array of moving nodes received as parameter
-    func nextStaticNode(from movingNodes: [MovingNode]) -> HoleNode { // changed from skspritenode in holenode
+    func nextStaticNode(from movingNodes: [MovingShapeNode]) -> HoleNode { // changed from skspritenode in holenode and movingNode to MovingShapeNode
         //ALESSIO: I'm Modifing this
         let index = GKRandomSource.sharedRandom().nextInt(upperBound: movingNodes.count)
         let node = movingNodes[index]
