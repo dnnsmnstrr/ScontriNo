@@ -11,13 +11,14 @@ import SpriteKit
 
 class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     let dataSource = GameDataSource()
-    
+    var numberShapesRemaining = Consts.shapes.count
     var holeNode: HoleNode!
     let textureWidth = MovingShapeNode(imageNamed: "red square").size.width
     //shape arrays
     var coloredShapesNodes: [MovingShapeNode] = []
     var coloredShapesPositions: [String: CGPoint] = [:]
     var coloredShapesInitialPositions = CGPoint.zero
+    var endGame = false
     
     override init() {
         super.init()
@@ -40,9 +41,11 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
             coloredShapesNodes.append(dataSource.nextMovingShapeNode())
             createOneShape(index: index, numberOfShapes: numberOfShapes)
         }
+        numberShapesRemaining -= numberOfShapes
     }
     
     func createOneShape(index: Int, numberOfShapes: Int){
+        
         let spacing: CGFloat = 10
         coloredShapesNodes[index].name = Consts.Id.CarGameScreen.coloredShapeNode + "\(index)"
         coloredShapesPositions[coloredShapesNodes[index].name!] = (CGPoint(x: CGFloat(UIScreen.main.bounds.width / CGFloat(numberOfShapes) + spacing + (CGFloat(index) * textureWidth ) ), y: UIScreen.main.bounds.height / 2))
@@ -77,15 +80,18 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     func controlIfRightShapeInHole(nodeName: String) {
         var i = 0
         while i < coloredShapesNodes.count {
+            
             if coloredShapesNodes[i].name == nodeName {
                 let index = i
                 //creating animation to get a new shape
                 let createNewShapeNode = SKAction.run {
+                    if self.numberShapesRemaining > 0 {
                     self.coloredShapesNodes[index] = self.dataSource.nextMovingShapeNode()
                     self.createOneShape(index: index, numberOfShapes: self.setDifficulty())
+                    } else {
+                        self.coloredShapesNodes.remove(at: index)
+                    }
                 }
-                
-                
                 
                 //                coloredShapesNodes[i].isFitting = true
                 //                let path = UIBezierPath()
@@ -98,6 +104,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
                 //                    createNewShapeNode
                 //                    ])
                 //creating animation sequence to move the shape to the hole and than creating a new shape
+                
                 let newSequence = SKAction.sequence([
                     coloredShapesNodes[index].moveTo(position: holeNode.position),
                     createNewShapeNode
@@ -106,8 +113,13 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
                 
                 //creating animation to get a new hole after the shape is in his center
                 let createNewHole = SKAction.run{
+                    if self.coloredShapesNodes.count > 0{
                     self.createHole()
+                    } else {
+                        self.endGame = true
+                    }
                 }
+                    
                 let changeHoleAnimation = SKAction.sequence([
                     SKAction.wait(forDuration: newSequence.duration),
                     SKAction.wait(forDuration: 0.2),
@@ -116,10 +128,16 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
                     ])
                 
                 self.holeNode.run(changeHoleAnimation)
-                
+                numberShapesRemaining -= 1
+                print("number of remaining shapes are \(numberShapesRemaining)")
             }
             i += 1
         }
+    }
+    
+    func endGameFunction() {
+        print("THE END FRA'")
+        endGame = false
     }
     
     public func didBegin(_ contact: SKPhysicsContact) {
@@ -173,6 +191,9 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
+        if endGame {
+            endGameFunction()
+        }
         
         for index in  0..<coloredShapesNodes.count {
             if !coloredShapesNodes[index].isFitting{
