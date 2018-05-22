@@ -24,6 +24,8 @@
 		2A2B4A5620976FCF009B81FB /* GameDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A5520976FCF009B81FB /* GameDataSource.swift */; };
 		2A5B5E4B209A21F8001D4985 /* CategorizationGameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B5E4A209A21F8001D4985 /* CategorizationGameScreen.swift */; };
 		2A5B5E4D20AB2435001D4985 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B5E4C20AB2435001D4985 /* CameraViewController.swift */; };
+		3052226520B4AE1100F3D5B2 /* MovingContextNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052226420B4AE1100F3D5B2 /* MovingContextNode.swift */; };
+		3052226920B4BF7200F3D5B2 /* LogNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052226820B4BF7200F3D5B2 /* LogNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		2A2B4A5520976FCF009B81FB /* GameDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDataSource.swift; sourceTree = "<group>"; };
 		2A5B5E4A209A21F8001D4985 /* CategorizationGameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorizationGameScreen.swift; sourceTree = "<group>"; };
 		2A5B5E4C20AB2435001D4985 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		3052226420B4AE1100F3D5B2 /* MovingContextNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingContextNode.swift; sourceTree = "<group>"; };
+		3052226820B4BF7200F3D5B2 /* LogNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,10 +118,12 @@
 				2A2B4A43209214F4009B81FB /* Consts.swift */,
 				2A2B4A5520976FCF009B81FB /* GameDataSource.swift */,
 				2A2B4A2B2091FBD4009B81FB /* RootViewController.swift */,
+				3052226820B4BF7200F3D5B2 /* LogNode.swift */,
 				2A5B5E4C20AB2435001D4985 /* CameraViewController.swift */,
 				2A2B4A3F2091FF86009B81FB /* GameScene.swift */,
 				2A2B4A4C20924A10009B81FB /* MovingNode.swift */,
 				15ED90F820AB2A0E00A3072E /* HoleNode.swift */,
+				3052226420B4AE1100F3D5B2 /* MovingContextNode.swift */,
 				15ED90FA20ADBA8200A3072E /* MovingShapeNode.swift */,
 				2A2B4A4E209252FB009B81FB /* ButtonNode.swift */,
 			);
@@ -208,8 +214,10 @@
 				2A2B4A44209214F4009B81FB /* Consts.swift in Sources */,
 				2A2B4A3E2091FF5A009B81FB /* SpeechRecognitionScreen.swift in Sources */,
 				2A2B4A4D20924A10009B81FB /* MovingNode.swift in Sources */,
+				3052226520B4AE1100F3D5B2 /* MovingContextNode.swift in Sources */,
 				2A5B5E4B209A21F8001D4985 /* CategorizationGameScreen.swift in Sources */,
 				2A2B4A2A2091FBD4009B81FB /* AppDelegate.swift in Sources */,
+				3052226920B4BF7200F3D5B2 /* LogNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -29,6 +29,22 @@ struct Consts {
         "teal blue",
         "yellow"
     ]
+    
+    
+    struct CategorizationGameScreen {
+        static let categories = [
+            "animals",
+            "fruits"
+        ]
+        static let animals = [
+            "bear",
+            "duck"
+        ]
+        static let fruits = [
+            "apple",
+            "orange"
+        ]
+    }
     struct Graphics {
         static let screenWidth = UIScreen.main.bounds.width
         static let screenHeight = UIScreen.main.bounds.height

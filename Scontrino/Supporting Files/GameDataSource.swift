@@ -11,6 +11,9 @@ import GameplayKit
 struct GameDataSource {
     var colorsDie: GKShuffledDistribution!
     var shapesDie: GKShuffledDistribution!
+    var categorizationDie: GKShuffledDistribution!
+    var animalsDie: GKShuffledDistribution!
+    var fruitDie: GKShuffledDistribution!
     
     init() {
         initializeDice()
@@ -24,6 +27,12 @@ struct GameDataSource {
     func nextMovingShapeNode() -> MovingShapeNode {
         return MovingShapeNode(imageNamed: nextColor() + " " + nextShape())
     }
+    
+    func nextFlagNode() -> SKSpriteNode {
+        return SKSpriteNode(imageNamed: nextCategorization())
+    }
+    
+    
     
     // This method returns a gray shape based on an array of moving nodes received as parameter
     func nextStaticNode(from movingNodes: [MovingShapeNode]) -> HoleNode { // changed from skspritenode in holenode and movingNode to MovingShapeNode
@@ -52,6 +61,9 @@ struct GameDataSource {
     mutating func initializeDice() {
         colorsDie = GKShuffledDistribution(forDieWithSideCount: Consts.colors.count - 1)
         shapesDie = GKShuffledDistribution(forDieWithSideCount: Consts.shapes.count - 1)
+        categorizationDie = GKShuffledDistribution(forDieWithSideCount: Consts.CategorizationGameScreen.categories.count)
+        animalsDie = GKShuffledDistribution(forDieWithSideCount: Consts.CategorizationGameScreen.animals.count - 1)
+        fruitDie = GKShuffledDistribution(forDieWithSideCount: Consts.CategorizationGameScreen.fruits.count - 1)
     }
     
     private func nextShape() -> String {
@@ -60,5 +72,17 @@ struct GameDataSource {
     
     private func nextColor() -> String {
         return Consts.colors[colorsDie.nextInt()]
+    }
+    
+    private func nextCategorization() -> String {
+        return Consts.CategorizationGameScreen.categories[categorizationDie.nextInt() - 1]
+    }
+    
+    private func nextFruit() -> String {
+        return Consts.CategorizationGameScreen.fruits[fruitDie.nextInt()]
+    }
+    
+    private func nextAnimal() -> String {
+        return Consts.CategorizationGameScreen.animals[animalsDie.nextInt()]
     }
 }
