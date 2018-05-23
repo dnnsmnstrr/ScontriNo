@@ -9,7 +9,7 @@
 import SpriteKit
 
 class MovingContextNode: MovingNode {
-    var isInTheRightHole = false
+    var isInTheRightCategory = false
     var isFitting = false
     var fittingSpeed: CGFloat = 150
     
@@ -22,7 +22,7 @@ class MovingContextNode: MovingNode {
         texSize.height = (texSize.height) * 0.65
         self.isHidden = true
         self.isUserInteractionEnabled = true
-        self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "red square"), size: texSize)
+        self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: imageNamed), size: texSize)
         self.physicsBody?.affectedByGravity = false
         self.physicsBody?.categoryBitMask = Consts.PhysicsMask.shapeNodes
         self.physicsBody?.contactTestBitMask = Consts.PhysicsMask.holeNode
@@ -44,17 +44,17 @@ class MovingContextNode: MovingNode {
         path.move(to: self.position)
         path.addLine(to: position)
         
-        let fillInHoleAnimation = SKAction.sequence([
+        let fitTheCategory = SKAction.sequence([
             SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: fittingSpeed),
             SKAction.removeFromParent(),
             ])
-        return fillInHoleAnimation
+        return fitTheCategory
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let scene = self.scene as? CarGameScreen {
-            scene.coloredShapesInitialPositions = scene.coloredShapesPositions[self.name!]!
-        }
+//        if let scene = self.scene as? CategorizationGameScreen {
+//            scene.movingContextNodeInitialPosition = scene.movingContextNodePosition[self.name!]!
+//        }
     }
     
 //    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {

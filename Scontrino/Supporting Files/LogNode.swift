@@ -10,11 +10,15 @@ import SpriteKit
 
 class LogNode: SKSpriteNode {
     
+    var nodeFlag: SKSpriteNode = SKSpriteNode()
+    
     convenience init(imageNamed: String, flag: SKSpriteNode) {
         let texture = SKTexture(imageNamed: imageNamed)
         self.init(texture: texture)
+        
         flag.position = CGPoint(x: self.frame.midX, y: self.frame.maxY - flag.frame.maxY - 5)
         flag.name = "flag" + " " + imageNamed
+        nodeFlag = flag
         self.addChild(flag)
     }
     

@@ -53,6 +53,39 @@ struct GameDataSource {
 //        return SKSpriteNode(imageNamed: "gray" + " " + shape)
     }
     
+    func nextMovingContextNode(from logNodes: [LogNode]) -> MovingContextNode { // changed from skspritenode in holenode and movingNode to MovingShapeNode
+        //ALESSIO: I'm Modifing this
+        let index = GKRandomSource.sharedRandom().nextInt(upperBound: logNodes.count) //sistemare
+        let node = logNodes[index]
+        var res = ""
+        
+        switch node.nodeFlag.name {
+        case "flag fruits":
+            res  = nextFruit()
+        case "flag animals":
+            res = nextAnimal()
+        default:
+            res = nextAnimal()
+        }
+        
+        let newNode = MovingContextNode(imageNamed: res)
+//        da cambiare
+//        let shape = node.texture!.description.split(separator: "\'")[1].split(separator: " ").last!
+//        let grayNode = MovingContextNode(imageNamed: "gray" + " " + shape)
+//        debugPrint("Shape of the gray node is: \(shape)")
+//        debugPrint("name of gray node is: \(node.name)")
+//        grayNode.name = node.name
+//        return grayNode
+        
+        //End of my changes, I commented the original lines
+        
+        //        let node = movingNodes[GKRandomSource.sharedRandom().nextInt(upperBound: movingNodes.count)]
+        //        let shape = node.texture!.description.split(separator: "\'")[1].split(separator: " ").last!
+        //
+        //        return SKSpriteNode(imageNamed: "gray" + " " + shape)
+        return newNode
+    }
+
     func nextWord() -> String {
         return Consts.words[GKRandomSource.sharedRandom().nextInt(upperBound: Consts.words.count)]
     }
