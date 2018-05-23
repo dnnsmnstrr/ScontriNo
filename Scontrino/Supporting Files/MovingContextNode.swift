@@ -57,24 +57,28 @@ class MovingContextNode: MovingNode {
 //        }
     }
     
-//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        if let touch = touches.first {
-////            if let scene = self.scene as? CategorizationGameScreen {
-////                let location = touch.location(in: scene)
-////                scene.coloredShapesPositions[self.name!] = location
-//            }
-//        }
-//    }
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//
-////        if let scene = self.scene as? CategorizationGameScreen {
-////            if isInTheRightHole == false {
-////                scene.coloredShapesPositions[self.name!] = scene.coloredShapesInitialPositions
-////            }
-//            else {
-//                scene.controlIfRightShapeInHole(nodeName: self.name!)
-//            }
-//        }
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            if let scene = self.scene as? CategorizationGameScreen {
+                let location = touch.location(in: scene)
+                scene.movingNode.position = location
+            }
+        }
+    }
+
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        if let scene = self.scene as? CategorizationGameScreen {
+            if isInTheRightCategory == false {
+                scene.movingNode.position = CGPoint(x: 200, y: 200)
+//                self.position = CGPoint(x: 200, y: 200)
+            }
+            else {
+                scene.checkRightCategory()
+            }
+        }
     
     }
 //}
+}
