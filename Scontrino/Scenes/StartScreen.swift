@@ -79,8 +79,8 @@ class StartScreen: SKScene, ButtonNodeDelegate {
             case "CategorizationGameScreen":
                 RootViewController.shared.skView.presentScene(CategorizationGameScreen())
             case "FaceDetectionScreen":
-//                RootViewController.shared.skView.presentScene(FaceDetectionScreen())
-                RootViewController.shared.present(CameraViewController(), animated: true, completion: nil)
+                RootViewController.shared.skView.presentScene(FaceDetectionScreen())
+//                RootViewController.shared.present(CameraViewController(), animated: true, completion: nil)
             case "SpeechRecognitionScreen":
                 RootViewController.shared.skView.presentScene(SpeechRecognitionScreen())
             default:
