@@ -41,6 +41,13 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
         self.addChild(logNode[1])
     }
     
+    func createSingleLog (location: CGPoint) {
+        
+        
+        
+        
+    }
+    
     func createMovingNode(){
         movingNode = dataSource.nextMovingContextNode(from: logNode)
         movingNode.position = CGPoint(x: 200, y: 200)
@@ -66,14 +73,16 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
                 
                 let category = bodyB.node as! LogNode
                 debugPrint(category.nodeFlag.name!)
-                debugPrint(bodyA.node?.name)
+                debugPrint(bodyA.node?.name!)
                 switch category.nodeFlag.name {
                 case "flag fruits":
                     
                     if Consts.CategorizationGameScreen.fruits.contains((bodyA.node?.name)!) {
                         debugPrint("right category")
                         let contactNode = bodyA.node as! MovingContextNode
+                        contactNode.category = category.nodeFlag.name!
                         contactNode.isInTheRightCategory = true
+                        print("category: " + contactNode.category)
                     }
                     
                 case "flag animals":
@@ -82,6 +91,8 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
                         debugPrint("right category")
                         let contactNode = bodyA.node as! MovingContextNode
                         contactNode.isInTheRightCategory = true
+                        contactNode.category = category.nodeFlag.name!
+                        print("category: " + contactNode.category)
                     }
                     
                 default:
@@ -127,6 +138,8 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
                         debugPrint("right category")
                         let contactNode = bodyA.node as! MovingContextNode
                         contactNode.isInTheRightCategory = false
+                        
+                        
                     }
                     
                 case "flag animals":
@@ -135,6 +148,7 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
                         debugPrint("right category")
                         let contactNode = bodyA.node as! MovingContextNode
                         contactNode.isInTheRightCategory = false
+                        
                     }
                     
                 default:
@@ -157,6 +171,72 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
     }
     
     func checkRightCategory () {
+      
+        
+//            if coloredShapesNodes[i].name == nodeName {
+        
+        
+        
+        var index = 0
+        var logPosition: CGPoint = CGPoint.zero
+        
+        
+        print("log category: " + movingNode.category)
+        print("log[0] : " + logNode[0].nodeFlag.name!)
+        print("log[1] : " + logNode[1].nodeFlag.name!)
+            if logNode[0].nodeFlag.name == movingNode.category {
+                print("first one")
+                logPosition = logNode[0].position
+                index = 0
+                
+            } else if logNode[1].nodeFlag.name == movingNode.category {
+                print("second")
+                 logPosition = logNode[1].position
+                index = 1
+        }
+        
+        
+                let newSequence = SKAction.sequence([
+                    movingNode.moveTo(position: logPosition),
+                    
+//                    createNewMovingNode
+                    ])
+                movingNode.run(newSequence)
+//                movingNode.removeFromParent()
+//                logNode[index].addChild(movingNode)
+        
+                //creating animation to get a new hole after the shape is in his center
+                let createNewLog = SKAction.run{
+//                    if self.coloredShapesNodes.count > 0{
+//                        self.createHole()
+//                    } else {
+//                        self.endGame = true
+//                    }
+                    
+                }
+        
+        
+        //creating animation to get a new shape
+        let createNewMovingNode = SKAction.run {
+            //                    if self.numberShapesRemaining > 0 {
+            self.createMovingNode()
+            //                        self.createOneShape(index: index, numberOfShapes: self.setDifficulty())
+            //                    } else {
+            //                        self.coloredShapesNodes.remove(at: index)
+            //                    }
+        }
+                
+                let changeHoleAnimation = SKAction.sequence([
+                    SKAction.wait(forDuration: newSequence.duration),
+                    SKAction.wait(forDuration: 0.2),
+                    SKAction.removeFromParent(),
+                    createNewLog
+                    ])
+                
+//                self.logNode[index].run(changeHoleAnimation)
+        
+        
+    
         
     }
     

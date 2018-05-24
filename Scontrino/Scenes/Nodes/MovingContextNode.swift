@@ -12,6 +12,7 @@ class MovingContextNode: MovingNode {
     var isInTheRightCategory = false
     var isFitting = false
     var fittingSpeed: CGFloat = 150
+    var category: String = ""
     
     convenience init(imageNamed: String) {
         let texture = SKTexture(imageNamed: imageNamed)
@@ -46,7 +47,7 @@ class MovingContextNode: MovingNode {
         
         let fitTheCategory = SKAction.sequence([
             SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: fittingSpeed),
-            SKAction.removeFromParent(),
+//            SKAction.removeFromParent(),
             ])
         return fitTheCategory
     }
