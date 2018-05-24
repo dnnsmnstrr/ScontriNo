@@ -14,26 +14,39 @@ import Vision
 
 class FaceDetectionScreen: GameScene {
     
+    let cameraNode = SKCameraNode()
+    
     var ferrisWheel: SKSpriteNode!
     private var cabins: [SKSpriteNode] = []
     var startTime: TimeInterval?
     var start: CGPoint?
     var end: CGPoint?
-    var wheelSpeed: CGFloat?
+    var wheelSpeed: CGFloat = 1000
+    var zoomedIn: Bool = false
+    var zoomPoint: CGFloat?
     
     
     
     override func createSceneContents() {
         super.createSceneContents()
         
+        cameraNode.position = CGPoint(x: self.size.width / 2,y: self.size.height / 2)
+        self.addChild(cameraNode)
+        self.camera = cameraNode
+        
+        
+        
+        
         //create ferris wheel
         
         ferrisWheel = SKSpriteNode.init(texture: SKTexture(imageNamed: "Wheel"))
         ferrisWheel.name = "wheel"
+//        ferrisWheel.texture
         ferrisWheel.zPosition = 2
         ferrisWheel.anchorPoint = CGPoint(x: 0.5, y: 0.5) // default
         ferrisWheel.position = CGPoint(x: size.width/2, y: size.height/2)
         ferrisWheel.size = CGSize(width: size.width, height: size.width)
+        zoomPoint = ferrisWheel.frame.minY + size.height/10
         ferrisWheel.physicsBody = SKPhysicsBody(circleOfRadius: max((ferrisWheel.size.width) / 2,
                                                                     (ferrisWheel.size.height) / 2))
         ferrisWheel.zRotation = CGFloat.pi / 2
@@ -71,7 +84,7 @@ class FaceDetectionScreen: GameScene {
         }
         
         
-        
+        //MARK: touches
         
     }
     
@@ -100,12 +113,18 @@ class FaceDetectionScreen: GameScene {
             }
             let touchPosition = touch.location(in: self)
             if touchPosition.x < (self.frame.width / 2) {
-                self.ferrisWheel.physicsBody?.applyAngularImpulse(-(wheelSpeed!/100))
+                self.ferrisWheel.physicsBody?.applyAngularImpulse(-(wheelSpeed/100))
             } else {
-                self.ferrisWheel.physicsBody?.applyAngularImpulse(wheelSpeed!/100)
+                self.ferrisWheel.physicsBody?.applyAngularImpulse(wheelSpeed/100)
             }
         }
         if magnitude < 25 {
+            if !zoomedIn{
+                zoomIn()
+            }
+            else {
+                zoomOut()
+            }
             
             let touchPosition = touch.location(in: self)
             if touchPosition.x < (self.frame.width / 2) {
@@ -116,6 +135,25 @@ class FaceDetectionScreen: GameScene {
         }
         
     }
+    
+    //MARK: custom functions
+    
+    func zoomIn(scalingFactor: CGFloat = 0.2) {
+        let zoomInAction = SKAction.scale(to: scalingFactor, duration: 1)
+        let positioning = SKAction.moveTo(y: zoomPoint! / 6, duration: 1)
+        let group = SKAction.group([zoomInAction, positioning])
+        cameraNode.run(group)
+        zoomedIn = true
+    }
+    
+    func zoomOut(scalingFactor: CGFloat = 1) {
+        let zoomInAction = SKAction.scale(to: scalingFactor, duration: 1)
+        let positioning = SKAction.moveTo(y: self.size.height / 2, duration: 1)
+        let group = SKAction.group([zoomInAction, positioning])
+        cameraNode.run(group)
+        zoomedIn = false
+    }
+    
     
     override init() {
         super.init()
