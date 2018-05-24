@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class VagonNode : SKSpriteNode {
+class CentralVagonNode : SKSpriteNode {
     convenience init(imageNamed: String) {
         let texture = SKTexture(imageNamed: imageNamed)
         self.init(texture: texture)
