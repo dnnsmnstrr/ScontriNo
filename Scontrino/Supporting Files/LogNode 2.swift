@@ -16,14 +16,14 @@ class LogNode: SKSpriteNode {
         let texture = SKTexture(imageNamed: imageNamed)
         self.init(texture: texture)
         
-        var texSize = texture.size()
-        texSize.width = (texSize.width) * 0.8
-        texSize.height = (texSize.height) * 0.8
-        self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: imageNamed), size: texSize)
-        self.physicsBody?.isDynamic = false
-        self.physicsBody?.affectedByGravity = false
-        self.physicsBody?.categoryBitMask = Consts.PhysicsMask.holeNode
-        self.physicsBody?.contactTestBitMask = Consts.PhysicsMask.shapeNodes
+//        var texSize = texture.size()
+////        texSize.width = (texSize.width) * 0.55
+////        texSize.height = (texSize.height) * 0.55
+//        self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "red square"), size: texSize)
+//        self.physicsBody?.isDynamic = false
+//        self.physicsBody?.affectedByGravity = false
+//        self.physicsBody?.categoryBitMask = Consts.PhysicsMask.holeNode
+//        self.physicsBody?.contactTestBitMask = Consts.PhysicsMask.shapeNodes
 //        let isVisible = SKAction.run{
 //            self.isHidden = false
 //        }
@@ -35,7 +35,7 @@ class LogNode: SKSpriteNode {
 //        self.run(presentationAnimation)
         
         flag.position = CGPoint(x: self.frame.midX, y: self.frame.maxY - flag.frame.maxY - 5)
-//        flag.name = "flag" + " " + imageNamed
+        flag.name = "flag" + " " + imageNamed
         nodeFlag = flag
         self.addChild(flag)
     }

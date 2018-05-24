@@ -29,7 +29,10 @@ struct GameDataSource {
     }
     
     func nextFlagNode() -> SKSpriteNode {
-        return SKSpriteNode(imageNamed: nextCategorization())
+        let cat = nextCategorization()
+        let flagNode = SKSpriteNode(imageNamed: cat)
+        flagNode.name = "flag" + " " + cat
+        return flagNode
     }
     
     
@@ -69,6 +72,7 @@ struct GameDataSource {
         }
         
         let newNode = MovingContextNode(imageNamed: res)
+        newNode.name = res
 //        da cambiare
 //        let shape = node.texture!.description.split(separator: "\'")[1].split(separator: " ").last!
 //        let grayNode = MovingContextNode(imageNamed: "gray" + " " + shape)
