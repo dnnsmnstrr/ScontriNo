@@ -19,13 +19,13 @@
 		2A5B5E4B209A21F8001D4985 /* CategorizationGameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B5E4A209A21F8001D4985 /* CategorizationGameScreen.swift */; };
 		8B03E08F20B6DD5700004D7E /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E08D20B6DD5700004D7E /* RootViewController.swift */; };
 		8B03E09020B6DD5700004D7E /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E08E20B6DD5700004D7E /* CameraViewController.swift */; };
-		8B03E09320B6DD8600004D7E /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E09220B6DD8600004D7E /* Consts.swift */; };
 		8B03E09B20B6DDDB00004D7E /* HoleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E09520B6DDDB00004D7E /* HoleNode.swift */; };
 		8B03E09C20B6DDDB00004D7E /* LogNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E09620B6DDDB00004D7E /* LogNode.swift */; };
 		8B03E09D20B6DDDB00004D7E /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E09720B6DDDB00004D7E /* ButtonNode.swift */; };
 		8B03E09E20B6DDDB00004D7E /* MovingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E09820B6DDDB00004D7E /* MovingNode.swift */; };
 		8B03E09F20B6DDDB00004D7E /* MovingContextNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E09920B6DDDB00004D7E /* MovingContextNode.swift */; };
 		8B03E0A020B6DDDB00004D7E /* MovingShapeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E09A20B6DDDB00004D7E /* MovingShapeNode.swift */; };
+		8B03E0A720B6E0DE00004D7E /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E0A620B6E0DE00004D7E /* Consts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,13 +43,13 @@
 		2A5B5E4A209A21F8001D4985 /* CategorizationGameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorizationGameScreen.swift; sourceTree = "<group>"; };
 		8B03E08D20B6DD5700004D7E /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootViewController.swift; path = Scontrino/View/RootViewController.swift; sourceTree = SOURCE_ROOT; };
 		8B03E08E20B6DD5700004D7E /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = Scontrino/View/CameraViewController.swift; sourceTree = SOURCE_ROOT; };
-		8B03E09220B6DD8600004D7E /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Consts.swift; path = ../Model/Consts.swift; sourceTree = "<group>"; };
 		8B03E09520B6DDDB00004D7E /* HoleNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HoleNode.swift; path = Scontrino/Scenes/Nodes/HoleNode.swift; sourceTree = SOURCE_ROOT; };
 		8B03E09620B6DDDB00004D7E /* LogNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogNode.swift; path = Scontrino/Scenes/Nodes/LogNode.swift; sourceTree = SOURCE_ROOT; };
 		8B03E09720B6DDDB00004D7E /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonNode.swift; path = Scontrino/Scenes/Nodes/ButtonNode.swift; sourceTree = SOURCE_ROOT; };
 		8B03E09820B6DDDB00004D7E /* MovingNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovingNode.swift; path = Scontrino/Scenes/Nodes/MovingNode.swift; sourceTree = SOURCE_ROOT; };
 		8B03E09920B6DDDB00004D7E /* MovingContextNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovingContextNode.swift; path = Scontrino/Scenes/Nodes/MovingContextNode.swift; sourceTree = SOURCE_ROOT; };
 		8B03E09A20B6DDDB00004D7E /* MovingShapeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovingShapeNode.swift; path = Scontrino/Scenes/Nodes/MovingShapeNode.swift; sourceTree = SOURCE_ROOT; };
+		8B03E0A620B6E0DE00004D7E /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +82,7 @@
 		2A2B4A282091FBD4009B81FB /* Scontrino */ = {
 			isa = PBXGroup;
 			children = (
-				8B03E09120B6DD7B00004D7E /* Model */,
+				8B03E0A320B6E0B700004D7E /* Model */,
 				8B03E08C20B6DD4700004D7E /* View */,
 				2A2B4A4920922272009B81FB /* Supporting Files */,
 				2A2B4A4820922256009B81FB /* Scenes */,
@@ -134,15 +134,6 @@
 			path = "New Group";
 			sourceTree = "<group>";
 		};
-		8B03E09120B6DD7B00004D7E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				8B03E09220B6DD8600004D7E /* Consts.swift */,
-			);
-			name = Model;
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		8B03E09420B6DDCA00004D7E /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +145,15 @@
 				8B03E09A20B6DDDB00004D7E /* MovingShapeNode.swift */,
 			);
 			name = Nodes;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		8B03E0A320B6E0B700004D7E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8B03E0A620B6E0DE00004D7E /* Consts.swift */,
+			);
+			name = Model;
 			path = "New Group";
 			sourceTree = "<group>";
 		};
@@ -232,9 +232,9 @@
 				2A2B4A3C2091FF42009B81FB /* FaceDetectionScreen.swift in Sources */,
 				8B03E08F20B6DD5700004D7E /* RootViewController.swift in Sources */,
 				2A2B4A46209217F6009B81FB /* StartScreen.swift in Sources */,
-				8B03E09320B6DD8600004D7E /* Consts.swift in Sources */,
 				8B03E09F20B6DDDB00004D7E /* MovingContextNode.swift in Sources */,
 				2A2B4A5620976FCF009B81FB /* GameDataSource.swift in Sources */,
+				8B03E0A720B6E0DE00004D7E /* Consts.swift in Sources */,
 				8B03E0A020B6DDDB00004D7E /* MovingShapeNode.swift in Sources */,
 				8B03E09D20B6DDDB00004D7E /* ButtonNode.swift in Sources */,
 				8B03E09C20B6DDDB00004D7E /* LogNode.swift in Sources */,
