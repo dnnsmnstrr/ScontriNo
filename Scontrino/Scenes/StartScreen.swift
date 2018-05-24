@@ -51,6 +51,12 @@ class StartScreen: SKScene, ButtonNodeDelegate {
         bottomNode.name = "SpeechRecognitionScreen"
         bottomNode.position = CGPoint(x: self.size.width / 2, y: 2.5 * self.size.height / 8)
         self.addChild(bottomNode)
+        
+        let trialNode = ButtonNode(imageNamed: "green star")
+        trialNode.delegate = self
+        trialNode.name = "TrialScreen"
+        trialNode.position = CGPoint(x: self.size.width / 2, y: 1.5 * self.size.height / 8)
+        self.addChild(trialNode)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -65,6 +71,8 @@ class StartScreen: SKScene, ButtonNodeDelegate {
                 RootViewController.shared.skView.presentScene(FaceDetectionScreen())
             case "bottomNode":
                 RootViewController.shared.skView.presentScene(SpeechRecognitionScreen())
+            case "trialNode":
+                RootViewController.shared.skView.presentScene(TrialScreen())
             default:
                 break
             }
@@ -83,6 +91,8 @@ class StartScreen: SKScene, ButtonNodeDelegate {
 //                RootViewController.shared.present(CameraViewController(), animated: true, completion: nil)
             case "SpeechRecognitionScreen":
                 RootViewController.shared.skView.presentScene(SpeechRecognitionScreen())
+            case "TrialScreen":
+                RootViewController.shared.skView.presentScene(TrialScreen())
             default:
                 print("default")
             }
