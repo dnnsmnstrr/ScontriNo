@@ -91,7 +91,8 @@ struct GameDataSource {
     }
 
     func nextWord() -> String {
-        return Consts.words[GKRandomSource.sharedRandom().nextInt(upperBound: Consts.words.count)]
+//        return Consts.words[GKRandomSource.sharedRandom().nextInt(upperBound: Consts.words.count)]
+        return "luna"
     }
     
     // TODO: - initializeDice() should be updated to depend opon dificulty

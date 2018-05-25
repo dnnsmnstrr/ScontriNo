@@ -19,8 +19,6 @@ class RootViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let consts = Consts()
-        print(consts.search())
         view = SKView()
         if let mainView = self.view as! SKView? {
             debugPrint("mainView: \(mainView.frame)")

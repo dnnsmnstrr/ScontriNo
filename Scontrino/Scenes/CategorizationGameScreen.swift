@@ -173,67 +173,107 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
     func checkRightCategory () {
       
         
-//            if coloredShapesNodes[i].name == nodeName {
-        
-        
-        
         var index = 0
         var logPosition: CGPoint = CGPoint.zero
-        
+        print("altezza nodo: \(logNode[0].size.height)")
         
         print("log category: " + movingNode.category)
         print("log[0] : " + logNode[0].nodeFlag.name!)
         print("log[1] : " + logNode[1].nodeFlag.name!)
-            if logNode[0].nodeFlag.name == movingNode.category {
-                print("first one")
-                logPosition = logNode[0].position
-                index = 0
-                
-            } else if logNode[1].nodeFlag.name == movingNode.category {
-                print("second")
-                 logPosition = logNode[1].position
-                index = 1
+        if logNode[0].nodeFlag.name == movingNode.category {
+            print("first one")
+            logPosition = logNode[0].position
+            index = 0
+            
+        } else if logNode[1].nodeFlag.name == movingNode.category {
+            print("second")
+            logPosition = logNode[1].position
+            index = 1
         }
         
         
-                let newSequence = SKAction.sequence([
-                    movingNode.moveTo(position: logPosition),
-                    
-//                    createNewMovingNode
-                    ])
-                movingNode.run(newSequence)
-//                movingNode.removeFromParent()
-//                logNode[index].addChild(movingNode)
+        let newSequence = SKAction.sequence([
+            movingNode.moveTo(position: logPosition),
+            
+            //                    createNewMovingNode
+            ])
+        movingNode.run(newSequence)
+        //                movingNode.removeFromParent()
+        //                logNode[index].addChild(movingNode)
         
-                //creating animation to get a new hole after the shape is in his center
-                let createNewLog = SKAction.run{
-//                    if self.coloredShapesNodes.count > 0{
-//                        self.createHole()
-//                    } else {
-//                        self.endGame = true
-//                    }
-                    
-                }
+        
+        
+        
+        let newPosition = CGPoint(x: self.logNode[index].initialPosition.x, y: self.frame.height + self.logNode[index].size.height / 2)
+        
+        //creating animation to get a new hole after the shape is in his center
+        //                let createNewLog = SKAction.move(to: newPosition, duration: 2)
+        
         
         
         //creating animation to get a new shape
         let createNewMovingNode = SKAction.run {
-            //                    if self.numberShapesRemaining > 0 {
+            
+            self.movingNode.removeFromParent()
             self.createMovingNode()
-            //                        self.createOneShape(index: index, numberOfShapes: self.setDifficulty())
-            //                    } else {
-            //                        self.coloredShapesNodes.remove(at: index)
-            //                    }
+            
         }
-                
-                let changeHoleAnimation = SKAction.sequence([
-                    SKAction.wait(forDuration: newSequence.duration),
-                    SKAction.wait(forDuration: 0.2),
-                    SKAction.removeFromParent(),
-                    createNewLog
-                    ])
-                
-//                self.logNode[index].run(changeHoleAnimation)
+        
+        
+        
+        //                let logOutsideTheScene = SKAction.sequence([
+        //                    SKAction.wait(forDuration: newSequence.duration),
+        //                    SKAction.wait(forDuration: 0.2),
+        ////                    SKAction.removeFromParent(),
+        ////                    createNewLog
+        ////                    logNode[index].moveTo(position: newPosition)
+        //
+        //                    ])
+        
+        //        let resetPosition = SKAction.run {
+        //
+        //            self.logNode[index].position = CGPoint(x: self.logNode[index].initialPosition.x, y: 0 - self.logNode[index].size.height/2)
+        //            print("x: \(self.logNode[index].position.x), y: \(self.logNode[index].position.y)")
+        //        }
+        
+        //        let prova = SKAction.run {
+        //
+        //            self.logNode[index].position = self.logNode[index].initialPosition
+        //            print("x: \(self.logNode[index].position.x), y: \(self.logNode[index].position.y)")
+        //        }
+        
+        
+        let logInitialPoisition = SKAction.sequence([
+            SKAction.wait(forDuration: newSequence.duration),
+            SKAction.wait(forDuration: 0.2),
+            //            resetPosition,
+            logNode[index].moveTo(position: newPosition, startingPoint: logNode[index].position),
+            //            movingNode.removeFromParent(),
+            //            logNode[index].moveTo(position: CGPoint(x: newPosition.x, y: 0 - self.logNode[index].size.height), startingPoint: newPosition),
+            //            SKAction.removeFromParent(),
+            logNode[index].moveTo(position: self.logNode[index].initialPosition, startingPoint: CGPoint(x: newPosition.x, y: 0 - self.logNode[index].size.height)),
+            createNewMovingNode
+            
+            ])
+        
+        //        self.run(changeHoleAnimation)
+        //                self.logNode[index].run(changeHoleAnimation)
+        //                self.movingNode.removeFromParent()
+        //        logNode[index].run(logNode[index].moveTo(position: newPosition))
+        
+        //        logNode[index].run(logOutsideTheScene)
+        
+        movingNode.run( movingNode.moveTo(position: newPosition))
+        //        logNode[index].position = CGPoint(x: lastPosition.x, y: 0 - logNode[index].size.height/2)
+        
+        logNode[index].run(logInitialPoisition)
+        
+        //        movingNode.removeFromParent()
+        //        logNode[index].run(logNode[index].moveTo(position: CGPoint(x: 89, y: 350)))
+        //        logNode[index].position = CGPoint(x: lastPosition.x, y: 0)
+        //        logNode[index].run(logNode[index].moveTo(position: lastPosition))
+        
+        //                self.run(createNewMovingNode)
         
         
     
