@@ -8,10 +8,49 @@
 
 import UIKit
 
+enum Difficulty {
+    case easy, normal
+}
+
 struct Consts {
-    static let words = [
-        "luna",
-        "stella"
+    private static let words = [
+        Difficulty.easy: [
+            "a*": ["ape", "addio", "ago", "abbaglio", "addurre", "affetto", "avuto", "aghi", "aglio", "ascia"],
+            "e*": ["evviva"],
+            "ɛ*": [],
+            "i*": [],
+            "o*": [],
+            "ɔ*": ["oca", "ocche"],
+            "u*": ["uffa", "uva", "uno", "urra"],
+            "b*": ["bello", "babbo", "banana", "balena", "beghe", "buchi", "bagno", "biglia", "biscia"],
+            "d*": ["dado", "dottore", "doglie"],
+            "dz*": ["zorro"],
+            "dʒ*": [],
+            "f*": ["fata", "famoso", "femmina", "fichi", "foglia", "figlio"],
+            "g*": ["gatto", "gufo", "gattino", "ghiaccio", "ghisa", "gogna"],
+            "k*": ["cane", "corro", "cappotto", "cotone", "codino", "colore", "cofano", "cassetta", "cannone", "collana", "corona", "correre", "chicco", "chilo", "chele", "coscia"],
+            "l*": ["leggo", "lana", "leccare", "legare", "lagna", "legno", "luglio", "liscio"],
+            "ʎ*": [],
+            "m*": ["moto", "mucca", "mago", "mamma", "mela", "mattone", "mobile", "maghi", "maglia", "moglie"],
+            "ɱ*": [],
+            "n*": ["nido", "neve", "nave", "nonno", "nobile"],
+            "ŋ*": [],
+            "ɲ*": ["gnomo", "gnocco"],
+            "p*": ["pipa", "pippo", "pozzo", "pezzo", "palla", "panino", "posate", "piaghe", "poche", "pugno", "pegno", "paglia"],
+            "r*": ["roba", "rosa", "razzo", "rosso", "ricamo", "rumore", "roghi", "raglia"],
+            "s*": ["sole", "sasso", "seme", "sapone", "sabato", "salame", "seghe", "spighe", "segno", "sogni"],
+            "ʃ*": ["scimmia"],
+            "t*": ["topo", "tetto", "tavolo", "timone", "toghe"],
+            "ts*": ["zozzo"],
+            "tʃ*": [],
+            "v*": ["vaso", "vagone", "valore"],
+            "w*": [],
+            "j*": [],
+            "z*": [],
+        ],
+        Difficulty.normal: [
+            "*a*": []
+        ]
     ]
     static let shapes = [
         "triangle",
