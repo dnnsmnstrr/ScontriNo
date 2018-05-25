@@ -14,6 +14,7 @@ struct GameDataSource {
     var categorizationDie: GKShuffledDistribution!
     var animalsDie: GKShuffledDistribution!
     var fruitDie: GKShuffledDistribution!
+    var clothesDie: GKShuffledDistribution!
     
     init() {
         initializeDice()
@@ -67,6 +68,8 @@ struct GameDataSource {
             res  = nextFruit()
         case "flag animals":
             res = nextAnimal()
+        case "flag clothes":
+            res = nextDress()
         default:
             res = nextAnimal()
         }
@@ -100,8 +103,9 @@ struct GameDataSource {
         colorsDie = GKShuffledDistribution(forDieWithSideCount: Consts.colors.count - 1)
         shapesDie = GKShuffledDistribution(forDieWithSideCount: Consts.shapes.count - 1)
         categorizationDie = GKShuffledDistribution(forDieWithSideCount: Consts.CategorizationGameScreen.categories.count)
-        animalsDie = GKShuffledDistribution(forDieWithSideCount: Consts.CategorizationGameScreen.animals.count - 1)
-        fruitDie = GKShuffledDistribution(forDieWithSideCount: Consts.CategorizationGameScreen.fruits.count - 1)
+        animalsDie = GKShuffledDistribution(forDieWithSideCount: Consts.CategorizationGameScreen.animals.count)
+        fruitDie = GKShuffledDistribution(forDieWithSideCount: Consts.CategorizationGameScreen.fruits.count)
+        clothesDie = GKShuffledDistribution(forDieWithSideCount: Consts.CategorizationGameScreen.clothes.count)
     }
     
     private func nextShape() -> String {
@@ -117,10 +121,14 @@ struct GameDataSource {
     }
     
     private func nextFruit() -> String {
-        return Consts.CategorizationGameScreen.fruits[fruitDie.nextInt()]
+        return Consts.CategorizationGameScreen.fruits[fruitDie.nextInt() - 1]
     }
     
     private func nextAnimal() -> String {
-        return Consts.CategorizationGameScreen.animals[animalsDie.nextInt()]
+        return Consts.CategorizationGameScreen.animals[animalsDie.nextInt() - 1]
+    }
+    
+    private func nextDress() -> String {
+        return Consts.CategorizationGameScreen.clothes[clothesDie.nextInt() - 1]
     }
 }

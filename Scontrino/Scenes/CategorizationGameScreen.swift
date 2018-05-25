@@ -95,6 +95,16 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
                         print("category: " + contactNode.category)
                     }
                     
+                case "flag clothes":
+                    
+                    if Consts.CategorizationGameScreen.clothes.contains((bodyA.node?.name)!) {
+                        debugPrint("right category")
+                        let contactNode = bodyA.node as! MovingContextNode
+                        contactNode.isInTheRightCategory = true
+                        contactNode.category = category.nodeFlag.name!
+                        print("category: " + contactNode.category)
+                    }
+                    
                 default:
                     
 //                    if Consts.CategorizationGameScreen.fruits.contains((bodyA.node?.name)!) {
@@ -145,6 +155,15 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
                 case "flag animals":
                     
                     if Consts.CategorizationGameScreen.animals.contains((bodyA.node?.name)!) {
+                        debugPrint("right category")
+                        let contactNode = bodyA.node as! MovingContextNode
+                        contactNode.isInTheRightCategory = false
+                        
+                    }
+                    
+                case "flag clothes":
+                    
+                    if Consts.CategorizationGameScreen.clothes.contains((bodyA.node?.name)!) {
                         debugPrint("right category")
                         let contactNode = bodyA.node as! MovingContextNode
                         contactNode.isInTheRightCategory = false

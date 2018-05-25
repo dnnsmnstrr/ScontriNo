@@ -73,15 +73,22 @@ struct Consts {
     struct CategorizationGameScreen {
         static let categories = [
             "animals",
-            "fruits"
+            "fruits",
+            "clothes"
         ]
         static let animals = [
             "bear",
-            "duck"
+            "duck",
+            "dog"
         ]
         static let fruits = [
             "apple",
-            "orange"
+            "orange",
+            "lime"
+        ]
+        static let clothes = [
+            "shirt",
+            "dress"
         ]
     }
     struct Graphics {
