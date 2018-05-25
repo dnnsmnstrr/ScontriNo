@@ -46,7 +46,7 @@ class FaceDetectionScreen: GameScene {
         ferrisWheel.anchorPoint = CGPoint(x: 0.5, y: 0.5) // default
         ferrisWheel.position = CGPoint(x: size.width/2, y: size.height/2)
         ferrisWheel.size = CGSize(width: size.width, height: size.width)
-        zoomPoint = ferrisWheel.frame.minY + size.height/10
+        zoomPoint = ferrisWheel.frame.minY - size.height/20
         ferrisWheel.physicsBody = SKPhysicsBody(circleOfRadius: max((ferrisWheel.size.width) / 2,
                                                                     (ferrisWheel.size.height) / 2))
         ferrisWheel.zRotation = CGFloat.pi / 2
@@ -58,18 +58,21 @@ class FaceDetectionScreen: GameScene {
         self.addChild(ferrisWheel)
         
         
-        let radius = ferrisWheel.size.width/2
+        let radius = ferrisWheel.size.width/2 - 2
         for i in 1...6 {
-            let newCabin = SKSpriteNode.init(texture: SKTexture(imageNamed: "Cabin"))
+            
+            let newCabin = CabinNode.init(imageNamed: "cabin body")
+//            let newCabin = SKSpriteNode.init(texture: SKTexture(imageNamed: "Cabin"))
+            
             newCabin.zPosition = 3
             newCabin.size = CGSize(width: ferrisWheel.size.width/5, height: ferrisWheel.size.height/5)
-            
+
             let currentX = radius*CGFloat(cosf(2*Float.pi*Float(i)/6))+ferrisWheel.frame.midX
             let currentY = radius*CGFloat(sinf(2*Float.pi*Float(i)/6))+ferrisWheel.frame.midY
-            
+
             newCabin.position = CGPoint(x: currentX, y: currentY-newCabin.size.height/2)
             newCabin.physicsBody = SKPhysicsBody(circleOfRadius: newCabin.size.height/2)
-            newCabin.physicsBody?.angularDamping = 0.9
+            newCabin.physicsBody?.angularDamping = 30
             newCabin.physicsBody?.mass = 2
             self.addChild(newCabin)
             cabins.append(newCabin)
@@ -140,7 +143,7 @@ class FaceDetectionScreen: GameScene {
     
     func zoomIn(scalingFactor: CGFloat = 0.2) {
         let zoomInAction = SKAction.scale(to: scalingFactor, duration: 1)
-        let positioning = SKAction.moveTo(y: zoomPoint! / 6, duration: 1)
+        let positioning = SKAction.moveTo(y: zoomPoint!, duration: 1)
         let group = SKAction.group([zoomInAction, positioning])
         cameraNode.run(group)
         zoomedIn = true
