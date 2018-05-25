@@ -41,16 +41,10 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
         self.addChild(logNode[1])
     }
     
-    func createSingleLog (location: CGPoint) {
-        
-        
-        
-        
-    }
     
     func createMovingNode(){
         movingNode = dataSource.nextMovingContextNode(from: logNode)
-        movingNode.position = CGPoint(x: 200, y: 200)
+//        movingNode.position = CGPoint(x: 200, y: 200)
         self.addChild(movingNode)
     }
     
@@ -270,8 +264,9 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
             //            movingNode.removeFromParent(),
             //            logNode[index].moveTo(position: CGPoint(x: newPosition.x, y: 0 - self.logNode[index].size.height), startingPoint: newPosition),
             //            SKAction.removeFromParent(),
+            createNewMovingNode,
             logNode[index].moveTo(position: self.logNode[index].initialPosition, startingPoint: CGPoint(x: newPosition.x, y: 0 - self.logNode[index].size.height)),
-            createNewMovingNode
+            
             
             ])
         
