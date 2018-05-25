@@ -270,6 +270,7 @@
 				8B03E09C20B6DDDB00004D7E /* LogNode.swift in Sources */,
 				2A2B4A42209213C2009B81FB /* CarGameScreen.swift in Sources */,
 				2A2B4A3E2091FF5A009B81FB /* SpeechRecognitionScreen.swift in Sources */,
+				8B03E0A920B6F0AA00004D7E /* TrialScreen.swift in Sources */,
 				8B03E09B20B6DDDB00004D7E /* HoleNode.swift in Sources */,
 				8B03E09E20B6DDDB00004D7E /* MovingNode.swift in Sources */,
 				2A5B5E4B209A21F8001D4985 /* CategorizationGameScreen.swift in Sources */,
