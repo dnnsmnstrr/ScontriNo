@@ -17,7 +17,7 @@ class FaceDetectionScreen: GameScene {
     let cameraNode = SKCameraNode()
     
     var ferrisWheel: SKSpriteNode!
-    private var cabins: [SKSpriteNode] = []
+    private var cabins: [CabinNode] = []
     var startTime: TimeInterval?
     var start: CGPoint?
     var end: CGPoint?
@@ -123,10 +123,21 @@ class FaceDetectionScreen: GameScene {
         }
         if magnitude < 25 {
             if !zoomedIn{
-                zoomIn()
+//                zoomIn()
+                for cabin in cabins {
+                    if !cabin.doorsOpen{
+                        cabin.openDoors()
+                    }
+                    else {
+                        cabin.closeDoors()
+                    }
+                }
             }
             else {
-                zoomOut()
+//                zoomOut()
+                for cabin in cabins {
+                    cabin.openDoors()
+                }
             }
             
             let touchPosition = touch.location(in: self)
