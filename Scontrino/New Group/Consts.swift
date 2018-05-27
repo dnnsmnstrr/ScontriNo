@@ -211,4 +211,15 @@ struct Consts {
         static let shapeNodes: UInt32 = 0x1 << 1 //2
         static let holeNode: UInt32 = 0x1 << 2 // 4
     }
+    
+    struct NodePositions {
+        static let movingCategInitialPos = CGPoint(x: Graphics.screenWidth / 2 , y: 0 - Graphics.screenHeight / 6)
+        static let movingCategFinalPos = CGPoint(x: Graphics.screenWidth / 2 , y: Graphics.screenHeight / 6)
+        
+        static let firstLogPosition = CGPoint(x: Graphics.screenWidth / 4 , y: Graphics.screenHeight / 2)
+        
+        static let secondLogPosition = CGPoint(x: (3 * Graphics.screenWidth) / 4 , y: Graphics.screenHeight / 2)
+        
+    }
+    
 }

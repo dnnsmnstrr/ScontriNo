@@ -13,12 +13,11 @@ class MovingContextNode: MovingNode {
     var isFitting = false
     var fittingSpeed: CGFloat = 150
     var category: String = ""
-    let startPosition = CGPoint(x: 200, y: 200)
     
     convenience init(imageNamed: String) {
         let texture = SKTexture(imageNamed: imageNamed)
         self.init(texture: texture)
-        self.position = CGPoint(x: 200, y: 0 - self.size.height / 2)
+        self.position = Consts.NodePositions.movingCategInitialPos
         
         var texSize = texture.size()
         texSize.width = (texSize.width) * 0.65
@@ -34,9 +33,7 @@ class MovingContextNode: MovingNode {
 //            self.isHidden = false
 //        }
         let presentationAnimation = SKAction.sequence([
-            moveTo(position: startPosition),
-//                                                       isVisible,
-//                                                       SKAction.scale(to: self.size, duration: 0.5)
+            moveTo(position: Consts.NodePositions.movingCategFinalPos),
             ])
         self.run(presentationAnimation)
     }
@@ -75,8 +72,8 @@ class MovingContextNode: MovingNode {
 
         if let scene = self.scene as? CategorizationGameScreen {
             if isInTheRightCategory == false {
-                scene.movingNode.position = CGPoint(x: 200, y: 200)
-//                self.position = CGPoint(x: 200, y: 200)
+                scene.movingNode.position = Consts.NodePositions.movingCategFinalPos
+
             }
             else {
                 scene.checkRightCategory()
@@ -84,5 +81,4 @@ class MovingContextNode: MovingNode {
         }
     
     }
-//}
 }

@@ -12,8 +12,10 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
     let dataSource = GameDataSource()
     var logNode: [LogNode] = []
     var movingNode: MovingContextNode = MovingContextNode()
-    var movingContextNodeInitialPosition = CGPoint.zero
-    var movingContextNodePosition: [String: CGPoint] = [:]
+    var cont = 0
+    let numberOfComprarison = 5
+    var endComparison = false
+    
     override init() {
         super.init()
     }
@@ -35,8 +37,8 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
         flag = dataSource.nextFlagNode()
         logNode.append(LogNode(imageNamed: "log", flag: flag))
 //        random size for random log
-        logNode[0].setup(pos: CGPoint(x: 90, y: 350))
-        logNode[1].setup(pos: CGPoint(x: 320, y: 350))
+        logNode[0].setup(pos: Consts.NodePositions.firstLogPosition)
+        logNode[1].setup(pos: Consts.NodePositions.secondLogPosition)
         self.addChild(logNode[0])
         self.addChild(logNode[1])
     }
@@ -100,19 +102,10 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
                     }
                     
                 default:
-                    
-//                    if Consts.CategorizationGameScreen.fruits.contains((bodyA.node?.name)!) {
                         debugPrint("default")
-//                        let contactNode = bodyA.node as! MovingContextNode
-//                        contactNode.isInTheRightCategory = true
-//                    }
+
                 }
-                
-//                if bodyA.node?.name == bodyB.node?.name {
-//                    debugPrint("same Shape")
-//                    let contactNode = bodyA.node as! MovingShapeNode
-//                    contactNode.isInTheRightHole = true
-//                }
+
             }
         }
     }
@@ -165,19 +158,9 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
                     }
                     
                 default:
-                    
-//                    if Consts.CategorizationGameScreen.fruits.contains((bodyA.node?.name)!) {
                         debugPrint("right category")
-//                        let contactNode = bodyA.node as! MovingContextNode
-//                        contactNode.isInTheRightCategory = false
-//                    }
                 }
                 
-//                if bodyA.node?.name == bodyB.node?.name {
-//                    debugPrint("same Shape")
-//                    let contactNode = bodyA.node as! MovingShapeNode
-//                    contactNode.isInTheRightHole = false
-//                }
             }
         }
         
@@ -185,6 +168,13 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
     
     func checkRightCategory () {
       
+        cont += 1
+        
+        if cont == numberOfComprarison {
+            endComparison = true
+        }
+        
+        if !endComparison {
         
         var index = 0
         var logPosition: CGPoint = CGPoint.zero
@@ -206,13 +196,10 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
         
         
         let newSequence = SKAction.sequence([
-            movingNode.moveTo(position: logPosition),
-            
-            //                    createNewMovingNode
+            movingNode.moveTo(position: logPosition)
             ])
+        
         movingNode.run(newSequence)
-        //                movingNode.removeFromParent()
-        //                logNode[index].addChild(movingNode)
         
         
         
@@ -220,7 +207,6 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
         let newPosition = CGPoint(x: self.logNode[index].initialPosition.x, y: self.frame.height + self.logNode[index].size.height / 2)
         
         //creating animation to get a new hole after the shape is in his center
-        //                let createNewLog = SKAction.move(to: newPosition, duration: 2)
         
         
         
@@ -234,63 +220,27 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
         
         
         
-        //                let logOutsideTheScene = SKAction.sequence([
-        //                    SKAction.wait(forDuration: newSequence.duration),
-        //                    SKAction.wait(forDuration: 0.2),
-        ////                    SKAction.removeFromParent(),
-        ////                    createNewLog
-        ////                    logNode[index].moveTo(position: newPosition)
-        //
-        //                    ])
-        
-        //        let resetPosition = SKAction.run {
-        //
-        //            self.logNode[index].position = CGPoint(x: self.logNode[index].initialPosition.x, y: 0 - self.logNode[index].size.height/2)
-        //            print("x: \(self.logNode[index].position.x), y: \(self.logNode[index].position.y)")
-        //        }
-        
-        //        let prova = SKAction.run {
-        //
-        //            self.logNode[index].position = self.logNode[index].initialPosition
-        //            print("x: \(self.logNode[index].position.x), y: \(self.logNode[index].position.y)")
-        //        }
-        
-        
         let logInitialPoisition = SKAction.sequence([
             SKAction.wait(forDuration: newSequence.duration),
             SKAction.wait(forDuration: 0.2),
-            //            resetPosition,
             logNode[index].moveTo(position: newPosition, startingPoint: logNode[index].position),
-            //            movingNode.removeFromParent(),
-            //            logNode[index].moveTo(position: CGPoint(x: newPosition.x, y: 0 - self.logNode[index].size.height), startingPoint: newPosition),
-            //            SKAction.removeFromParent(),
             createNewMovingNode,
             logNode[index].moveTo(position: self.logNode[index].initialPosition, startingPoint: CGPoint(x: newPosition.x, y: 0 - self.logNode[index].size.height)),
             
             
             ])
-        
-        //        self.run(changeHoleAnimation)
-        //                self.logNode[index].run(changeHoleAnimation)
-        //                self.movingNode.removeFromParent()
-        //        logNode[index].run(logNode[index].moveTo(position: newPosition))
-        
-        //        logNode[index].run(logOutsideTheScene)
+       
         
         movingNode.run( movingNode.moveTo(position: newPosition))
-        //        logNode[index].position = CGPoint(x: lastPosition.x, y: 0 - logNode[index].size.height/2)
         
         logNode[index].run(logInitialPoisition)
-        
-        //        movingNode.removeFromParent()
-        //        logNode[index].run(logNode[index].moveTo(position: CGPoint(x: 89, y: 350)))
-        //        logNode[index].position = CGPoint(x: lastPosition.x, y: 0)
-        //        logNode[index].run(logNode[index].moveTo(position: lastPosition))
-        
-        //                self.run(createNewMovingNode)
-        
-        
-    
+            
+        } else {
+            
+            //create new log or exit
+            RootViewController.shared.skView.presentScene(StartScreen())
+            
+        }
         
     }
     
