@@ -12,6 +12,7 @@
 		1570D58320B6E35300AAF28A /* CentralVagonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570D57F20B6E35300AAF28A /* CentralVagonNode.swift */; };
 		1570D58420B6E35300AAF28A /* TailVagonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570D58020B6E35300AAF28A /* TailVagonNode.swift */; };
 		1570D58620B6E36200AAF28A /* TrialScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570D58520B6E36200AAF28A /* TrialScreen.swift */; };
+		1570D58820B6FB5C00AAF28A /* Train.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570D58720B6FB5C00AAF28A /* Train.swift */; };
 		2A2B4A2A2091FBD4009B81FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A292091FBD4009B81FB /* AppDelegate.swift */; };
 		2A2B4A342091FBD7009B81FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A2B4A322091FBD7009B81FB /* LaunchScreen.storyboard */; };
 		2A2B4A3C2091FF42009B81FB /* FaceDetectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A3B2091FF42009B81FB /* FaceDetectionScreen.swift */; };
@@ -39,6 +40,7 @@
 		1570D57F20B6E35300AAF28A /* CentralVagonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralVagonNode.swift; sourceTree = "<group>"; };
 		1570D58020B6E35300AAF28A /* TailVagonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TailVagonNode.swift; sourceTree = "<group>"; };
 		1570D58520B6E36200AAF28A /* TrialScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrialScreen.swift; path = ../../../../../Desktop/filexcode/TrialScreen.swift; sourceTree = "<group>"; };
+		1570D58720B6FB5C00AAF28A /* Train.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Train.swift; sourceTree = "<group>"; };
 		2A2B4A262091FBD4009B81FB /* Scontrino.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scontrino.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A2B4A292091FBD4009B81FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2A2B4A332091FBD7009B81FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -76,10 +78,11 @@
 		1570D57C20B6E30100AAF28A /* TrainNodes */ = {
 			isa = PBXGroup;
 			children = (
-				1570D57F20B6E35300AAF28A /* CentralVagonNode.swift */,
 				1570D57D20B6E35300AAF28A /* HeadVagonNode.swift */,
+				1570D57F20B6E35300AAF28A /* CentralVagonNode.swift */,
 				1570D58020B6E35300AAF28A /* TailVagonNode.swift */,
 				1570D57E20B6E35300AAF28A /* TrainNode.swift */,
+				1570D58720B6FB5C00AAF28A /* Train.swift */,
 			);
 			path = TrainNodes;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				1570D58120B6E35300AAF28A /* HeadVagonNode.swift in Sources */,
 				8B03E09020B6DD5700004D7E /* CameraViewController.swift in Sources */,
 				2A2B4A2A2091FBD4009B81FB /* AppDelegate.swift in Sources */,
+				1570D58820B6FB5C00AAF28A /* Train.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

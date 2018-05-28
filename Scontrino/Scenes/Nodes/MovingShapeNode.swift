@@ -16,7 +16,7 @@ class MovingShapeNode: MovingNode {
     convenience init(imageNamed: String) {
         let texture = SKTexture(imageNamed: imageNamed)
         self.init(texture: texture)
-        
+        self.zPosition = Consts.CarGameScreen.zPositions.shapes
         var texSize = texture.size()
         texSize.width = (texSize.width) * 0.65
         texSize.height = (texSize.height) * 0.65
@@ -37,16 +37,21 @@ class MovingShapeNode: MovingNode {
         self.run(presentationAnimation)
     }
     
-    func moveTo(position: CGPoint) -> SKAction {
+    func moveTo(position: CGPoint, onComplete: @escaping (Bool) -> Void) -> SKAction {
         
         isFitting = true
         let path = UIBezierPath()
         path.move(to: self.position)
         path.addLine(to: position)
         
+        let completedAction = SKAction.run {
+            onComplete(true)
+        }
+        
         let fillInHoleAnimation = SKAction.sequence([
             SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: fittingSpeed),
-            SKAction.removeFromParent(),
+            completedAction
+//            SKAction.removeFromParent(),
             ])
         return fillInHoleAnimation
     }
@@ -72,7 +77,8 @@ class MovingShapeNode: MovingNode {
                 scene.coloredShapesPositions[self.name!] = scene.coloredShapesInitialPositions
             }
             else {
-                scene.controlIfRightShapeInHole(nodeName: self.name!)
+                scene.shapeIsGoingToRightHole(nodeName: self.name!)
+//                scene.controlIfRightShapeInHole(nodeName: self.name!)
             }
         }
         
