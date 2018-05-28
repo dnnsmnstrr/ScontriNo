@@ -21,6 +21,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     //speech
     var currentWordOnScreen: String!
     
+    
     let recordingNode = SKSpriteNode(imageNamed: "recording off")
     var recognizedSentence = ""
     var recognizedWords = [Substring]()
@@ -40,11 +41,12 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         }
     }
     
-    //camera
+    //camera & ui
     let cameraNode = SKCameraNode()
     
     var ferrisWheel: SKSpriteNode!
     private var cabins: [CabinNode] = []
+    private var currentWords: [String] = []
     
     var startTime: TimeInterval?
     var start: CGPoint?
@@ -58,15 +60,10 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     override func createSceneContents() {
         super.createSceneContents()
         
-        //game
-        currentWordOnScreen = dataSource.nextWord()
-        
         //camera
         cameraNode.position = CGPoint(x: self.size.width / 2,y: self.size.height / 2)
         self.addChild(cameraNode)
         self.camera = cameraNode
-        
-        
         
         
         //create ferris wheel
@@ -109,8 +106,10 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
             newCabin.rightDoor?.size = CGSize(width: newCabin.size.width/3.1, height: newCabin.size.height/1.3)
             newCabin.occupant?.size = CGSize(width: newCabin.size.width/2, height: newCabin.size.height/2)
             
-            newCabin.occupant?.texture = SKTexture(imageNamed: dataSource.getWord())
-            
+            //occupant
+            var newOccupant: String = dataSource.getWord()
+            currentWords.append(newOccupant)
+            newCabin.occupant?.texture = SKTexture(imageNamed: newOccupant)
             
             self.addChild(newCabin)
             cabins.append(newCabin)
@@ -130,9 +129,10 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         captionNode.name = "caption"
         captionNode.position = CGPoint(x: ferrisWheel.frame.midX, y: ferrisWheel.frame.minY-10)
         
+        startGame()
         //start the recording process
         checkAuthorization()
-        startGame()
+        
     }
     
     //touch handling
@@ -293,14 +293,11 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                     
                     self.audio.stop()
                     self.recognitionRequest?.endAudio()
-                    
                     self.recognitionRequest = nil
                     self.recognitionTask = nil
                     
                     print("Entered the control, the current word on screen is: \(self.currentWordOnScreen!)\n")
-                    //                    if self.currentWordOnScreen == "sole" {
-                    //                        print("it worked!")
-                    //                    }
+                    self.cabins[0].closeDoors()
                     
                     
                     
@@ -331,9 +328,10 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     }
     
     func startGame() {
-        for cabin in cabins{
-            
-        }
+        currentWordOnScreen = currentWords[0]
+        print("Current word: \(self.currentWordOnScreen!)\n")
+        cabins[0].openDoors()
+
     }
     
     override init() {

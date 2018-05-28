@@ -29,9 +29,9 @@ class GameScene: SKScene, ButtonNodeDelegate {
     }
     
     func tapButtonNode(_ sender: ButtonNode) {
-        RootViewController.shared.view.viewWithTag(0451)?.removeFromSuperview()
+        //RootViewController.shared.view.viewWithTag(0451)?.removeFromSuperview()
         
-        if let speech = RootViewController.shared.skView.scene as? SpeechRecognitionScreen {
+        if let speech = RootViewController.shared.skView.scene as? FerrisWheelGameScreen {
             speech.listen = false
         }
 
