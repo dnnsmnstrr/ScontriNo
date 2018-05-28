@@ -19,7 +19,7 @@
 		2A2B4A3E2091FF5A009B81FB /* SpeechRecognitionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A3D2091FF5A009B81FB /* SpeechRecognitionScreen.swift */; };
 		2A2B4A402091FF86009B81FB /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A3F2091FF86009B81FB /* GameScene.swift */; };
 		2A2B4A42209213C2009B81FB /* RollerCoasterGameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A41209213C2009B81FB /* RollerCoasterGameScreen.swift */; };
-		2A2B4A46209217F6009B81FB /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A45209217F6009B81FB /* StartScreen.swift */; };
+		2A2B4A46209217F6009B81FB /* MenuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A45209217F6009B81FB /* MenuScreen.swift */; };
 		2A2B4A4B2092286F009B81FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A2B4A4A2092286F009B81FB /* Assets.xcassets */; };
 		2A2B4A5620976FCF009B81FB /* GameDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A5520976FCF009B81FB /* GameDataSource.swift */; };
 		2A5B5E4B209A21F8001D4985 /* FloatingLogsGameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B5E4A209A21F8001D4985 /* FloatingLogsGameScreen.swift */; };
@@ -51,7 +51,7 @@
 		2A2B4A3D2091FF5A009B81FB /* SpeechRecognitionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionScreen.swift; sourceTree = "<group>"; };
 		2A2B4A3F2091FF86009B81FB /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		2A2B4A41209213C2009B81FB /* RollerCoasterGameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollerCoasterGameScreen.swift; sourceTree = "<group>"; };
-		2A2B4A45209217F6009B81FB /* StartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
+		2A2B4A45209217F6009B81FB /* MenuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScreen.swift; sourceTree = "<group>"; };
 		2A2B4A4A2092286F009B81FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A2B4A5520976FCF009B81FB /* GameDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDataSource.swift; sourceTree = "<group>"; };
 		2A5B5E4A209A21F8001D4985 /* FloatingLogsGameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingLogsGameScreen.swift; sourceTree = "<group>"; };
@@ -132,7 +132,7 @@
 		2A2B4A4820922256009B81FB /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				2A2B4A45209217F6009B81FB /* StartScreen.swift */,
+				2A2B4A45209217F6009B81FB /* MenuScreen.swift */,
 				2A2B4A41209213C2009B81FB /* RollerCoasterGameScreen.swift */,
 				2A5B5E4A209A21F8001D4985 /* FloatingLogsGameScreen.swift */,
 				B91713F420B6EA2F0071D78F /* TrialScreen.swift */,
@@ -265,7 +265,7 @@
 				1570D58320B6E35300AAF28A /* CentralVagonNode.swift in Sources */,
 				B91713F520B6EA2F0071D78F /* TrialScreen.swift in Sources */,
 				8B03E08F20B6DD5700004D7E /* RootViewController.swift in Sources */,
-				2A2B4A46209217F6009B81FB /* StartScreen.swift in Sources */,
+				2A2B4A46209217F6009B81FB /* MenuScreen.swift in Sources */,
 				8B03E09F20B6DDDB00004D7E /* MovingContextNode.swift in Sources */,
 				2A2B4A5620976FCF009B81FB /* GameDataSource.swift in Sources */,
 				8B03E0A720B6E0DE00004D7E /* Consts.swift in Sources */,

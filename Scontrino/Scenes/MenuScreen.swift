@@ -1,5 +1,5 @@
 //
-//  StartScreen.swift
+//  MenuScreen.swift
 //  Scontrino
 //
 //  Created by Eduardo Yutaka Nakanishi on 26/04/2018.
@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class StartScreen: SKScene, ButtonNodeDelegate {
+class MenuScreen: SKScene, ButtonNodeDelegate {
     var touchLocation: CGPoint!
     
     override init() {
@@ -21,22 +21,25 @@ class StartScreen: SKScene, ButtonNodeDelegate {
     }
     
     func createSceneContent() {
-        let rollerCoasterNode = ButtonNode(imageNamed: "roller coaster icon")
-        rollerCoasterNode.delegate = self
-        rollerCoasterNode.name = "RollerCoasterGameScreen"
-        rollerCoasterNode.position = CGPoint(x: Consts.Graphics.screenWidth / 6, y: Consts.Graphics.screenHeight / 2)
-        self.addChild(rollerCoasterNode)
-        
         let ferrisWheelNode = ButtonNode(imageNamed: "ferris wheel icon")
         ferrisWheelNode.delegate = self
         ferrisWheelNode.name = "FerrisWheelGameScreen"
         ferrisWheelNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight / 2)
+        ferrisWheelNode.setScale(Consts.Graphics.scale)
         self.addChild(ferrisWheelNode)
+        
+        let rollerCoasterNode = ButtonNode(imageNamed: "roller coaster icon")
+        rollerCoasterNode.delegate = self
+        rollerCoasterNode.name = "RollerCoasterGameScreen"
+        rollerCoasterNode.setScale(Consts.Graphics.scale)
+        rollerCoasterNode.position = CGPoint(x: Consts.Graphics.screenWidth / 6, y: Consts.Graphics.screenHeight / 2 - (ferrisWheelNode.size.height - rollerCoasterNode.size.height) / 2)
+        self.addChild(rollerCoasterNode)
         
         let floatingLogsNode = ButtonNode(imageNamed: "floating logs icon")
         floatingLogsNode.delegate = self
         floatingLogsNode.name = "FloatingLogsGameScreen"
-        floatingLogsNode.position = CGPoint(x: 5 * Consts.Graphics.screenWidth / 6, y: Consts.Graphics.screenHeight / 2)
+        floatingLogsNode.setScale(Consts.Graphics.scale)
+        floatingLogsNode.position = CGPoint(x: 5 * Consts.Graphics.screenWidth / 6, y: Consts.Graphics.screenHeight / 2 - (ferrisWheelNode.size.height - floatingLogsNode.size.height) / 2)
         self.addChild(floatingLogsNode)
         
         let trialNode = ButtonNode(imageNamed: "green star")

@@ -22,7 +22,7 @@ struct Consts {
         static let screenWidth = screenBounds.width
         static let screenHeight = screenBounds.height
         static let screenResolution = screenBounds.size
-        static let scaling = screenWidth / 1336
+        static let scale = screenWidth / 1336
     }
     private static let words = [
         Difficulty.easy: [

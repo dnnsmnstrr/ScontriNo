@@ -238,7 +238,7 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
         } else {
             
             //create new log or exit
-            RootViewController.shared.skView.presentScene(StartScreen())
+            RootViewController.shared.skView.presentScene(MenuScreen())
             
         }
         
