@@ -21,23 +21,23 @@ class StartScreen: SKScene, ButtonNodeDelegate {
     }
     
     func createSceneContent() {
-        let rollerCoasterNode = ButtonNode(imageNamed: "red square")
+        let rollerCoasterNode = ButtonNode(imageNamed: "roller coaster icon")
         rollerCoasterNode.delegate = self
         rollerCoasterNode.name = "RollerCoasterGameScreen"
-        rollerCoasterNode.position = CGPoint(x: self.size.width / 2, y: 5.5 * self.size.height / 8)
+        rollerCoasterNode.position = CGPoint(x: Consts.Graphics.screenWidth / 6, y: Consts.Graphics.screenHeight / 2)
         self.addChild(rollerCoasterNode)
         
-        let floatingLogsNode = ButtonNode(imageNamed: "blue triangle")
-        floatingLogsNode.delegate = self
-        floatingLogsNode.name = "FloatingLogsGameScreen"
-        floatingLogsNode.position = CGPoint(x: self.size.width / 2, y: 4.5 * self.size.height / 8)
-        self.addChild(floatingLogsNode)
-        
-        let ferrisWheelNode = ButtonNode(imageNamed: "orange circle")
+        let ferrisWheelNode = ButtonNode(imageNamed: "ferris wheel icon")
         ferrisWheelNode.delegate = self
         ferrisWheelNode.name = "FerrisWheelGameScreen"
-        ferrisWheelNode.position = CGPoint(x: self.size.width / 2, y: 3.5 * self.size.height / 8)
+        ferrisWheelNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight / 2)
         self.addChild(ferrisWheelNode)
+        
+        let floatingLogsNode = ButtonNode(imageNamed: "floating logs icon")
+        floatingLogsNode.delegate = self
+        floatingLogsNode.name = "FloatingLogsGameScreen"
+        floatingLogsNode.position = CGPoint(x: 5 * Consts.Graphics.screenWidth / 6, y: Consts.Graphics.screenHeight / 2)
+        self.addChild(floatingLogsNode)
         
         let trialNode = ButtonNode(imageNamed: "green star")
         trialNode.delegate = self
