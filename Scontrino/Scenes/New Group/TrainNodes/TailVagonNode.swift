@@ -12,6 +12,7 @@ class TailVagonNode : SKSpriteNode {
     convenience init(imageNamed: String) {
         let texture = SKTexture(imageNamed: imageNamed)
         self.init(texture: texture)
+        self.setScale(Consts.Graphics.scale)
 //        self.setScale(0.1)
     }
     func setup(posX: CGFloat) {
