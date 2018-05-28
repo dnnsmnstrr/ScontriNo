@@ -225,4 +225,16 @@ struct Consts {
         
     }
     
+    //testing
+    static let testArray = [
+        "bear",
+        "duck",
+        "dog",
+        "apple",
+        "orange",
+        "lime",
+        "shirt",
+        "dress"
+    ]
+    
 }

@@ -98,6 +98,11 @@ struct GameDataSource {
         return "luna"
     }
     
+    func getWord() -> String {
+        let index = Int(arc4random_uniform(UInt32(Consts.testArray.count)))
+        return Consts.testArray[index]
+    }
+    
     // TODO: - initializeDice() should be updated to depend opon dificulty
     mutating func initializeDice() {
         colorsDie = GKShuffledDistribution(forDieWithSideCount: Consts.colors.count - 1)
