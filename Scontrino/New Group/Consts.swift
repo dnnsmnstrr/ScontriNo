@@ -22,7 +22,7 @@ struct Consts {
         static let screenWidth = screenBounds.width
         static let screenHeight = screenBounds.height
         static let screenResolution = screenBounds.size
-        static let scaling = screenWidth / 1336
+        static let scale = screenWidth / 1336
     }
     private static let words = [
         Difficulty.easy: [
@@ -204,6 +204,14 @@ struct Consts {
             "shirt",
             "dress"
         ]
+    }
+    struct CarGameScreen {
+        struct zPositions {
+            static let hole: CGFloat = 50
+            static let background: CGFloat = -100
+            static let vagons: CGFloat = 1
+            static let shapes: CGFloat = 51
+        }
     }
     struct Id {
         struct RollerCoasterGameScreen {

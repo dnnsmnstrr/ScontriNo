@@ -35,6 +35,6 @@ class GameScene: SKScene, ButtonNodeDelegate {
             speech.listen = false
         }
 
-        RootViewController.shared.skView.presentScene(StartScreen())
+        RootViewController.shared.skView.presentScene(MenuScreen())
     }
 }

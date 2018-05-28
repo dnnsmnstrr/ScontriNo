@@ -13,14 +13,22 @@ class TrainNode : SKNode {
         self.init()
         
         let headVagon = HeadVagonNode(imageNamed: "frontal")
+        
         let centralVagon = CentralVagonNode(imageNamed: "central")
         let tailVagon = TailVagonNode(imageNamed: "back")
-        var pos:CGFloat = 400
-        headVagon.position = CGPoint(x: pos, y: headVagon.size.height)
+        var pos: CGFloat = 0
+//        self.setScale(0.2)
+//        headVagon.setScale(0.2)
+//        centralVagon.setScale(0.2)
+//        tailVagon.setScale(0.2)
+//        headVagon.position = CGPoint(x: pos, y: 0)
         pos = pos - headVagon.size.width
-        centralVagon.position = CGPoint(x: pos, y: centralVagon.size.height)
+//        pos = pos - self.size.width
+        centralVagon.position = CGPoint(x: pos, y: 0)
         pos = pos - centralVagon.size.width
-        tailVagon.position = CGPoint(x: pos, y: tailVagon.size.height)
+        tailVagon.position = CGPoint(x: pos, y: 0)
+        
+        
         
         self.addChild(headVagon)
         self.addChild(centralVagon)

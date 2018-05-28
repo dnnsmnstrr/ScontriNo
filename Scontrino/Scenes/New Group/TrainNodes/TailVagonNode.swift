@@ -12,6 +12,11 @@ class TailVagonNode : SKSpriteNode {
     convenience init(imageNamed: String) {
         let texture = SKTexture(imageNamed: imageNamed)
         self.init(texture: texture)
+//        self.setScale(0.1)
     }
-    
+    func setup(posX: CGFloat) {
+        self.position.y = Consts.Graphics.screenHeight - Consts.Graphics.screenHeight / 2
+        self.position.x = posX - self.size.width / 2
+        self.zPosition = Consts.CarGameScreen.zPositions.vagons
+    }
 }
