@@ -24,6 +24,7 @@ class GameScene: SKScene, ButtonNodeDelegate {
         backButton.delegate = self
         backButton.position = CGPoint(x: 80, y: self.size.height - 80)
         backButton.name = "backButton"
+        backButton.zPosition = 100
         self.addChild(backButton)
     }
     

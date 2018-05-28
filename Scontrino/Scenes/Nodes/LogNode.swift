@@ -11,6 +11,8 @@ import SpriteKit
 class LogNode: SKSpriteNode {
     
     var nodeFlag: SKSpriteNode = SKSpriteNode()
+    var fittingSpeed: CGFloat = 150
+    var initialPosition: CGPoint = CGPoint.zero
     
     convenience init(imageNamed: String, flag: SKSpriteNode) {
         let texture = SKTexture(imageNamed: imageNamed)
@@ -42,7 +44,22 @@ class LogNode: SKSpriteNode {
     
     func setup(pos: CGPoint){
         self.position = pos
+        self.initialPosition = pos
         self.setScale(0.5)
+    }
+    
+    func moveTo(position: CGPoint, startingPoint: CGPoint) -> SKAction {
+        
+        //        isFitting = true
+        let path = UIBezierPath()
+        path.move(to: startingPoint)
+        path.addLine(to: position)
+        
+        let fitTheCategory = SKAction.sequence([
+            SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: fittingSpeed),
+            //            SKAction.removeFromParent(),
+            ])
+        return fitTheCategory
     }
     
     

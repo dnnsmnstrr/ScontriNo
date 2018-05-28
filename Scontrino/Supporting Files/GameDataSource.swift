@@ -14,6 +14,7 @@ struct GameDataSource {
     var categorizationDie: GKShuffledDistribution!
     var animalsDie: GKShuffledDistribution!
     var fruitDie: GKShuffledDistribution!
+    var clothesDie: GKShuffledDistribution!
     
     init() {
         initializeDice()
@@ -67,6 +68,8 @@ struct GameDataSource {
             res  = nextFruit()
         case "flag animals":
             res = nextAnimal()
+        case "flag clothes":
+            res = nextDress()
         default:
             res = nextAnimal()
         }
@@ -91,16 +94,23 @@ struct GameDataSource {
     }
 
     func nextWord() -> String {
-        return Consts.words[GKRandomSource.sharedRandom().nextInt(upperBound: Consts.words.count)]
+//        return Consts.words[GKRandomSource.sharedRandom().nextInt(upperBound: Consts.words.count)]
+        return "luna"
+    }
+    
+    func getWord() -> String {
+        let index = Int(arc4random_uniform(UInt32(Consts.testArray.count)))
+        return Consts.testArray[index]
     }
     
     // TODO: - initializeDice() should be updated to depend opon dificulty
     mutating func initializeDice() {
         colorsDie = GKShuffledDistribution(forDieWithSideCount: Consts.colors.count - 1)
         shapesDie = GKShuffledDistribution(forDieWithSideCount: Consts.shapes.count - 1)
-        categorizationDie = GKShuffledDistribution(forDieWithSideCount: Consts.CategorizationGameScreen.categories.count)
-        animalsDie = GKShuffledDistribution(forDieWithSideCount: Consts.CategorizationGameScreen.animals.count - 1)
-        fruitDie = GKShuffledDistribution(forDieWithSideCount: Consts.CategorizationGameScreen.fruits.count - 1)
+        categorizationDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.categories.count)
+        animalsDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.animals.count)
+        fruitDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.fruits.count)
+        clothesDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.clothes.count)
     }
     
     private func nextShape() -> String {
@@ -112,14 +122,18 @@ struct GameDataSource {
     }
     
     private func nextCategorization() -> String {
-        return Consts.CategorizationGameScreen.categories[categorizationDie.nextInt() - 1]
+        return Consts.FloatingLogsGameScreen.categories[categorizationDie.nextInt() - 1]
     }
     
     private func nextFruit() -> String {
-        return Consts.CategorizationGameScreen.fruits[fruitDie.nextInt()]
+        return Consts.FloatingLogsGameScreen.fruits[fruitDie.nextInt() - 1]
     }
     
     private func nextAnimal() -> String {
-        return Consts.CategorizationGameScreen.animals[animalsDie.nextInt()]
+        return Consts.FloatingLogsGameScreen.animals[animalsDie.nextInt() - 1]
+    }
+    
+    private func nextDress() -> String {
+        return Consts.FloatingLogsGameScreen.clothes[clothesDie.nextInt() - 1]
     }
 }
