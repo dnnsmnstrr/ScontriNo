@@ -198,7 +198,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         
     }
     
-    //MARK: custom functions
+    //MARK: camera functions
     
     func zoomIn(scalingFactor: CGFloat = 0.2, duration: TimeInterval = 1) {
         let zoomInAction = SKAction.scale(to: scalingFactor, duration: duration)
@@ -306,11 +306,6 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
 
                     print("Entered the control, the new word on screen is: \(self.currentWordOnScreen!)\n")
                     
-                    
-                    
-                    
-                    
-                    
                 }
                 
                 
@@ -339,11 +334,11 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     }
     
     func startGame() {
-        zoomIn(scalingFactor: 0.2, duration: 3)
+        zoomIn(scalingFactor: 0.2, duration: 5)
         currentWordOnScreen = currentWords[index]
         print("Current word: \(self.currentWordOnScreen!)\n")
         cabins[index].physicsBody?.mass=4
-        cabins[index].openDoors()
+        cabins[index].openDoors(duration: 1.5, wait: true, waitDuration: 4.3)
         
     }
     
@@ -357,7 +352,11 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
             self.index += 1
         }
         cabins[index].physicsBody?.mass = 4
-        cabins[index].openDoors()
+        
+        cabins[index].openDoors(wait: true)
+//        if cabins[index].frame.midY < ferrisWheel.frame.minY + ferrisWheel.size.height/4{
+//
+//        }
     }
     
 //    func reloadWords() {

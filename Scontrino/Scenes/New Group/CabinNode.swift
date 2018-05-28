@@ -65,13 +65,23 @@ class CabinNode: SKSpriteNode {
         
     }
     
-    func openDoors(duration: TimeInterval = 1) {
+    func openDoors(duration: TimeInterval = 1, wait: Bool = false, waitDuration: TimeInterval = 2) {
         let openingLeft = SKAction.moveBy(x: -offsetOpened!, y: 0, duration: duration)
         let openingRight = SKAction.moveBy(x: offsetOpened!, y: 0, duration: duration)
+        let waiting = SKAction.wait(forDuration: waitDuration)
         print("opening doors")
         if !doorsOpen {
-            leftDoor?.run(openingLeft)
-            rightDoor?.run(openingRight)
+            if wait{
+                let leftSequence = SKAction.sequence([waiting, openingLeft])
+                let rightSequence = SKAction.sequence([waiting, openingRight])
+                leftDoor?.run(leftSequence)
+                rightDoor?.run(rightSequence)
+            }
+            else{
+                leftDoor?.run(openingLeft)
+                rightDoor?.run(openingRight)
+            }
+            
         }
         doorsOpen = true
     }
