@@ -1,5 +1,5 @@
 //
-//  CarGameScreen.swift
+//  RollerCoasterGameScreen.swift
 //  Scontrino
 //
 //  Created by Eduardo Yutaka Nakanishi on 26/04/2018.
@@ -9,7 +9,7 @@
 
 import SpriteKit
 
-class CarGameScreen: GameScene, SKPhysicsContactDelegate {
+class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
     let dataSource = GameDataSource()
     var numberShapesRemaining = Consts.shapes.count
     var holeNode: HoleNode!
@@ -47,7 +47,7 @@ class CarGameScreen: GameScene, SKPhysicsContactDelegate {
     func createOneShape(index: Int, numberOfShapes: Int){
         
         let spacing: CGFloat = 10
-        coloredShapesNodes[index].name = Consts.Id.CarGameScreen.coloredShapeNode + "\(index)"
+        coloredShapesNodes[index].name = Consts.Id.RollerCoasterGameScreen.coloredShapeNode + "\(index)"
         coloredShapesPositions[coloredShapesNodes[index].name!] = (CGPoint(x: CGFloat(UIScreen.main.bounds.width / CGFloat(numberOfShapes) + spacing + (CGFloat(index) * textureWidth ) ), y: UIScreen.main.bounds.height / 2))
         coloredShapesNodes[index].position = coloredShapesPositions[coloredShapesNodes[index].name!]!
         self.addChild(coloredShapesNodes[index])

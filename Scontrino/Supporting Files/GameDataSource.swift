@@ -102,10 +102,10 @@ struct GameDataSource {
     mutating func initializeDice() {
         colorsDie = GKShuffledDistribution(forDieWithSideCount: Consts.colors.count - 1)
         shapesDie = GKShuffledDistribution(forDieWithSideCount: Consts.shapes.count - 1)
-        categorizationDie = GKShuffledDistribution(forDieWithSideCount: Consts.CategorizationGameScreen.categories.count)
-        animalsDie = GKShuffledDistribution(forDieWithSideCount: Consts.CategorizationGameScreen.animals.count)
-        fruitDie = GKShuffledDistribution(forDieWithSideCount: Consts.CategorizationGameScreen.fruits.count)
-        clothesDie = GKShuffledDistribution(forDieWithSideCount: Consts.CategorizationGameScreen.clothes.count)
+        categorizationDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.categories.count)
+        animalsDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.animals.count)
+        fruitDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.fruits.count)
+        clothesDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.clothes.count)
     }
     
     private func nextShape() -> String {
@@ -117,18 +117,18 @@ struct GameDataSource {
     }
     
     private func nextCategorization() -> String {
-        return Consts.CategorizationGameScreen.categories[categorizationDie.nextInt() - 1]
+        return Consts.FloatingLogsGameScreen.categories[categorizationDie.nextInt() - 1]
     }
     
     private func nextFruit() -> String {
-        return Consts.CategorizationGameScreen.fruits[fruitDie.nextInt() - 1]
+        return Consts.FloatingLogsGameScreen.fruits[fruitDie.nextInt() - 1]
     }
     
     private func nextAnimal() -> String {
-        return Consts.CategorizationGameScreen.animals[animalsDie.nextInt() - 1]
+        return Consts.FloatingLogsGameScreen.animals[animalsDie.nextInt() - 1]
     }
     
     private func nextDress() -> String {
-        return Consts.CategorizationGameScreen.clothes[clothesDie.nextInt() - 1]
+        return Consts.FloatingLogsGameScreen.clothes[clothesDie.nextInt() - 1]
     }
 }

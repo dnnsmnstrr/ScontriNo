@@ -53,14 +53,14 @@ class MovingContextNode: MovingNode {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        if let scene = self.scene as? CategorizationGameScreen {
+//        if let scene = self.scene as? FloatingLogsGameScreen {
 //            scene.movingContextNodeInitialPosition = scene.movingContextNodePosition[self.name!]!
 //        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
-            if let scene = self.scene as? CategorizationGameScreen {
+            if let scene = self.scene as? FloatingLogsGameScreen {
                 let location = touch.location(in: scene)
                 scene.movingNode.position = location
             }
@@ -70,7 +70,7 @@ class MovingContextNode: MovingNode {
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
 
-        if let scene = self.scene as? CategorizationGameScreen {
+        if let scene = self.scene as? FloatingLogsGameScreen {
             if isInTheRightCategory == false {
                 scene.movingNode.position = Consts.NodePositions.movingCategFinalPos
 

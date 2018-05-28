@@ -13,14 +13,14 @@
 		1570D58420B6E35300AAF28A /* TailVagonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570D58020B6E35300AAF28A /* TailVagonNode.swift */; };
 		2A2B4A2A2091FBD4009B81FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A292091FBD4009B81FB /* AppDelegate.swift */; };
 		2A2B4A342091FBD7009B81FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A2B4A322091FBD7009B81FB /* LaunchScreen.storyboard */; };
-		2A2B4A3C2091FF42009B81FB /* FaceDetectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A3B2091FF42009B81FB /* FaceDetectionScreen.swift */; };
+		2A2B4A3C2091FF42009B81FB /* FerrisWheelGameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A3B2091FF42009B81FB /* FerrisWheelGameScreen.swift */; };
 		2A2B4A3E2091FF5A009B81FB /* SpeechRecognitionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A3D2091FF5A009B81FB /* SpeechRecognitionScreen.swift */; };
 		2A2B4A402091FF86009B81FB /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A3F2091FF86009B81FB /* GameScene.swift */; };
-		2A2B4A42209213C2009B81FB /* CarGameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A41209213C2009B81FB /* CarGameScreen.swift */; };
+		2A2B4A42209213C2009B81FB /* RollerCoasterGameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A41209213C2009B81FB /* RollerCoasterGameScreen.swift */; };
 		2A2B4A46209217F6009B81FB /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A45209217F6009B81FB /* StartScreen.swift */; };
 		2A2B4A4B2092286F009B81FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A2B4A4A2092286F009B81FB /* Assets.xcassets */; };
 		2A2B4A5620976FCF009B81FB /* GameDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A5520976FCF009B81FB /* GameDataSource.swift */; };
-		2A5B5E4B209A21F8001D4985 /* CategorizationGameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B5E4A209A21F8001D4985 /* CategorizationGameScreen.swift */; };
+		2A5B5E4B209A21F8001D4985 /* FloatingLogsGameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B5E4A209A21F8001D4985 /* FloatingLogsGameScreen.swift */; };
 		8B03E08F20B6DD5700004D7E /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E08D20B6DD5700004D7E /* RootViewController.swift */; };
 		8B03E09020B6DD5700004D7E /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E08E20B6DD5700004D7E /* CameraViewController.swift */; };
 		8B03E09B20B6DDDB00004D7E /* HoleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E09520B6DDDB00004D7E /* HoleNode.swift */; };
@@ -43,14 +43,14 @@
 		2A2B4A292091FBD4009B81FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2A2B4A332091FBD7009B81FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2A2B4A352091FBD7009B81FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2A2B4A3B2091FF42009B81FB /* FaceDetectionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectionScreen.swift; sourceTree = "<group>"; };
+		2A2B4A3B2091FF42009B81FB /* FerrisWheelGameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FerrisWheelGameScreen.swift; sourceTree = "<group>"; };
 		2A2B4A3D2091FF5A009B81FB /* SpeechRecognitionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionScreen.swift; sourceTree = "<group>"; };
 		2A2B4A3F2091FF86009B81FB /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		2A2B4A41209213C2009B81FB /* CarGameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarGameScreen.swift; sourceTree = "<group>"; };
+		2A2B4A41209213C2009B81FB /* RollerCoasterGameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollerCoasterGameScreen.swift; sourceTree = "<group>"; };
 		2A2B4A45209217F6009B81FB /* StartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
 		2A2B4A4A2092286F009B81FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A2B4A5520976FCF009B81FB /* GameDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDataSource.swift; sourceTree = "<group>"; };
-		2A5B5E4A209A21F8001D4985 /* CategorizationGameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorizationGameScreen.swift; sourceTree = "<group>"; };
+		2A5B5E4A209A21F8001D4985 /* FloatingLogsGameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingLogsGameScreen.swift; sourceTree = "<group>"; };
 		8B03E08D20B6DD5700004D7E /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootViewController.swift; path = Scontrino/View/RootViewController.swift; sourceTree = SOURCE_ROOT; };
 		8B03E08E20B6DD5700004D7E /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = Scontrino/View/CameraViewController.swift; sourceTree = SOURCE_ROOT; };
 		8B03E09520B6DDDB00004D7E /* HoleNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HoleNode.swift; path = Scontrino/Scenes/Nodes/HoleNode.swift; sourceTree = SOURCE_ROOT; };
@@ -128,10 +128,10 @@
 			isa = PBXGroup;
 			children = (
 				2A2B4A45209217F6009B81FB /* StartScreen.swift */,
-				2A2B4A41209213C2009B81FB /* CarGameScreen.swift */,
-				2A5B5E4A209A21F8001D4985 /* CategorizationGameScreen.swift */,
+				2A2B4A41209213C2009B81FB /* RollerCoasterGameScreen.swift */,
+				2A5B5E4A209A21F8001D4985 /* FloatingLogsGameScreen.swift */,
 				B91713F420B6EA2F0071D78F /* TrialScreen.swift */,
-				2A2B4A3B2091FF42009B81FB /* FaceDetectionScreen.swift */,
+				2A2B4A3B2091FF42009B81FB /* FerrisWheelGameScreen.swift */,
 				2A2B4A3D2091FF5A009B81FB /* SpeechRecognitionScreen.swift */,
 				8B03E09420B6DDCA00004D7E /* Nodes */,
 			);
@@ -256,7 +256,7 @@
 			files = (
 				1570D58220B6E35300AAF28A /* TrainNode.swift in Sources */,
 				2A2B4A402091FF86009B81FB /* GameScene.swift in Sources */,
-				2A2B4A3C2091FF42009B81FB /* FaceDetectionScreen.swift in Sources */,
+				2A2B4A3C2091FF42009B81FB /* FerrisWheelGameScreen.swift in Sources */,
 				1570D58320B6E35300AAF28A /* CentralVagonNode.swift in Sources */,
 				B91713F520B6EA2F0071D78F /* TrialScreen.swift in Sources */,
 				8B03E08F20B6DD5700004D7E /* RootViewController.swift in Sources */,
@@ -268,11 +268,11 @@
 				8B03E0A020B6DDDB00004D7E /* MovingShapeNode.swift in Sources */,
 				8B03E09D20B6DDDB00004D7E /* ButtonNode.swift in Sources */,
 				8B03E09C20B6DDDB00004D7E /* LogNode.swift in Sources */,
-				2A2B4A42209213C2009B81FB /* CarGameScreen.swift in Sources */,
+				2A2B4A42209213C2009B81FB /* RollerCoasterGameScreen.swift in Sources */,
 				2A2B4A3E2091FF5A009B81FB /* SpeechRecognitionScreen.swift in Sources */,
 				8B03E09B20B6DDDB00004D7E /* HoleNode.swift in Sources */,
 				8B03E09E20B6DDDB00004D7E /* MovingNode.swift in Sources */,
-				2A5B5E4B209A21F8001D4985 /* CategorizationGameScreen.swift in Sources */,
+				2A5B5E4B209A21F8001D4985 /* FloatingLogsGameScreen.swift in Sources */,
 				1570D58120B6E35300AAF28A /* HeadVagonNode.swift in Sources */,
 				8B03E09020B6DD5700004D7E /* CameraViewController.swift in Sources */,
 				2A2B4A2A2091FBD4009B81FB /* AppDelegate.swift in Sources */,
