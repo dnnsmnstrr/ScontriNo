@@ -11,7 +11,6 @@
 		1570D58220B6E35300AAF28A /* TrainNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570D57E20B6E35300AAF28A /* TrainNode.swift */; };
 		1570D58320B6E35300AAF28A /* CentralVagonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570D57F20B6E35300AAF28A /* CentralVagonNode.swift */; };
 		1570D58420B6E35300AAF28A /* TailVagonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570D58020B6E35300AAF28A /* TailVagonNode.swift */; };
-		1570D58620B6E36200AAF28A /* TrialScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570D58520B6E36200AAF28A /* TrialScreen.swift */; };
 		1570D58820B6FB5C00AAF28A /* Train.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570D58720B6FB5C00AAF28A /* Train.swift */; };
 		2A2B4A2A2091FBD4009B81FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A292091FBD4009B81FB /* AppDelegate.swift */; };
 		2A2B4A342091FBD7009B81FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A2B4A322091FBD7009B81FB /* LaunchScreen.storyboard */; };
@@ -33,7 +32,7 @@
 		8B03E0A020B6DDDB00004D7E /* MovingShapeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E09A20B6DDDB00004D7E /* MovingShapeNode.swift */; };
 		8B03E0A720B6E0DE00004D7E /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E0A620B6E0DE00004D7E /* Consts.swift */; };
 		B91713F520B6EA2F0071D78F /* TrialScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91713F420B6EA2F0071D78F /* TrialScreen.swift */; };
-		B9A5A63920B803290021501C /* CabinNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A5A63820B803290021501C /* CabinNode.swift */; };
+		B9A5A63D20BC65060021501C /* CabinNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A5A63C20BC65060021501C /* CabinNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +40,6 @@
 		1570D57E20B6E35300AAF28A /* TrainNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainNode.swift; sourceTree = "<group>"; };
 		1570D57F20B6E35300AAF28A /* CentralVagonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralVagonNode.swift; sourceTree = "<group>"; };
 		1570D58020B6E35300AAF28A /* TailVagonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TailVagonNode.swift; sourceTree = "<group>"; };
-		1570D58520B6E36200AAF28A /* TrialScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrialScreen.swift; path = ../../../../../Desktop/filexcode/TrialScreen.swift; sourceTree = "<group>"; };
 		1570D58720B6FB5C00AAF28A /* Train.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Train.swift; sourceTree = "<group>"; };
 		2A2B4A262091FBD4009B81FB /* Scontrino.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scontrino.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A2B4A292091FBD4009B81FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +63,7 @@
 		8B03E09A20B6DDDB00004D7E /* MovingShapeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovingShapeNode.swift; path = Scontrino/Scenes/Nodes/MovingShapeNode.swift; sourceTree = SOURCE_ROOT; };
 		8B03E0A620B6E0DE00004D7E /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		B91713F420B6EA2F0071D78F /* TrialScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrialScreen.swift; sourceTree = "<group>"; };
-		B9A5A63820B803290021501C /* CabinNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CabinNode.swift; sourceTree = "<group>"; };
+		B9A5A63C20BC65060021501C /* CabinNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CabinNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,7 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				8B03E09720B6DDDB00004D7E /* ButtonNode.swift */,
-				B9A5A63820B803290021501C /* CabinNode.swift */,
+				B9A5A63C20BC65060021501C /* CabinNode.swift */,
 				1570D57C20B6E30100AAF28A /* TrainNodes */,
 				8B03E09520B6DDDB00004D7E /* HoleNode.swift */,
 				8B03E09620B6DDDB00004D7E /* LogNode.swift */,
@@ -272,6 +270,7 @@
 				1570D58420B6E35300AAF28A /* TailVagonNode.swift in Sources */,
 				8B03E0A020B6DDDB00004D7E /* MovingShapeNode.swift in Sources */,
 				8B03E09D20B6DDDB00004D7E /* ButtonNode.swift in Sources */,
+				B9A5A63D20BC65060021501C /* CabinNode.swift in Sources */,
 				8B03E09C20B6DDDB00004D7E /* LogNode.swift in Sources */,
 				2A2B4A42209213C2009B81FB /* RollerCoasterGameScreen.swift in Sources */,
 				2A2B4A3E2091FF5A009B81FB /* SpeechRecognitionScreen.swift in Sources */,
