@@ -1,5 +1,5 @@
 //
-//  CategorizationGameScreen.swift
+//  FloatingLogsGameScreen.swift
 //  Scontrino
 //
 //  Created by Eduardo Yutaka Nakanishi on 02/05/2018.
@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
+class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
     let dataSource = GameDataSource()
     var logNode: [LogNode] = []
     var movingNode: MovingContextNode = MovingContextNode()
@@ -73,7 +73,7 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
                 switch category.nodeFlag.name {
                 case "flag fruits":
                     
-                    if Consts.CategorizationGameScreen.fruits.contains((bodyA.node?.name)!) {
+                    if Consts.FloatingLogsGameScreen.fruits.contains((bodyA.node?.name)!) {
                         debugPrint("right category")
                         let contactNode = bodyA.node as! MovingContextNode
                         contactNode.category = category.nodeFlag.name!
@@ -83,7 +83,7 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
                     
                 case "flag animals":
                     
-                    if Consts.CategorizationGameScreen.animals.contains((bodyA.node?.name)!) {
+                    if Consts.FloatingLogsGameScreen.animals.contains((bodyA.node?.name)!) {
                         debugPrint("right category")
                         let contactNode = bodyA.node as! MovingContextNode
                         contactNode.isInTheRightCategory = true
@@ -93,7 +93,7 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
                     
                 case "flag clothes":
                     
-                    if Consts.CategorizationGameScreen.clothes.contains((bodyA.node?.name)!) {
+                    if Consts.FloatingLogsGameScreen.clothes.contains((bodyA.node?.name)!) {
                         debugPrint("right category")
                         let contactNode = bodyA.node as! MovingContextNode
                         contactNode.isInTheRightCategory = true
@@ -131,7 +131,7 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
                 switch category.nodeFlag.name {
                 case "flag fruits":
                     
-                    if Consts.CategorizationGameScreen.fruits.contains((bodyA.node?.name)!) {
+                    if Consts.FloatingLogsGameScreen.fruits.contains((bodyA.node?.name)!) {
                         debugPrint("right category")
                         let contactNode = bodyA.node as! MovingContextNode
                         contactNode.isInTheRightCategory = false
@@ -141,7 +141,7 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
                     
                 case "flag animals":
                     
-                    if Consts.CategorizationGameScreen.animals.contains((bodyA.node?.name)!) {
+                    if Consts.FloatingLogsGameScreen.animals.contains((bodyA.node?.name)!) {
                         debugPrint("right category")
                         let contactNode = bodyA.node as! MovingContextNode
                         contactNode.isInTheRightCategory = false
@@ -150,7 +150,7 @@ class CategorizationGameScreen: GameScene, SKPhysicsContactDelegate  {
                     
                 case "flag clothes":
                     
-                    if Consts.CategorizationGameScreen.clothes.contains((bodyA.node?.name)!) {
+                    if Consts.FloatingLogsGameScreen.clothes.contains((bodyA.node?.name)!) {
                         debugPrint("right category")
                         let contactNode = bodyA.node as! MovingContextNode
                         contactNode.isInTheRightCategory = false

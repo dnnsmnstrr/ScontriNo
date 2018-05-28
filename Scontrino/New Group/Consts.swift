@@ -17,6 +17,13 @@ enum Position {
 }
 
 struct Consts {
+    struct Graphics {
+        static let screenBounds = UIScreen.main.bounds
+        static let screenWidth = screenBounds.width
+        static let screenHeight = screenBounds.height
+        static let screenResolution = screenBounds.size
+        static let scaling = screenWidth / 1336
+    }
     private static let words = [
         Difficulty.easy: [
             Position.initial: [
@@ -177,7 +184,7 @@ struct Consts {
     ]
     
     
-    struct CategorizationGameScreen {
+    struct FloatingLogsGameScreen {
         static let categories = [
             "animals",
             "fruits",
@@ -198,12 +205,8 @@ struct Consts {
             "dress"
         ]
     }
-    struct Graphics {
-        static let screenWidth = UIScreen.main.bounds.width
-        static let screenHeight = UIScreen.main.bounds.height
-    }
     struct Id {
-        struct CarGameScreen {
+        struct RollerCoasterGameScreen {
             static let coloredShapeNode = "100-"
         }
     }

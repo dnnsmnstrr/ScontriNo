@@ -1,5 +1,5 @@
 //
-//  FaceDetectionScreen.swift
+//  FerrisWheelGameScreen.swift
 //  Scontrino
 //
 //  Created by Eduardo Yutaka Nakanishi on 26/04/2018.
@@ -12,7 +12,7 @@ import SpriteKit
 import AVFoundation
 import Vision
 
-class FaceDetectionScreen: GameScene {
+class FerrisWheelGameScreen: GameScene {
     
     let cameraNode = SKCameraNode()
     

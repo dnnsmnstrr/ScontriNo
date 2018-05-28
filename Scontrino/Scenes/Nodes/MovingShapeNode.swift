@@ -52,14 +52,14 @@ class MovingShapeNode: MovingNode {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let scene = self.scene as? CarGameScreen {
+        if let scene = self.scene as? RollerCoasterGameScreen {
             scene.coloredShapesInitialPositions = scene.coloredShapesPositions[self.name!]!
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
-            if let scene = self.scene as? CarGameScreen {
+            if let scene = self.scene as? RollerCoasterGameScreen {
                 let location = touch.location(in: scene)
                 scene.coloredShapesPositions[self.name!] = location
             }
@@ -67,7 +67,7 @@ class MovingShapeNode: MovingNode {
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        if let scene = self.scene as? CarGameScreen {
+        if let scene = self.scene as? RollerCoasterGameScreen {
             if isInTheRightHole == false {
                 scene.coloredShapesPositions[self.name!] = scene.coloredShapesInitialPositions
             }
