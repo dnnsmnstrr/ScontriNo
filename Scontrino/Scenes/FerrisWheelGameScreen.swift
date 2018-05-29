@@ -26,7 +26,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     var recognizedSentence = ""
     var recognizedWords = [Substring]()
     
-    private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))!
+    private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "it-IT"))!
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private var audio = AVAudioEngine()
@@ -188,7 +188,14 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                         self.recognitionRequest?.endAudio()
                     } else {
                         self.recordingNode.texture = SKTexture(imageNamed: "recording on")
-                        try! self.startRecording()
+//                        try! self.startRecording()
+                        
+                        do {
+                            try self.startRecording()
+                            
+                        } catch {
+                            print("error unknown")
+                        }
                     }
                     
                 case .denied:

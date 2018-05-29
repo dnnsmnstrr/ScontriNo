@@ -186,23 +186,43 @@ struct Consts {
     
     struct FloatingLogsGameScreen {
         static let categories = [
-            "animals",
-            "fruits",
-            "clothes"
+            "oggetti",
+            "abbigliamento",
+            "animali",
+            "cibo",
+            "mezziDiTrasporto",
+            "stagioni"
         ]
-        static let animals = [
-            "bear",
-            "duck",
-            "dog"
+        static let animali = [
+            "gufo",
+            "cane"
         ]
-        static let fruits = [
-            "apple",
-            "orange",
-            "lime"
+        static let cibo = [
+            "banana",
+            "mela",
+            "uva",
+            "panino"
         ]
-        static let clothes = [
-            "shirt",
-            "dress"
+        static let abbigliamento = [
+            "cappotto",
+            "maglia"
+        ]
+        static let oggetti = [
+            "ago",
+            "dado",
+            "mattone",
+            "pipa",
+            "sapone",
+            "tavolo",
+            "palla"
+        ]
+        static let mezziDiTrasporto = [
+            "razzo",
+            "nave"
+        ]
+        static let stagioni = [
+            "sole",
+            "neve"
         ]
     }
     struct CarGameScreen {
@@ -235,14 +255,26 @@ struct Consts {
     
     //testing
     static let testArray = [
-        "duck",
-        "dog",
-        "apple",
-        "lime",
-        "shirt",
-        "dress",
-        "moon",
-        "star"
+        "ago",
+        "dado",
+        "mattone",
+        "pipa",
+        "sapone",
+        "tavolo",
+        "palla",
+        "cappotto",
+        "maglia",
+        "gufo",
+        "cane",
+        "banana",
+        "mela",
+        "uva",
+        "panino",
+        "razzo",
+        "nave",
+        "rosa",
+        "sole",
+        "neve"
     ]
     
 }

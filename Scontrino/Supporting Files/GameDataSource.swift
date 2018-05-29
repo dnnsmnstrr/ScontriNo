@@ -13,8 +13,12 @@ struct GameDataSource {
     var shapesDie: GKShuffledDistribution!
     var categorizationDie: GKShuffledDistribution!
     var animalsDie: GKShuffledDistribution!
-    var fruitDie: GKShuffledDistribution!
+    var ciboDie: GKShuffledDistribution!
     var clothesDie: GKShuffledDistribution!
+    var objectDie: GKShuffledDistribution!
+    var mezziDie: GKShuffledDistribution!
+    var stagioniDie: GKShuffledDistribution!
+    
     
     init() {
         initializeDice()
@@ -64,12 +68,19 @@ struct GameDataSource {
         var res = ""
         
         switch node.nodeFlag.name {
-        case "flag fruits":
-            res  = nextFruit()
-        case "flag animals":
+        case "flag cibo":
+            res  = nextCibo()
+        case "flag animali":
             res = nextAnimal()
-        case "flag clothes":
+        case "flag abbigliamento":
             res = nextDress()
+        case "flag oggetti":
+            res = nextObject()
+        case "flag mezziDiTrasporto":
+            res = nextTransport()
+        case "flag stagioni":
+            res = nextSeason()
+            
         default:
             res = nextAnimal()
         }
@@ -99,12 +110,18 @@ struct GameDataSource {
             let node = logNodes[index]
             
             switch node.nodeFlag.name {
-            case "flag fruits":
-                num += Consts.FloatingLogsGameScreen.fruits.count
-            case "flag animals":
-                num += Consts.FloatingLogsGameScreen.animals.count
-            case "flag clothes":
-                num += Consts.FloatingLogsGameScreen.clothes.count
+            case "flag oggetti":
+                num += Consts.FloatingLogsGameScreen.oggetti.count
+            case "flag abbigliamento":
+                num += Consts.FloatingLogsGameScreen.abbigliamento.count
+            case "flag animali":
+                num += Consts.FloatingLogsGameScreen.animali.count
+            case "flag cibo":
+                num += Consts.FloatingLogsGameScreen.cibo.count
+            case "flag mezziDiTrasporto":
+                num += Consts.FloatingLogsGameScreen.mezziDiTrasporto.count
+            case "flag stagioni":
+                num += Consts.FloatingLogsGameScreen.stagioni.count
             default:
                 num += 0
             }
@@ -129,9 +146,12 @@ struct GameDataSource {
         colorsDie = GKShuffledDistribution(forDieWithSideCount: Consts.colors.count - 1)
         shapesDie = GKShuffledDistribution(forDieWithSideCount: Consts.shapes.count - 1)
         categorizationDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.categories.count)
-        animalsDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.animals.count)
-        fruitDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.fruits.count)
-        clothesDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.clothes.count)
+        animalsDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.animali.count)
+        ciboDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.cibo.count)
+        clothesDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.abbigliamento.count)
+        objectDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.oggetti.count)
+        mezziDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.mezziDiTrasporto.count)
+        stagioniDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.stagioni.count)
     }
     
     private func nextShape() -> String {
@@ -146,15 +166,27 @@ struct GameDataSource {
         return Consts.FloatingLogsGameScreen.categories[categorizationDie.nextInt() - 1]
     }
     
-    private func nextFruit() -> String {
-        return Consts.FloatingLogsGameScreen.fruits[fruitDie.nextInt() - 1]
+    private func nextCibo() -> String {
+        return Consts.FloatingLogsGameScreen.cibo[ciboDie.nextInt() - 1]
     }
     
     private func nextAnimal() -> String {
-        return Consts.FloatingLogsGameScreen.animals[animalsDie.nextInt() - 1]
+        return Consts.FloatingLogsGameScreen.animali[animalsDie.nextInt() - 1]
     }
     
     private func nextDress() -> String {
-        return Consts.FloatingLogsGameScreen.clothes[clothesDie.nextInt() - 1]
+        return Consts.FloatingLogsGameScreen.abbigliamento[clothesDie.nextInt() - 1]
+    }
+    
+    private func nextObject() -> String {
+        return Consts.FloatingLogsGameScreen.oggetti[objectDie.nextInt() - 1]
+    }
+    
+    private func nextTransport() -> String {
+        return Consts.FloatingLogsGameScreen.mezziDiTrasporto[mezziDie.nextInt() - 1]
+    }
+    
+    private func nextSeason() -> String {
+        return Consts.FloatingLogsGameScreen.stagioni[stagioniDie.nextInt() - 1]
     }
 }

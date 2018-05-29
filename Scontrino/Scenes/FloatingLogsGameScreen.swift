@@ -82,9 +82,9 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
                 debugPrint(category.nodeFlag.name!)
                 debugPrint(bodyA.node?.name!)
                 switch category.nodeFlag.name {
-                case "flag fruits":
+                case "flag oggetti":
                     
-                    if Consts.FloatingLogsGameScreen.fruits.contains((bodyA.node?.name)!) {
+                    if Consts.FloatingLogsGameScreen.oggetti.contains((bodyA.node?.name)!) {
                         debugPrint("right category")
                         let contactNode = bodyA.node as! MovingContextNode
                         contactNode.category = category.nodeFlag.name!
@@ -92,9 +92,9 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
                         print("category: " + contactNode.category)
                     }
                     
-                case "flag animals":
+                case "flag abbigliamento":
                     
-                    if Consts.FloatingLogsGameScreen.animals.contains((bodyA.node?.name)!) {
+                    if Consts.FloatingLogsGameScreen.abbigliamento.contains((bodyA.node?.name)!) {
                         debugPrint("right category")
                         let contactNode = bodyA.node as! MovingContextNode
                         contactNode.isInTheRightCategory = true
@@ -102,9 +102,39 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
                         print("category: " + contactNode.category)
                     }
                     
-                case "flag clothes":
+                case "flag animali":
                     
-                    if Consts.FloatingLogsGameScreen.clothes.contains((bodyA.node?.name)!) {
+                    if Consts.FloatingLogsGameScreen.animali.contains((bodyA.node?.name)!) {
+                        debugPrint("right category")
+                        let contactNode = bodyA.node as! MovingContextNode
+                        contactNode.isInTheRightCategory = true
+                        contactNode.category = category.nodeFlag.name!
+                        print("category: " + contactNode.category)
+                    }
+                    
+                case "flag cibo":
+                    
+                    if Consts.FloatingLogsGameScreen.cibo.contains((bodyA.node?.name)!) {
+                        debugPrint("right category")
+                        let contactNode = bodyA.node as! MovingContextNode
+                        contactNode.isInTheRightCategory = true
+                        contactNode.category = category.nodeFlag.name!
+                        print("category: " + contactNode.category)
+                    }
+                    
+                case "flag mezziDiTrasporto":
+                    
+                    if Consts.FloatingLogsGameScreen.mezziDiTrasporto.contains((bodyA.node?.name)!) {
+                        debugPrint("right category")
+                        let contactNode = bodyA.node as! MovingContextNode
+                        contactNode.isInTheRightCategory = true
+                        contactNode.category = category.nodeFlag.name!
+                        print("category: " + contactNode.category)
+                    }
+                    
+                case "flag stagioni":
+                    
+                    if Consts.FloatingLogsGameScreen.stagioni.contains((bodyA.node?.name)!) {
                         debugPrint("right category")
                         let contactNode = bodyA.node as! MovingContextNode
                         contactNode.isInTheRightCategory = true
@@ -140,9 +170,9 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
                 let category = bodyB.node as! LogNode
                 
                 switch category.nodeFlag.name {
-                case "flag fruits":
+                case "flag oggetti":
                     
-                    if Consts.FloatingLogsGameScreen.fruits.contains((bodyA.node?.name)!) {
+                    if Consts.FloatingLogsGameScreen.oggetti.contains((bodyA.node?.name)!) {
                         debugPrint("right category")
                         let contactNode = bodyA.node as! MovingContextNode
                         contactNode.isInTheRightCategory = false
@@ -150,23 +180,51 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
                         
                     }
                     
-                case "flag animals":
+                case "flag abbigliamento":
                     
-                    if Consts.FloatingLogsGameScreen.animals.contains((bodyA.node?.name)!) {
+                    if Consts.FloatingLogsGameScreen.abbigliamento.contains((bodyA.node?.name)!) {
                         debugPrint("right category")
                         let contactNode = bodyA.node as! MovingContextNode
                         contactNode.isInTheRightCategory = false
                         
                     }
                     
-                case "flag clothes":
+                case "flag animali":
                     
-                    if Consts.FloatingLogsGameScreen.clothes.contains((bodyA.node?.name)!) {
+                    if Consts.FloatingLogsGameScreen.animali.contains((bodyA.node?.name)!) {
                         debugPrint("right category")
                         let contactNode = bodyA.node as! MovingContextNode
                         contactNode.isInTheRightCategory = false
                         
                     }
+                    
+                case "flag cibo":
+                    
+                    if Consts.FloatingLogsGameScreen.cibo.contains((bodyA.node?.name)!) {
+                        debugPrint("right category")
+                        let contactNode = bodyA.node as! MovingContextNode
+                        contactNode.isInTheRightCategory = false
+                        
+                    }
+                    
+                case "flag mezziDiTrasporto":
+                    
+                    if Consts.FloatingLogsGameScreen.mezziDiTrasporto.contains((bodyA.node?.name)!) {
+                        debugPrint("right category")
+                        let contactNode = bodyA.node as! MovingContextNode
+                        contactNode.isInTheRightCategory = false
+                        
+                    }
+                    
+                case "flag stagioni":
+                    
+                    if Consts.FloatingLogsGameScreen.stagioni.contains((bodyA.node?.name)!) {
+                        debugPrint("right category")
+                        let contactNode = bodyA.node as! MovingContextNode
+                        contactNode.isInTheRightCategory = false
+                        
+                    }
+                    
                     
                 default:
                         debugPrint("right category")

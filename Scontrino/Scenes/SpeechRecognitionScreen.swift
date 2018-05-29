@@ -109,7 +109,15 @@ class SpeechRecognitionScreen: GameScene, SFSpeechRecognizerDelegate {
                         self.recognitionRequest?.endAudio()
                     } else {
                         self.recordingNode.texture = SKTexture(imageNamed: "recording on")
-                        try! self.startRecording()
+                        do {
+                            try
+                                self.startRecording()
+                            
+                        } catch  {
+                            print("error")
+                        }
+                        
+//                        try! self.startRecording()
                     }
                     
                 case .denied:

@@ -70,6 +70,7 @@
 		8B03E09820B6DDDB00004D7E /* MovingNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovingNode.swift; path = Scontrino/Scenes/Nodes/MovingNode.swift; sourceTree = SOURCE_ROOT; };
 		8B03E09920B6DDDB00004D7E /* MovingContextNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovingContextNode.swift; path = Scontrino/Scenes/Nodes/MovingContextNode.swift; sourceTree = SOURCE_ROOT; };
 		8B03E09A20B6DDDB00004D7E /* MovingShapeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovingShapeNode.swift; path = Scontrino/Scenes/Nodes/MovingShapeNode.swift; sourceTree = SOURCE_ROOT; };
+		8B10DF1D20BE02CF0045E4C5 /* Scontrino.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scontrino.entitlements; sourceTree = "<group>"; };
 		B91713F420B6EA2F0071D78F /* TrialScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrialScreen.swift; sourceTree = "<group>"; };
 		B9A5A64720BD8CAB0021501C /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Consts.swift; path = "New Group/Consts.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,6 +103,7 @@
 			children = (
 				2A2B4A282091FBD4009B81FB /* Scontrino */,
 				2A2B4A272091FBD4009B81FB /* Products */,
+				8B10DF1E20BE02EF0045E4C5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,6 +118,7 @@
 		2A2B4A282091FBD4009B81FB /* Scontrino */ = {
 			isa = PBXGroup;
 			children = (
+				8B10DF1D20BE02CF0045E4C5 /* Scontrino.entitlements */,
 				B9A5A64620BD8C970021501C /* Model */,
 				B9A5A64920BD8CC10021501C /* View */,
 				2A2B4A4920922272009B81FB /* Supporting Files */,
@@ -179,6 +182,13 @@
 			path = "New Group";
 			sourceTree = "<group>";
 		};
+		8B10DF1E20BE02EF0045E4C5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B9A5A64620BD8C970021501C /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +240,14 @@
 					2A2B4A252091FBD4009B81FB = {
 						CreatedOnToolsVersion = 9.3;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -431,13 +449,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CSKA8928CG;
+				DEVELOPMENT_TEAM = KUSE58VWBE;
 				INFOPLIST_FILE = Scontrino/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ADA.Scontrino;
+				PRODUCT_BUNDLE_IDENTIFIER = ADA.Scontrino.GiocchieTalkie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -446,13 +465,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CSKA8928CG;
+				DEVELOPMENT_TEAM = KUSE58VWBE;
 				INFOPLIST_FILE = Scontrino/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ADA.Scontrino;
+				PRODUCT_BUNDLE_IDENTIFIER = ADA.Scontrino.GiocchieTalkie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
