@@ -17,13 +17,10 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     
     let dataSource = GameDataSource()
     
-    
     //speech
     var currentWordOnScreen: String!
     private var currentWords: [String] = []
     var index: Int = 0
-
-    
     
     let recordingNode = SKSpriteNode(imageNamed: "recording off")
     var recognizedSentence = ""
@@ -46,9 +43,12 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     
     //camera & ui
     let cameraNode = SKCameraNode()
+//    let background = SKSpriteNode()
     
     var ferrisWheel: SKSpriteNode!
+    var amountOfCabins: Float = 6 //default is six, physics are tuned to that
     private var cabins: [CabinNode] = []
+    
     
     var startTime: TimeInterval?
     var start: CGPoint?
@@ -56,82 +56,34 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     var wheelSpeed: CGFloat = 1000
     var zoomedIn: Bool = false
     var zoomPoint: CGFloat?
+    var justSkipped: Bool = false
+    var screenScale: CGFloat = UIScreen.main.scale
     
     
     
     override func createSceneContents() {
         super.createSceneContents()
+        let center: CGPoint = CGPoint(x: self.size.width / 2,y: self.size.height / 2)
         
         //camera
-        cameraNode.position = CGPoint(x: self.size.width / 2,y: self.size.height / 2)
+        cameraNode.position = center
         self.addChild(cameraNode)
         self.camera = cameraNode
+        print(screenScale)
         
-        
+        //background
+        let background = SKSpriteNode(imageNamed: "ferris wheel background")
+        background.position = center
+        background.setScale(Consts.Graphics.scale)
+        addChild(background)
+
         //create ferris wheel
+        createFerrisWheel()
+        self.physicsWorld.gravity = CGVector(dx: 0, dy: -30/screenScale)
         
-        ferrisWheel = SKSpriteNode.init(texture: SKTexture(imageNamed: "Wheel"))
-        ferrisWheel.name = "wheel"
-        ferrisWheel.zPosition = 2
-        ferrisWheel.anchorPoint = CGPoint(x: 0.5, y: 0.5) // default
-        ferrisWheel.position = CGPoint(x: size.width/2, y: size.height/1.6)
-        ferrisWheel.size = CGSize(width: size.height/1.2, height: size.height/1.2)
-        zoomPoint = ferrisWheel.frame.minY - size.height/14
-        ferrisWheel.physicsBody = SKPhysicsBody(circleOfRadius: max((ferrisWheel.size.width) / 2,
-                                                                    (ferrisWheel.size.height) / 2))
-        ferrisWheel.zRotation = CGFloat.pi / 2
-        ferrisWheel.physicsBody?.pinned = true
-        ferrisWheel.physicsBody?.angularDamping = 15
-        
-        self.addChild(ferrisWheel)
-        
-        
-        //place cabins
-        let radius = ferrisWheel.size.width/2 - 2
-        for i in 1...6 {
-            
-            let newCabin = CabinNode.init(imageNamed: "cabin body")
-            
-            newCabin.zPosition = 3
-            newCabin.size = CGSize(width: ferrisWheel.size.width/5, height: ferrisWheel.size.height/5)
-
-            //trigonometric functions to calculate cabin position on the circumference of the wheel
-            let currentX = radius*CGFloat(cosf(2*Float.pi*Float(i)/6))+ferrisWheel.frame.midX
-            let currentY = radius*CGFloat(sinf(2*Float.pi*Float(i)/6))+ferrisWheel.frame.midY
-
-            newCabin.position = CGPoint(x: currentX, y: currentY-newCabin.size.height/2)
-            newCabin.physicsBody = SKPhysicsBody(circleOfRadius: newCabin.size.height/2)
-            newCabin.physicsBody?.angularDamping = 30
-            newCabin.physicsBody?.mass = 2
-            //resize doors according to current cabin size
-            newCabin.leftDoor?.size = CGSize(width: newCabin.size.width/3.1, height: newCabin.size.height/1.3)
-            newCabin.rightDoor?.size = CGSize(width: newCabin.size.width/3.1, height: newCabin.size.height/1.3)
-            newCabin.occupant?.size = CGSize(width: newCabin.size.width/2, height: newCabin.size.height/2)
-            
-            //occupant
-            var newOccupant: String = dataSource.getWord()
-            currentWords.append(newOccupant)
-            newCabin.occupant?.texture = SKTexture(imageNamed: newOccupant)
-            
-            self.addChild(newCabin)
-            cabins.append(newCabin)
-            
-            let joint = SKPhysicsJointPin.joint(withBodyA: ferrisWheel.physicsBody! , bodyB: newCabin.physicsBody!, anchor: CGPoint(x: currentX, y: currentY))
-            //limit joint angles?
-            //            joint.shouldEnableLimits = true
-            //            joint.lowerAngleLimit = -0.3
-            //            joint.upperAngleLimit = 0.3
-            self.physicsWorld.add(joint)
-            
-        }
-        
-        let captionNode = SKLabelNode(text: currentWordOnScreen)
-        captionNode.fontSize = 36
-        captionNode.fontColor = .black
-        captionNode.name = "caption"
-        captionNode.position = CGPoint(x: ferrisWheel.frame.midX, y: ferrisWheel.frame.minY-10)
-        
+        //set up the first round
         startGame()
+        
         //start the recording process
         checkAuthorization()
         
@@ -164,28 +116,28 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
             }
             let touchPosition = touch.location(in: self)
             if touchPosition.x < (self.frame.width / 2) {
-                self.ferrisWheel.physicsBody?.applyAngularImpulse(-(wheelSpeed/100))
+                self.ferrisWheel.physicsBody?.applyAngularImpulse(-(wheelSpeed/10))
             } else {
-                self.ferrisWheel.physicsBody?.applyAngularImpulse(wheelSpeed/100)
+                self.ferrisWheel.physicsBody?.applyAngularImpulse(wheelSpeed/10)
             }
         }
         if magnitude < 25 {
             if !zoomedIn{
                 zoomIn()
-//                for cabin in cabins {
-//                    if !cabin.doorsOpen{
-//                        cabin.openDoors()
-//                    }
-//                    else {
-//                        cabin.closeDoors()
-//                    }
-//                }
+                //                for cabin in cabins {
+                //                    if !cabin.doorsOpen{
+                //                        cabin.openDoors()
+                //                    }
+                //                    else {
+                //                        cabin.closeDoors()
+                //                    }
+                //                }
             }
             else {
                 zoomOut()
-//                for cabin in cabins {
-//                    cabin.openDoors()
-//                }
+                //                for cabin in cabins {
+                //                    cabin.openDoors()
+                //                }
             }
             
             let touchPosition = touch.location(in: self)
@@ -300,12 +252,22 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                     self.recognitionRequest = nil
                     self.recognitionTask = nil
                     
-                    self.nextCabin()
-                    
                     self.currentWordOnScreen = self.currentWords[self.index]
-
+                    
+                    
                     print("Entered the control, the new word on screen is: \(self.currentWordOnScreen!)\n")
                     
+                }
+                    //skip if too many words were said
+                else if (self.recognizedSentence.lengthOfBytes(using: String.Encoding.ascii) > 50 && !self.justSkipped) || self.recognizedSentence.contains("skip"){
+                    self.audio.stop()
+                    self.recognitionRequest?.endAudio()
+                    self.recognitionRequest = nil
+                    self.recognitionTask = nil
+                    
+                    self.justSkipped = true
+                    
+                    print("Entered the control, the new word on screen is: \(self.currentWordOnScreen!)\n")
                 }
                 
                 
@@ -315,6 +277,12 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                 
                 self.audio.stop()
                 inputNode.removeTap(onBus: 0)
+                self.nextCabin()
+                
+                //                if !self.justSkipped{
+                //                    self.nextCabin()
+                //                    self.justSkipped = false
+                //                }
                 
                 if self.listen {
                     try! self.startRecording()
@@ -333,8 +301,70 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         self.listen = true
     }
     
+    //ui
+    func createFerrisWheel() {
+        ferrisWheel = SKSpriteNode.init(texture: SKTexture(imageNamed: "wheel"))
+        ferrisWheel.name = "wheel"
+        ferrisWheel.zPosition = 2
+        ferrisWheel.anchorPoint = CGPoint(x: 0.5, y: 0.5) // default
+        ferrisWheel.position = CGPoint(x: size.width/2, y: size.height/1.6)
+        ferrisWheel.size = CGSize(width: size.height/1.2, height: size.height/1.2)
+        zoomPoint = ferrisWheel.frame.minY - size.height/14
+        ferrisWheel.physicsBody = SKPhysicsBody(circleOfRadius: max((ferrisWheel.size.width) / 2,
+                                                                    (ferrisWheel.size.height) / 2))
+        ferrisWheel.zRotation = CGFloat.pi / 2
+        ferrisWheel.physicsBody?.pinned = true
+        ferrisWheel.physicsBody?.angularDamping = 0.5 * screenScale * screenScale * screenScale
+        
+        let base = SKSpriteNode(imageNamed: "base")
+        base.position = CGPoint(x: size.width/2, y: size.height/4.5)
+        base.size = CGSize(width: ferrisWheel.frame.width*1.1, height: ferrisWheel.frame.height*1.1)
+        
+        self.addChild(ferrisWheel)
+        self.addChild(base)
+        
+        placeCabins(amount: amountOfCabins)
+    }
+    
+    func placeCabins(amount: Float = 6) {
+        let radius = ferrisWheel.size.width/2 - 10
+        for i in 1...Int(amount) {
+            
+            let newCabin = CabinNode.init(imageNamed: "cabin body")
+            
+            newCabin.zPosition = 3
+            newCabin.size = CGSize(width: ferrisWheel.size.width/5, height: ferrisWheel.size.height/5)
+            
+            //trigonometric functions to calculate cabin position on the circumference of the wheel
+            let currentX = radius*CGFloat(cosf(2*Float.pi*Float(i)/amount))+ferrisWheel.frame.midX
+            let currentY = radius*CGFloat(sinf(2*Float.pi*Float(i)/amount))+ferrisWheel.frame.midY
+            
+            newCabin.position = CGPoint(x: currentX, y: currentY-newCabin.size.height/2)
+            newCabin.physicsBody = SKPhysicsBody(circleOfRadius: newCabin.size.height/2)
+            newCabin.physicsBody?.angularDamping = 30
+            newCabin.physicsBody?.mass = 2
+            //resize doors according to current cabin size
+            newCabin.leftDoor?.size = CGSize(width: newCabin.size.width/3.1, height: newCabin.size.height/1.3)
+            newCabin.rightDoor?.size = CGSize(width: newCabin.size.width/3.1, height: newCabin.size.height/1.3)
+            newCabin.occupant?.size = CGSize(width: newCabin.size.width/2, height: newCabin.size.height/2)
+            
+            
+            //occupant
+            let newOccupant: String = dataSource.getWord()
+            currentWords.append(newOccupant)
+            newCabin.occupant?.texture = SKTexture(imageNamed: newOccupant)
+            
+            self.addChild(newCabin)
+            cabins.append(newCabin)
+            
+            let joint = SKPhysicsJointPin.joint(withBodyA: ferrisWheel.physicsBody! , bodyB: newCabin.physicsBody!, anchor: CGPoint(x: currentX, y: currentY))
+            self.physicsWorld.add(joint)
+            
+        }
+    }
+    
     func startGame() {
-        zoomIn(scalingFactor: 0.2, duration: 5)
+        zoomIn(scalingFactor: 0.2, duration: 15/Double(screenScale))
         currentWordOnScreen = currentWords[index]
         print("Current word: \(self.currentWordOnScreen!)\n")
         cabins[index].physicsBody?.mass=4
@@ -342,29 +372,37 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         
     }
     
+    
     func nextCabin() {
         cabins[index].physicsBody?.mass = 2
         self.cabins[self.index].closeDoors()
-        if index == 5{
+        if index == Int(amountOfCabins)-1{
             index = 0
+            let time = SKAction.wait(forDuration: 2)
+            run(time) {
+                self.reloadWords()
+            }
         }
         else{
             self.index += 1
         }
-        cabins[index].physicsBody?.mass = 4
+        cabins[index].physicsBody?.mass = 9/screenScale
         
+        //default wait time is 2 seconds
         cabins[index].openDoors(wait: true)
-//        if cabins[index].frame.midY < ferrisWheel.frame.minY + ferrisWheel.size.height/4{
-//
-//        }
     }
     
-//    func reloadWords() {
-//        currentWords = []
-//        for cabin in cabins {
-//            cabin.occupant?.texture = SKSpriteNode
-//        }
-//    }
+    func reloadWords() {
+        print("Reloading words...")
+        currentWords = []
+        for cabin in cabins {
+            let newOccupant: String = dataSource.getWord()
+            currentWords.append(newOccupant)
+            cabin.occupant?.texture = SKTexture(imageNamed: newOccupant)
+            
+        }
+        print("The new words are: \(self.currentWords)")
+    }
     
     override init() {
         super.init()

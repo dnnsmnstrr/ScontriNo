@@ -21,45 +21,59 @@ class MenuScreen: SKScene, ButtonNodeDelegate {
     }
     
     func createSceneContent() {
-        let ferrisWheelNode = ButtonNode(imageNamed: "ferris wheel icon")
+        let backgroundNode = SKSpriteNode(imageNamed: "start screen background")
+        backgroundNode.setScale(Consts.Graphics.scale)
+        backgroundNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight / 2)
+        self.addChild(backgroundNode)
+        
+        let backButton = ButtonNode(imageNamed: "back button", for: .normal)
+        backButton.delegate = self
+        backButton.name = "StartScreen"
+        backButton.setScale(Consts.Graphics.scale)
+        backButton.position = CGPoint(x: 100, y: self.size.height - 100)
+        self.addChild(backButton)
+        
+        let ferrisWheelNode = ButtonNode(imageNamed: "ferris wheel icon", for: .normal)
         ferrisWheelNode.delegate = self
         ferrisWheelNode.name = "FerrisWheelGameScreen"
         ferrisWheelNode.setScale(Consts.Graphics.scale)
         ferrisWheelNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight / 2)
         self.addChild(ferrisWheelNode)
         
-        let rollerCoasterNode = ButtonNode(imageNamed: "roller coaster icon")
+        let rollerCoasterNode = ButtonNode(imageNamed: "roller coaster icon", for: .normal)
         rollerCoasterNode.delegate = self
         rollerCoasterNode.name = "RollerCoasterGameScreen"
         rollerCoasterNode.setScale(Consts.Graphics.scale)
         rollerCoasterNode.position = CGPoint(x: Consts.Graphics.screenWidth / 6, y: Consts.Graphics.screenHeight / 2 - (ferrisWheelNode.size.height - rollerCoasterNode.size.height) / 2)
         self.addChild(rollerCoasterNode)
         
-        let floatingLogsNode = ButtonNode(imageNamed: "floating logs icon")
+        let floatingLogsNode = ButtonNode(imageNamed: "floating logs icon", for: .normal)
         floatingLogsNode.delegate = self
         floatingLogsNode.name = "FloatingLogsGameScreen"
         floatingLogsNode.setScale(Consts.Graphics.scale)
         floatingLogsNode.position = CGPoint(x: 5 * Consts.Graphics.screenWidth / 6, y: Consts.Graphics.screenHeight / 2 - (ferrisWheelNode.size.height - floatingLogsNode.size.height) / 2)
         self.addChild(floatingLogsNode)
         
-        let trialNode = ButtonNode(imageNamed: "green star")
-        trialNode.delegate = self
-        trialNode.name = "TrialScreen"
-        trialNode.position = CGPoint(x: self.size.width / 2, y: 1.5 * self.size.height / 8)
-        self.addChild(trialNode)
+//        let trialNode = ButtonNode(imageNamed: "green star", for: .normal)
+//        trialNode.delegate = self
+//        trialNode.name = "TrialScreen"
+//        trialNode.position = CGPoint(x: self.size.width / 2, y: 1.5 * self.size.height / 8)
+//        self.addChild(trialNode)
     }
     
     func buttonNodeTapped(_ sender: ButtonNode) {
         if let name = sender.name {
             switch name {
+            case "StartScreen":
+                RootViewController.shared.skView.presentScene(StartScreen())
             case "RollerCoasterGameScreen":
                 RootViewController.shared.skView.presentScene(RollerCoasterGameScreen())
             case "FloatingLogsGameScreen":
                 RootViewController.shared.skView.presentScene(FloatingLogsGameScreen())
             case "FerrisWheelGameScreen":
                 RootViewController.shared.skView.presentScene(FerrisWheelGameScreen())
-            case "TrialScreen":
-                RootViewController.shared.skView.presentScene(TrialScreen())
+//            case "TrialScreen":
+//                RootViewController.shared.skView.presentScene(TrialScreen())
             default:
                 break
             }
