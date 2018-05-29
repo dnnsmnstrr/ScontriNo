@@ -24,8 +24,8 @@ class MenuScreen: SKScene, ButtonNodeDelegate {
         let ferrisWheelNode = ButtonNode(imageNamed: "ferris wheel icon")
         ferrisWheelNode.delegate = self
         ferrisWheelNode.name = "FerrisWheelGameScreen"
-        ferrisWheelNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight / 2)
         ferrisWheelNode.setScale(Consts.Graphics.scale)
+        ferrisWheelNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight / 2)
         self.addChild(ferrisWheelNode)
         
         let rollerCoasterNode = ButtonNode(imageNamed: "roller coaster icon")
@@ -49,7 +49,7 @@ class MenuScreen: SKScene, ButtonNodeDelegate {
         self.addChild(trialNode)
     }
     
-    func tapButtonNode(_ sender: ButtonNode) {
+    func buttonNodeTapped(_ sender: ButtonNode) {
         if let name = sender.name {
             switch name {
             case "RollerCoasterGameScreen":
