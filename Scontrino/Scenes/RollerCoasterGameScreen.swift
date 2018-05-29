@@ -76,9 +76,10 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
     
     func createOneShape(index: Int, numberOfShapes: Int){
         
-        let spacing: CGFloat = 10
+        let spacing: CGFloat = Consts.Graphics.screenHeight / 100
         coloredShapesNodes[index].name = Consts.Id.RollerCoasterGameScreen.coloredShapeNode + "\(index)"
-        coloredShapesPositions[coloredShapesNodes[index].name!] = (CGPoint(x: CGFloat(UIScreen.main.bounds.width / CGFloat(numberOfShapes) + spacing + (CGFloat(index) * textureWidth ) ), y: UIScreen.main.bounds.height / 2))
+//        coloredShapesPositions[coloredShapesNodes[index].name!] = (CGPoint(x: CGFloat(UIScreen.main.bounds.width / CGFloat(numberOfShapes) + spacing + (CGFloat(index) * textureWidth ) ), y: UIScreen.main.bounds.height / 2))
+        coloredShapesPositions[coloredShapesNodes[index].name!] = (CGPoint(x: (Consts.Graphics.screenWidth / 5) * CGFloat(index + 2) , y: Consts.Graphics.screenHeight - coloredShapesNodes[index].size.height - spacing))
         coloredShapesNodes[index].position = coloredShapesPositions[coloredShapesNodes[index].name!]!
         self.addChild(coloredShapesNodes[index])
     }

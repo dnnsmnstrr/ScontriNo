@@ -13,6 +13,8 @@ class HoleNode: SKSpriteNode {
         let texture = SKTexture(imageNamed: imageNamed)
         self.init(texture: texture)
         self.isHidden = true
+        self.setScale(Consts.Graphics.scale)
+        let mySize = self.size
         var texSize = texture.size()
         texSize.width = (texSize.width) * 0.55
         texSize.height = (texSize.height) * 0.55
@@ -27,7 +29,7 @@ class HoleNode: SKSpriteNode {
         let presentationAnimation = SKAction.sequence([
             SKAction.scale(to: CGSize.zero, duration: 0),
             isVisible,
-            SKAction.scale(to: Consts.Graphics.scale, duration: 0.5)
+            SKAction.scale(to: mySize, duration: 0.5)
             ])
         self.run(presentationAnimation)
     }
