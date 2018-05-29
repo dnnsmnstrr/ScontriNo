@@ -46,7 +46,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
 //    let background = SKSpriteNode()
     
     var ferrisWheel: SKSpriteNode!
-    var amountOfCabins: Float = 12 //default is six, physics are tuned to that
+    var amountOfCabins: Float = 6 //default is six, physics are tuned to that
     private var cabins: [CabinNode] = []
     
     
@@ -386,13 +386,14 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         else{
             self.index += 1
         }
-        cabins[index].physicsBody?.mass = 4
+        cabins[index].physicsBody?.mass = 9/screenScale
         
         //default wait time is 2 seconds
         cabins[index].openDoors(wait: true)
     }
     
     func reloadWords() {
+        print("Reloading words...")
         currentWords = []
         for cabin in cabins {
             let newOccupant: String = dataSource.getWord()
@@ -400,6 +401,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
             cabin.occupant?.texture = SKTexture(imageNamed: newOccupant)
             
         }
+        print("The new words are: \(self.currentWords)")
     }
     
     override init() {
