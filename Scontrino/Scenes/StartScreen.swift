@@ -25,11 +25,12 @@ class StartScreen: SKScene, ButtonNodeDelegate {
         backgroundNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight / 2)
         self.addChild(backgroundNode)
         
-        let settingsButtonNode = ButtonNode(imageNamed: "settings button normal")
+        let settingsButtonNode = ButtonNode(imageNamed: "settings button normal", for: .normal)
         settingsButtonNode.delegate = self
         settingsButtonNode.name = "SettingsScreen"
         settingsButtonNode.setScale(Consts.Graphics.scale)
         settingsButtonNode.position = CGPoint(x: Consts.Graphics.screenWidth - settingsButtonNode.size.width / 2, y: Consts.Graphics.screenHeight - settingsButtonNode.size.height / 2)
+        settingsButtonNode.setTexture(imageNamed: "settings button highlighted", for: .highlighted)
         scene?.addChild(settingsButtonNode)
         
         let leftDoorGateNode = SKSpriteNode(imageNamed: "gate left door")
@@ -47,11 +48,12 @@ class StartScreen: SKScene, ButtonNodeDelegate {
         rightDoorGateNode.position = CGPoint(x: Consts.Graphics.screenWidth, y: 0.0)
         scene?.addChild(rightDoorGateNode)
 
-        let playButtonNode = ButtonNode(imageNamed: "play button normal")
+        let playButtonNode = ButtonNode(imageNamed: "play button normal", for: .normal)
         playButtonNode.delegate = self
         playButtonNode.name = "MenuScreen"
         playButtonNode.setScale(Consts.Graphics.scale)
         playButtonNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight / 2)
+        playButtonNode.setTexture(imageNamed: "play button highlighted", for: .highlighted)
         scene?.addChild(playButtonNode)
     }
     
@@ -69,7 +71,7 @@ class StartScreen: SKScene, ButtonNodeDelegate {
                 let transition = SKAction.run {
                     RootViewController.shared.skView.presentScene(MenuScreen())
                 }
-                let playSequence = SKAction.sequence([fadeOut, transition])
+                let playSequence = SKAction.sequence([fadeOut, SKAction.wait(forDuration: 1.0), transition])
                 let leftDoorGroup = SKAction.group([moveGateLeft, fadeOut])
                 let rightDoorGroup = SKAction.group([moveGateRight, fadeOut])
                 playButton.run(playSequence)

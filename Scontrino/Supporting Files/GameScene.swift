@@ -20,7 +20,7 @@ class GameScene: SKScene, ButtonNodeDelegate {
     }
     
     func createSceneContents() {
-        let backButton = ButtonNode(imageNamed: "back button")
+        let backButton = ButtonNode(imageNamed: "back button", for: .normal)
         backButton.delegate = self
         backButton.position = CGPoint(x: 80, y: self.size.height - 80)
         backButton.name = "backButton"
