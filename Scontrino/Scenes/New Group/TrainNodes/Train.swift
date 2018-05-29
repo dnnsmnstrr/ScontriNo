@@ -24,7 +24,7 @@ struct Train {
         headVagon.setup()
         var vagonXPosition = headVagon.position.x - (headVagon.size.width / 2)
         debugPrint(numberOfShapes)
-        for index in 0...numberOfShapes {
+        for index in 0...numberOfShapes - 1 {
             centralVagons.append(CentralVagonNode(imageNamed: "central"))
             centralVagons[index].setup(posX: vagonXPosition)
             vagonXPosition -= centralVagons[index].size.width
@@ -40,22 +40,31 @@ struct Train {
     }
     
     func moveTrain(pos: CGFloat, onComplete: @escaping (Bool) -> Void) -> TimeInterval {
-        var count = 0
+        var position = pos - (centralVagons[0].size.width * CGFloat(centralVagons.count + 1))
         let duration = moveVagon(vagon: headVagon, pos: pos) { (value) in
             if(value) {
-                count += 1
+                position -= self.headVagon.size.width
             }
         }
+        
         
         for index in 0...centralVagons.count - 1 {
 //            pos -= centralVagons[index].size.width
             moveVagon(vagon: centralVagons[index], pos: pos - (centralVagons[index].size.width * CGFloat(index + 1))) { (value) in
+//            moveVagon(vagon: centralVagons[index], pos: position) { (value) in
                 if(value) {
-                    count += 1
-                    if count == self.centralVagons.count {
-                        onComplete(true)
-                    }
+                    position = pos - (self.centralVagons[index].size.width * CGFloat(index + 1))
+//                    count += 1
+//                    if count == self.centralVagons.count {
+//                        onComplete(true)
+//                    }
                 }
+            }
+            
+        }
+        moveVagon(vagon: tailVagon, pos: position) { (value) in
+            if(value) {
+                onComplete(true)
             }
         }
         return duration

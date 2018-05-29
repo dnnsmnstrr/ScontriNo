@@ -49,7 +49,7 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
         }
     }
     func createTrain() {
-        train.setupTrain(numberOfShapes: setDifficulty())
+        train.setupTrain(numberOfShapes: Consts.shapes.count - 1)
         self.addChild(train.headVagon)
         for index in 0...train.centralVagons.count - 1 {
             self.addChild(train.centralVagons[index])
@@ -115,31 +115,61 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
                 let index = i
                 coloredShapesNodes[index].moveTo(position: holeNode.position) { (value) in
                     if value {
+                        debugPrint("finito il move to")
+                        debugPrint("coloreDHOleNodes.count \(self.coloredHoleNodes.count)")
                         self.coloredHoleNodes.append(self.coloredShapesNodes[index])
+                        debugPrint("aggiunto coloreDHOleNodes.count \(self.coloredHoleNodes.count)")
                         self.coloredHoleNodes[self.vagonIndex].position = self.holeNode.position
+                        debugPrint("shapeRamaining \(self.numberShapesRemaining)")
+                        debugPrint("Deleting a hole node")
+                        self.holeNode.removeFromParent()
                         if self.numberShapesRemaining > 0 {
+                            
+                            debugPrint("I'm changing Shape")
                             self.coloredShapesNodes[index] = self.dataSource.nextMovingShapeNode()
                             self.createOneShape(index: index, numberOfShapes: self.setDifficulty())
                         } else {
+                            debugPrint("I'm only removing a shape")
                             self.coloredShapesNodes.remove(at: index)
                         }
+                        
                         self.trainXPosition += self.train.headVagon.size.width
+                        self.moveHolesWithTrain(pos: self.trainXPosition)
                         self.moveTrain(pos: self.trainXPosition) { (value) in
+                            debugPrint("I'm inside Moving Train")
                             if(value) {
-                                self.holeNode.removeFromParent()
+                                debugPrint("shapeRamaining \(self.numberShapesRemaining)")
+                                self.vagonIndex += 1
                                 if self.coloredShapesNodes.count > 0{
+                                    debugPrint("creating a hole node")
                                     self.createHole()
                                 } else {
                                     self.endGame = true
                                 }
-                                self.vagonIndex += 1
+                                
                             }
                         }
                         
                     }
                 }
-                
+                numberShapesRemaining -= 1
+                print("number of remaining shapes are \(numberShapesRemaining)")
             }
+            i += 1
+        }
+    }
+    
+    func moveHolesWithTrain(pos: CGFloat) {
+        
+        for index in 0...coloredHoleNodes.count - 1 {
+            debugPrint("I'm moving the hole: \(index)")
+            let path = UIBezierPath()
+            path.move(to: coloredHoleNodes[index].position)
+            path.addLine(to: CGPoint(x: pos - (train.centralVagons[index].size.width * CGFloat(index + 1)), y: coloredHoleNodes[index].position.y))
+            
+            
+            
+                coloredHoleNodes[index].run(SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: train.trainSpeed))
         }
     }
     
@@ -234,6 +264,14 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
     func endGameFunction() {
         print("THE END FRA'")
         endGame = false
+        trainXPosition += (train.tailVagon.size.width * 2)
+        moveHolesWithTrain(pos: trainXPosition)
+        moveTrain(pos: trainXPosition) { (value) in
+            if(value) {
+//                I should come back here
+            }
+        }
+        
     }
     
     public func didBegin(_ contact: SKPhysicsContact) {

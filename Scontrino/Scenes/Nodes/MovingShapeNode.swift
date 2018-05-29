@@ -53,6 +53,7 @@ class MovingShapeNode: MovingNode {
             completedAction
 //            SKAction.removeFromParent(),
             ])
+        self.run(fillInHoleAnimation)
         return fillInHoleAnimation
     }
     
