@@ -24,6 +24,7 @@
 		2A2B4A5620976FCF009B81FB /* GameDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A5520976FCF009B81FB /* GameDataSource.swift */; };
 		2A5493F020BC5DE10077C600 /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5493EF20BC5DE10077C600 /* StartScreen.swift */; };
 		2A56760920BD75C1000F5388 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A56760820BD75C1000F5388 /* SettingsScreen.swift */; };
+		2A56760B20BD9D6A000F5388 /* SwitchNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A56760A20BD9D6A000F5388 /* SwitchNode.swift */; };
 		2A5B5E4B209A21F8001D4985 /* FloatingLogsGameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B5E4A209A21F8001D4985 /* FloatingLogsGameScreen.swift */; };
 		8B03E08F20B6DD5700004D7E /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E08D20B6DD5700004D7E /* RootViewController.swift */; };
 		8B03E09020B6DD5700004D7E /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E08E20B6DD5700004D7E /* CameraViewController.swift */; };
@@ -57,6 +58,7 @@
 		2A2B4A5520976FCF009B81FB /* GameDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDataSource.swift; sourceTree = "<group>"; };
 		2A5493EF20BC5DE10077C600 /* StartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
 		2A56760820BD75C1000F5388 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
+		2A56760A20BD9D6A000F5388 /* SwitchNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchNode.swift; sourceTree = "<group>"; };
 		2A5B5E4A209A21F8001D4985 /* FloatingLogsGameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingLogsGameScreen.swift; sourceTree = "<group>"; };
 		8B03E08D20B6DD5700004D7E /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootViewController.swift; path = Scontrino/View/RootViewController.swift; sourceTree = SOURCE_ROOT; };
 		8B03E08E20B6DD5700004D7E /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = Scontrino/View/CameraViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -171,6 +173,7 @@
 		8B03E09420B6DDCA00004D7E /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
+				2A56760A20BD9D6A000F5388 /* SwitchNode.swift */,
 				158720AA20BC6520001A6B59 /* CabinNode.swift */,
 				8B03E09720B6DDDB00004D7E /* ButtonNode.swift */,
 				B9A5A63C20BC65060021501C /* CabinNode.swift */,
@@ -266,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1570D58220B6E35300AAF28A /* TrainNode.swift in Sources */,
+				2A56760B20BD9D6A000F5388 /* SwitchNode.swift in Sources */,
 				2A2B4A402091FF86009B81FB /* GameScene.swift in Sources */,
 				2A5493F020BC5DE10077C600 /* StartScreen.swift in Sources */,
 				2A2B4A3C2091FF42009B81FB /* FerrisWheelGameScreen.swift in Sources */,
