@@ -26,6 +26,13 @@ class MenuScreen: SKScene, ButtonNodeDelegate {
         backgroundNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight / 2)
         self.addChild(backgroundNode)
         
+        let backButton = ButtonNode(imageNamed: "back button", for: .normal)
+        backButton.delegate = self
+        backButton.name = "StartScreen"
+        backButton.setScale(Consts.Graphics.scale)
+        backButton.position = CGPoint(x: 100, y: self.size.height - 100)
+        self.addChild(backButton)
+        
         let ferrisWheelNode = ButtonNode(imageNamed: "ferris wheel icon", for: .normal)
         ferrisWheelNode.delegate = self
         ferrisWheelNode.name = "FerrisWheelGameScreen"
@@ -57,6 +64,8 @@ class MenuScreen: SKScene, ButtonNodeDelegate {
     func buttonNodeTapped(_ sender: ButtonNode) {
         if let name = sender.name {
             switch name {
+            case "StartScreen":
+                RootViewController.shared.skView.presentScene(StartScreen())
             case "RollerCoasterGameScreen":
                 RootViewController.shared.skView.presentScene(RollerCoasterGameScreen())
             case "FloatingLogsGameScreen":
