@@ -32,8 +32,8 @@
 		8B03E09E20B6DDDB00004D7E /* MovingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E09820B6DDDB00004D7E /* MovingNode.swift */; };
 		8B03E09F20B6DDDB00004D7E /* MovingContextNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E09920B6DDDB00004D7E /* MovingContextNode.swift */; };
 		8B03E0A020B6DDDB00004D7E /* MovingShapeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E09A20B6DDDB00004D7E /* MovingShapeNode.swift */; };
-		8B03E0A720B6E0DE00004D7E /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E0A620B6E0DE00004D7E /* Consts.swift */; };
 		B91713F520B6EA2F0071D78F /* TrialScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91713F420B6EA2F0071D78F /* TrialScreen.swift */; };
+		B9A5A64820BD8CAB0021501C /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A5A64720BD8CAB0021501C /* Consts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,16 +56,16 @@
 		2A2B4A5520976FCF009B81FB /* GameDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDataSource.swift; sourceTree = "<group>"; };
 		2A5493EF20BC5DE10077C600 /* StartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
 		2A5B5E4A209A21F8001D4985 /* FloatingLogsGameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingLogsGameScreen.swift; sourceTree = "<group>"; };
-		8B03E08D20B6DD5700004D7E /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootViewController.swift; path = Scontrino/View/RootViewController.swift; sourceTree = SOURCE_ROOT; };
-		8B03E08E20B6DD5700004D7E /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = Scontrino/View/CameraViewController.swift; sourceTree = SOURCE_ROOT; };
+		8B03E08D20B6DD5700004D7E /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootViewController.swift; path = "Scontrino/Supporting Files/RootViewController.swift"; sourceTree = SOURCE_ROOT; };
+		8B03E08E20B6DD5700004D7E /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = "Scontrino/Supporting Files/CameraViewController.swift"; sourceTree = SOURCE_ROOT; };
 		8B03E09520B6DDDB00004D7E /* HoleNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HoleNode.swift; path = Scontrino/Scenes/Nodes/HoleNode.swift; sourceTree = SOURCE_ROOT; };
 		8B03E09620B6DDDB00004D7E /* LogNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogNode.swift; path = Scontrino/Scenes/Nodes/LogNode.swift; sourceTree = SOURCE_ROOT; };
 		8B03E09720B6DDDB00004D7E /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonNode.swift; path = Scontrino/Scenes/Nodes/ButtonNode.swift; sourceTree = SOURCE_ROOT; };
 		8B03E09820B6DDDB00004D7E /* MovingNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovingNode.swift; path = Scontrino/Scenes/Nodes/MovingNode.swift; sourceTree = SOURCE_ROOT; };
 		8B03E09920B6DDDB00004D7E /* MovingContextNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovingContextNode.swift; path = Scontrino/Scenes/Nodes/MovingContextNode.swift; sourceTree = SOURCE_ROOT; };
 		8B03E09A20B6DDDB00004D7E /* MovingShapeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovingShapeNode.swift; path = Scontrino/Scenes/Nodes/MovingShapeNode.swift; sourceTree = SOURCE_ROOT; };
-		8B03E0A620B6E0DE00004D7E /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		B91713F420B6EA2F0071D78F /* TrialScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrialScreen.swift; sourceTree = "<group>"; };
+		B9A5A64720BD8CAB0021501C /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Consts.swift; path = "New Group/Consts.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,8 +110,8 @@
 		2A2B4A282091FBD4009B81FB /* Scontrino */ = {
 			isa = PBXGroup;
 			children = (
-				8B03E0A320B6E0B700004D7E /* Model */,
-				8B03E08C20B6DD4700004D7E /* View */,
+				B9A5A64620BD8C970021501C /* Model */,
+				B9A5A64920BD8CC10021501C /* View */,
 				2A2B4A4920922272009B81FB /* Supporting Files */,
 				2A2B4A4820922256009B81FB /* Scenes */,
 				2A2B4A4720922241009B81FB /* Resources */,
@@ -154,16 +154,6 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8B03E08C20B6DD4700004D7E /* View */ = {
-			isa = PBXGroup;
-			children = (
-				8B03E08D20B6DD5700004D7E /* RootViewController.swift */,
-				8B03E08E20B6DD5700004D7E /* CameraViewController.swift */,
-			);
-			name = View;
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		8B03E09420B6DDCA00004D7E /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,13 +170,22 @@
 			path = "New Group";
 			sourceTree = "<group>";
 		};
-		8B03E0A320B6E0B700004D7E /* Model */ = {
+		B9A5A64620BD8C970021501C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8B03E0A620B6E0DE00004D7E /* Consts.swift */,
+				B9A5A64720BD8CAB0021501C /* Consts.swift */,
 			);
 			name = Model;
-			path = "New Group";
+			sourceTree = "<group>";
+		};
+		B9A5A64920BD8CC10021501C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8B03E08D20B6DD5700004D7E /* RootViewController.swift */,
+				8B03E08E20B6DD5700004D7E /* CameraViewController.swift */,
+			);
+			name = View;
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,12 +270,12 @@
 				8B03E09F20B6DDDB00004D7E /* MovingContextNode.swift in Sources */,
 				158720AB20BC6520001A6B59 /* CabinNode.swift in Sources */,
 				2A2B4A5620976FCF009B81FB /* GameDataSource.swift in Sources */,
-				8B03E0A720B6E0DE00004D7E /* Consts.swift in Sources */,
 				1570D58420B6E35300AAF28A /* TailVagonNode.swift in Sources */,
 				8B03E0A020B6DDDB00004D7E /* MovingShapeNode.swift in Sources */,
 				8B03E09D20B6DDDB00004D7E /* ButtonNode.swift in Sources */,
 				8B03E09C20B6DDDB00004D7E /* LogNode.swift in Sources */,
 				2A2B4A42209213C2009B81FB /* RollerCoasterGameScreen.swift in Sources */,
+				B9A5A64820BD8CAB0021501C /* Consts.swift in Sources */,
 				2A2B4A3E2091FF5A009B81FB /* SpeechRecognitionScreen.swift in Sources */,
 				8B03E09B20B6DDDB00004D7E /* HoleNode.swift in Sources */,
 				8B03E09E20B6DDDB00004D7E /* MovingNode.swift in Sources */,
@@ -420,7 +419,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8FSL5MASH7;
+				DEVELOPMENT_TEAM = CSKA8928CG;
 				INFOPLIST_FILE = Scontrino/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ADA.Scontrino;
@@ -435,7 +434,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8FSL5MASH7;
+				DEVELOPMENT_TEAM = CSKA8928CG;
 				INFOPLIST_FILE = Scontrino/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ADA.Scontrino;

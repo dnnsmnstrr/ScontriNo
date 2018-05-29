@@ -238,7 +238,6 @@ struct Consts {
         "duck",
         "dog",
         "apple",
-        "orange",
         "lime",
         "shirt",
         "dress",

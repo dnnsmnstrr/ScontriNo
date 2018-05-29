@@ -15,10 +15,13 @@ class CabinNode: SKSpriteNode {
     var rightDoor: SKSpriteNode?
     var occupant: SKSpriteNode?
     
+    let screenScale: CGFloat = UIScreen.main.scale
+
     var offsetClosed: CGFloat? = nil
     var offsetOpened: CGFloat? = nil
     var sizeWidth: CGFloat = 25+2
     var sizeHeight: CGFloat = 11+2
+    
     
     
     var doorsOpen: Bool = false
@@ -29,8 +32,6 @@ class CabinNode: SKSpriteNode {
         self.init(texture: texture)
         
         var texSize = texture.size()
-//        texSize.width = (texSize.width) * 0.8
-//        texSize.height = (texSize.height) * 0.8
         self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: imageNamed), size: texSize)
         self.physicsBody?.isDynamic = true
         self.physicsBody?.affectedByGravity = true
@@ -39,22 +40,22 @@ class CabinNode: SKSpriteNode {
         occupant = SKSpriteNode.init(imageNamed: "moon")
         occupant?.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         occupant?.zPosition = 4
-
+        
         
         //MARK: doors
-        //currently hardcoded
-        offsetClosed = self.frame.width/53-2.7
-        offsetOpened = self.frame.width/40-2.5
-
+        //stupidly hardcoded
+        offsetClosed = self.frame.width/(22*screenScale*(screenScale/2))
+        offsetOpened = self.frame.width/(10*screenScale*(screenScale/2))
+        
         leftDoor = SKSpriteNode.init(imageNamed: "left door")
         rightDoor = SKSpriteNode.init(imageNamed: "right door")
-
+        
         //rough default positioning
-        leftDoor?.position = CGPoint(x: self.frame.midX - offsetClosed!, y: self.frame.midY - self.frame.height/120)
+        leftDoor?.position = CGPoint(x: self.frame.midX - offsetClosed!, y: self.frame.midY - self.frame.height/150)
         leftDoor?.size = CGSize(width: self.size.width/sizeWidth, height: self.size.height/sizeHeight)
         leftDoor?.zPosition = 5
         
-        rightDoor?.position = CGPoint(x: self.frame.midX + offsetClosed!, y: self.frame.midY - self.frame.height/120)
+        rightDoor?.position = CGPoint(x: self.frame.midX + offsetClosed!, y: self.frame.midY - self.frame.height/150)
         rightDoor?.size = CGSize(width: self.size.width/sizeWidth, height: self.size.height/sizeHeight)
         rightDoor?.zPosition = 6
         
