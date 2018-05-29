@@ -22,9 +22,9 @@ class RootViewController: UIViewController {
         view = SKView()
         if let mainView = self.view as! SKView? {
             debugPrint("mainView: \(mainView.frame)")
-            mainView.showsFPS = true
-            mainView.showsNodeCount = true
-            mainView.showsPhysics = true
+//            mainView.showsFPS = true
+//            mainView.showsNodeCount = true
+//            mainView.showsPhysics = true
 //                        mainView.ignoresSiblingOrder = true
         }
     }
