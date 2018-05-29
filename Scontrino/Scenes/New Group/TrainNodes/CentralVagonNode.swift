@@ -25,7 +25,7 @@ class CentralVagonNode : SKSpriteNode {
 //        self.run(presentationAnimation)
     }
     func setup(posX: CGFloat) {
-        self.position.y = Consts.Graphics.screenHeight - Consts.Graphics.screenHeight / 2
+        self.position.y = Consts.Graphics.screenHeight - Consts.Graphics.screenHeight / 1.7
         self.position.x = posX - self.size.width / 2
         self.zPosition = Consts.CarGameScreen.zPositions.vagons
     }

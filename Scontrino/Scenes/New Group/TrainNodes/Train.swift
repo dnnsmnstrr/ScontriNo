@@ -22,15 +22,14 @@ struct Train {
     
     mutating func setupTrain(numberOfShapes: Int) {
         headVagon.setup()
-        var vagonXPosition = headVagon.position.x - (headVagon.size.width / 2)
+        var vagonXPosition = headVagon.position.x - (headVagon.size.width / 2) + (headVagon.size.width / 100 * 5)
         debugPrint(numberOfShapes)
         for index in 0...numberOfShapes - 1 {
             centralVagons.append(CentralVagonNode(imageNamed: "central"))
             centralVagons[index].setup(posX: vagonXPosition)
-            vagonXPosition -= centralVagons[index].size.width
+            vagonXPosition -= centralVagons[index].size.width + (centralVagons[index].size.width / 100 * 5)
         }
         tailVagon.setup(posX: vagonXPosition)
-        
     }
     
     mutating func instanziateCentralVagons(numberOfShapes: Int) {
@@ -50,7 +49,7 @@ struct Train {
         
         for index in 0...centralVagons.count - 1 {
 //            pos -= centralVagons[index].size.width
-            moveVagon(vagon: centralVagons[index], pos: pos - (centralVagons[index].size.width * CGFloat(index + 1))) { (value) in
+            moveVagon(vagon: centralVagons[index], pos: pos - (centralVagons[index].size.width * CGFloat(index + 1)) + (headVagon.size.width / 100 * 5)) { (value) in
 //            moveVagon(vagon: centralVagons[index], pos: position) { (value) in
                 if(value) {
                     position = pos - (self.centralVagons[index].size.width * CGFloat(index + 1))
@@ -60,7 +59,6 @@ struct Train {
 //                    }
                 }
             }
-            
         }
         moveVagon(vagon: tailVagon, pos: position) { (value) in
             if(value) {
@@ -82,7 +80,6 @@ struct Train {
         let fillInHoleAnimation = SKAction.sequence([
             SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: trainSpeed),
             anim
-//            SKAction.removeFromParent(),
             ])
         debugPrint("fill in Hole anim: \(fillInHoleAnimation.duration)")
         vagon.run(fillInHoleAnimation)

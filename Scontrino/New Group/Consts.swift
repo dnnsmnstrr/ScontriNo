@@ -171,15 +171,14 @@ struct Consts {
         "star",
         "circle",
         "square",
-        "polygon",
-        "rounded"
+        "polygon"
     ]
     static let colors = [
         "blue",
         "green",
         "orange",
         "red",
-        "teal blue",
+        "purple",
         "yellow"
     ]
     

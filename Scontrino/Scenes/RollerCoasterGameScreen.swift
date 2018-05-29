@@ -38,15 +38,24 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
     override func createSceneContents() {
         super.createSceneContents()
         self.physicsWorld.contactDelegate = self
-        
+        createBackground()
         createTrain()
-        trainXPosition = Consts.Graphics.screenWidth + (self.train.headVagon.size.width / 2)
-        self.moveTrain(pos: trainXPosition) { (value) in
+        trainXPosition = Consts.Graphics.screenWidth + (self.train.headVagon.size.width / 2) 
+        self.moveTrain() { (value) in
             if(value) {
                 self.createShapes()
                 self.createHole()
             }
         }
+    }
+    
+    func createBackground() {
+        let background = SKSpriteNode(imageNamed: "roller coaster background")
+        background.name = "background"
+        background.position = CGPoint(x: size.width/2, y: size.height/2)
+        background.size = CGSize(width: self.frame.width, height: self.frame.height)
+        background.zPosition = Consts.CarGameScreen.zPositions.background
+        addChild(background)
     }
     func createTrain() {
         train.setupTrain(numberOfShapes: Consts.shapes.count - 1)
@@ -57,8 +66,8 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
         self.addChild(train.tailVagon)
     }
     
-    func moveTrain(pos: CGFloat, onComplete: @escaping (Bool) -> Void ) {
-        train.moveTrain(pos: pos) { (value) in
+    func moveTrain(onComplete: @escaping (Bool) -> Void ) {
+        train.moveTrain(pos: trainXPosition) { (value) in
             if(value) {
                 onComplete(true)
             }
@@ -79,7 +88,7 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
         let spacing: CGFloat = Consts.Graphics.screenHeight / 100
         coloredShapesNodes[index].name = Consts.Id.RollerCoasterGameScreen.coloredShapeNode + "\(index)"
 //        coloredShapesPositions[coloredShapesNodes[index].name!] = (CGPoint(x: CGFloat(UIScreen.main.bounds.width / CGFloat(numberOfShapes) + spacing + (CGFloat(index) * textureWidth ) ), y: UIScreen.main.bounds.height / 2))
-        coloredShapesPositions[coloredShapesNodes[index].name!] = (CGPoint(x: (Consts.Graphics.screenWidth / 5) * CGFloat(index + 2) , y: Consts.Graphics.screenHeight - coloredShapesNodes[index].size.height - spacing))
+        coloredShapesPositions[coloredShapesNodes[index].name!] = (CGPoint(x: (Consts.Graphics.screenWidth / 11) * CGFloat((index + 1) * 3) , y: Consts.Graphics.screenHeight - (coloredShapesNodes[index].size.height / 2) - spacing))
         coloredShapesNodes[index].position = coloredShapesPositions[coloredShapesNodes[index].name!]!
         self.addChild(coloredShapesNodes[index])
     }
@@ -102,14 +111,17 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
         return numberOfShapes
     }
     
-    func createHole(){
+    func createHole() {
         holeNode = dataSource.nextStaticNode(from: coloredShapesNodes)
 //        holeNode.setup(pos: CGPoint(x: CGFloat(UIScreen.main.bounds.width / 2), y: UIScreen.main.bounds.height / 3))
-        holeNode.setup(pos: train.centralVagons[vagonIndex].position)
+        var position = CGPoint.zero
+        position.x = (train.centralVagons[vagonIndex].position.x * 2) / 2.05
+        position.y = (train.centralVagons[vagonIndex].position.y * 2) / 1.8
+        holeNode.setup(pos: position)
         self.addChild(holeNode)
     }
     
-    func shapeIsGoingToRightHole(nodeName: String){
+    func shapeIsGoingToRightHole(nodeName: String) {
         var i = 0
         while i < coloredShapesNodes.count {
             if coloredShapesNodes[i].name == nodeName {
@@ -134,9 +146,9 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
                             self.coloredShapesNodes.remove(at: index)
                         }
                         
-                        self.trainXPosition += self.train.headVagon.size.width
+                        self.trainXPosition += self.train.headVagon.size.width + (self.train.headVagon.size.width / 100 * 5)
                         self.moveHolesWithTrain(pos: self.trainXPosition)
-                        self.moveTrain(pos: self.trainXPosition) { (value) in
+                        self.moveTrain() { (value) in
                             debugPrint("I'm inside Moving Train")
                             if(value) {
                                 debugPrint("shapeRamaining \(self.numberShapesRemaining)")
@@ -223,11 +235,11 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
                     SKAction.removeFromParent(),
                     createNewHole
                     ])
-                trainXPosition += train.headVagon.size.width
+                trainXPosition += train.headVagon.size.width - (self.train.headVagon.size.width / 100 * 15)
                 
                 let moveToAnimation = SKAction.run {
 //                    self.coloredShapesNodes[index].moveTo(position: self.holeNode.position)
-                    self.moveTrain(pos: self.trainXPosition) { (value) in
+                    self.moveTrain() { (value) in
                         if(value) {
                             self.holeNode.run(changeHoleAnimation)
                             self.vagonIndex += 1
@@ -267,7 +279,7 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
         endGame = false
         trainXPosition += (train.tailVagon.size.width * 2)
         moveHolesWithTrain(pos: trainXPosition)
-        moveTrain(pos: trainXPosition) { (value) in
+        moveTrain() { (value) in
             if(value) {
 //                I should come back here
             }
