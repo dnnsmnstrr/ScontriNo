@@ -11,7 +11,7 @@ import SpriteKit
 class StartScreen: SKScene, ButtonNodeDelegate {
     
     override init() {
-        super.init(size: CGSize(width: Consts.Graphics.screenWidth, height: Consts.Graphics.screenHeight))
+        super.init(size: Consts.Graphics.screenResolution)
         createSceneContent()
     }
     
@@ -34,16 +34,16 @@ class StartScreen: SKScene, ButtonNodeDelegate {
         
         let leftDoorGateNode = SKSpriteNode(imageNamed: "gate left door")
         leftDoorGateNode.name = "gate left door"
-        leftDoorGateNode.setScale(Consts.Graphics.scale)
         leftDoorGateNode.anchorPoint = CGPoint(x: 0.0, y: 0.0)
+        leftDoorGateNode.setScale(Consts.Graphics.scale)
         print(Consts.Graphics.screenBounds)
         leftDoorGateNode.position = CGPoint(x: 0.0, y: 0.0)
         scene?.addChild(leftDoorGateNode)
         
         let rightDoorGateNode = SKSpriteNode(imageNamed: "gate right door")
         rightDoorGateNode.name = "gate right door"
-        rightDoorGateNode.setScale(Consts.Graphics.scale)
         rightDoorGateNode.anchorPoint = CGPoint(x: 1.0, y: 0.0)
+        rightDoorGateNode.setScale(Consts.Graphics.scale)
         rightDoorGateNode.position = CGPoint(x: Consts.Graphics.screenWidth, y: 0.0)
         scene?.addChild(rightDoorGateNode)
 
@@ -76,8 +76,8 @@ class StartScreen: SKScene, ButtonNodeDelegate {
                 settingsButton.run(fadeOut)
                 leftDoor.run(leftDoorGroup)
                 rightDoor.run(rightDoorGroup)
-//            case "SettingsScreen":
-//                RootViewController.shared.skView.presentScene(SettingsScreen())
+            case "SettingsScreen":
+                RootViewController.shared.skView.presentScene(SettingsScreen())
             default:
                 break
             }
