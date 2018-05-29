@@ -30,7 +30,7 @@ class RootViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        skView.presentScene(MenuScreen())
+        skView.presentScene(StartScreen())
     }
 
     override func didReceiveMemoryWarning() {

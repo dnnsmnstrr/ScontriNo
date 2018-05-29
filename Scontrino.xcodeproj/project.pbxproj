@@ -11,7 +11,6 @@
 		1570D58220B6E35300AAF28A /* TrainNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570D57E20B6E35300AAF28A /* TrainNode.swift */; };
 		1570D58320B6E35300AAF28A /* CentralVagonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570D57F20B6E35300AAF28A /* CentralVagonNode.swift */; };
 		1570D58420B6E35300AAF28A /* TailVagonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570D58020B6E35300AAF28A /* TailVagonNode.swift */; };
-		1570D58620B6E36200AAF28A /* TrialScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570D58520B6E36200AAF28A /* TrialScreen.swift */; };
 		1570D58820B6FB5C00AAF28A /* Train.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570D58720B6FB5C00AAF28A /* Train.swift */; };
 		2A2B4A2A2091FBD4009B81FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A292091FBD4009B81FB /* AppDelegate.swift */; };
 		2A2B4A342091FBD7009B81FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A2B4A322091FBD7009B81FB /* LaunchScreen.storyboard */; };
@@ -22,6 +21,7 @@
 		2A2B4A46209217F6009B81FB /* MenuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A45209217F6009B81FB /* MenuScreen.swift */; };
 		2A2B4A4B2092286F009B81FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A2B4A4A2092286F009B81FB /* Assets.xcassets */; };
 		2A2B4A5620976FCF009B81FB /* GameDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A5520976FCF009B81FB /* GameDataSource.swift */; };
+		2A5493F020BC5DE10077C600 /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5493EF20BC5DE10077C600 /* StartScreen.swift */; };
 		2A5B5E4B209A21F8001D4985 /* FloatingLogsGameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B5E4A209A21F8001D4985 /* FloatingLogsGameScreen.swift */; };
 		8B03E08F20B6DD5700004D7E /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E08D20B6DD5700004D7E /* RootViewController.swift */; };
 		8B03E09020B6DD5700004D7E /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E08E20B6DD5700004D7E /* CameraViewController.swift */; };
@@ -33,7 +33,6 @@
 		8B03E0A020B6DDDB00004D7E /* MovingShapeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E09A20B6DDDB00004D7E /* MovingShapeNode.swift */; };
 		8B03E0A720B6E0DE00004D7E /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E0A620B6E0DE00004D7E /* Consts.swift */; };
 		B91713F520B6EA2F0071D78F /* TrialScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91713F420B6EA2F0071D78F /* TrialScreen.swift */; };
-		B9A5A63920B803290021501C /* CabinNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A5A63820B803290021501C /* CabinNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +40,6 @@
 		1570D57E20B6E35300AAF28A /* TrainNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainNode.swift; sourceTree = "<group>"; };
 		1570D57F20B6E35300AAF28A /* CentralVagonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralVagonNode.swift; sourceTree = "<group>"; };
 		1570D58020B6E35300AAF28A /* TailVagonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TailVagonNode.swift; sourceTree = "<group>"; };
-		1570D58520B6E36200AAF28A /* TrialScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrialScreen.swift; path = ../../../../../Desktop/filexcode/TrialScreen.swift; sourceTree = "<group>"; };
 		1570D58720B6FB5C00AAF28A /* Train.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Train.swift; sourceTree = "<group>"; };
 		2A2B4A262091FBD4009B81FB /* Scontrino.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scontrino.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A2B4A292091FBD4009B81FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +52,7 @@
 		2A2B4A45209217F6009B81FB /* MenuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScreen.swift; sourceTree = "<group>"; };
 		2A2B4A4A2092286F009B81FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A2B4A5520976FCF009B81FB /* GameDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDataSource.swift; sourceTree = "<group>"; };
+		2A5493EF20BC5DE10077C600 /* StartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
 		2A5B5E4A209A21F8001D4985 /* FloatingLogsGameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingLogsGameScreen.swift; sourceTree = "<group>"; };
 		8B03E08D20B6DD5700004D7E /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootViewController.swift; path = Scontrino/View/RootViewController.swift; sourceTree = SOURCE_ROOT; };
 		8B03E08E20B6DD5700004D7E /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = Scontrino/View/CameraViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -132,6 +131,7 @@
 		2A2B4A4820922256009B81FB /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				2A5493EF20BC5DE10077C600 /* StartScreen.swift */,
 				2A2B4A45209217F6009B81FB /* MenuScreen.swift */,
 				2A2B4A41209213C2009B81FB /* RollerCoasterGameScreen.swift */,
 				2A5B5E4A209A21F8001D4985 /* FloatingLogsGameScreen.swift */,
@@ -261,6 +261,7 @@
 			files = (
 				1570D58220B6E35300AAF28A /* TrainNode.swift in Sources */,
 				2A2B4A402091FF86009B81FB /* GameScene.swift in Sources */,
+				2A5493F020BC5DE10077C600 /* StartScreen.swift in Sources */,
 				2A2B4A3C2091FF42009B81FB /* FerrisWheelGameScreen.swift in Sources */,
 				1570D58320B6E35300AAF28A /* CentralVagonNode.swift in Sources */,
 				B91713F520B6EA2F0071D78F /* TrialScreen.swift in Sources */,

@@ -9,7 +9,7 @@
 import SpriteKit
 
 protocol ButtonNodeDelegate: class {
-    func tapButtonNode(_ sender: ButtonNode)
+    func buttonNodeTapped(_ sender: ButtonNode)
 }
 
 class ButtonNode: SKSpriteNode {
@@ -22,6 +22,6 @@ class ButtonNode: SKSpriteNode {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        delegate?.tapButtonNode(self)
+        delegate?.buttonNodeTapped(self)
     }
 }
