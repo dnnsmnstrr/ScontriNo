@@ -43,7 +43,7 @@ class CabinNode: SKSpriteNode {
         
         //MARK: doors
         //currently hardcoded
-        offsetClosed = self.frame.width/53-2.5
+        offsetClosed = self.frame.width/53-2.7
         offsetOpened = self.frame.width/40-2.5
 
         leftDoor = SKSpriteNode.init(imageNamed: "left door")
@@ -65,20 +65,34 @@ class CabinNode: SKSpriteNode {
         
     }
     
-    func openDoors(duration: TimeInterval = 1) {
+    func openDoors(duration: TimeInterval = 1, wait: Bool = false, waitDuration: TimeInterval = 2) {
         let openingLeft = SKAction.moveBy(x: -offsetOpened!, y: 0, duration: duration)
         let openingRight = SKAction.moveBy(x: offsetOpened!, y: 0, duration: duration)
+        let waiting = SKAction.wait(forDuration: waitDuration)
         print("opening doors")
-        leftDoor?.run(openingLeft)
-        rightDoor?.run(openingRight)
+        if !doorsOpen {
+            if wait{
+                let leftSequence = SKAction.sequence([waiting, openingLeft])
+                let rightSequence = SKAction.sequence([waiting, openingRight])
+                leftDoor?.run(leftSequence)
+                rightDoor?.run(rightSequence)
+            }
+            else{
+                leftDoor?.run(openingLeft)
+                rightDoor?.run(openingRight)
+            }
+            
+        }
         doorsOpen = true
     }
     func closeDoors(duration: TimeInterval = 1) {
-        let openingLeft = SKAction.moveBy(x: offsetOpened!, y: 0, duration: duration)
-        let openingRight = SKAction.moveBy(x: -offsetOpened!, y: 0, duration: duration)
+        let closingLeft = SKAction.moveBy(x: offsetOpened!, y: 0, duration: duration)
+        let closingRight = SKAction.moveBy(x: -offsetOpened!, y: 0, duration: duration)
         print("closing doors")
-        leftDoor?.run(openingLeft)
-        rightDoor?.run(openingRight)
+        if doorsOpen {
+            leftDoor?.run(closingLeft)
+            rightDoor?.run(closingRight)
+        }
         doorsOpen = false
     }
     

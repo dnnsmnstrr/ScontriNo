@@ -12,6 +12,7 @@ class CentralVagonNode : SKSpriteNode {
     convenience init(imageNamed: String) {
         let texture = SKTexture(imageNamed: imageNamed)
         self.init(texture: texture)
+        self.setScale(Consts.Graphics.scale)
 //        self.setScale(0.1)
         
 //        self.position = CGPoint(x: Consts.Graphics.screenWidth - self.size.width, y: Consts.Graphics.screenHeight - self.size.height)
