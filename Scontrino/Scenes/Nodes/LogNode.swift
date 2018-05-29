@@ -11,7 +11,7 @@ import SpriteKit
 class LogNode: SKSpriteNode {
     
     var nodeFlag: SKSpriteNode = SKSpriteNode()
-    var fittingSpeed: CGFloat = 150
+    var fittingSpeed: CGFloat = 200
     var initialPosition: CGPoint = CGPoint.zero
     
     convenience init(imageNamed: String, flag: SKSpriteNode) {
@@ -45,7 +45,10 @@ class LogNode: SKSpriteNode {
     func setup(pos: CGPoint){
         self.position = pos
         self.initialPosition = pos
-        self.setScale(0.5)
+        let scaleNumberHeight = Consts.Graphics.screenResolution.height / 2
+        let scaleNumberWidth = Consts.Graphics.screenResolution.width / 5
+        self.size.height = scaleNumberHeight
+        self.size.width = scaleNumberWidth
     }
     
     func moveTo(position: CGPoint, startingPoint: CGPoint) -> SKAction {

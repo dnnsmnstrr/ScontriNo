@@ -24,6 +24,7 @@ struct Consts {
         static let screenResolution = screenBounds.size
         static let scale = screenWidth / 1336
     }
+    static let phonems = ["a", "b", "d", "dz", "dʒ", "e", "ɛ", "f", "g", "i", "j", "k", "l", "ʎ", "m", "ɱ", "n", "ɲ", "ŋ", "o", "ɔ", "p", "r", "s", "ʃ", "t", "ts", "tʃ", "u", "v", "w", "z"]
     private static let words = [
         Difficulty.easy: [
             Position.initial: [
