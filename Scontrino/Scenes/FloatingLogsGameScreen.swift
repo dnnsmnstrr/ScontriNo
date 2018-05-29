@@ -17,6 +17,12 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
     
     override init() {
         super.init()
+        let backgroundNode = SKSpriteNode(imageNamed: "backgroundLog")
+        backgroundNode.zPosition = -10
+        backgroundNode.size = CGSize(width: self.size.width, height: self.size.height)
+        backgroundNode.position = CGPoint(x: size.width/2, y: size.height/2)
+        //        backgroundNode.frame =
+        self.addChild(backgroundNode)
     }
     
     required init?(coder aDecoder: NSCoder) {

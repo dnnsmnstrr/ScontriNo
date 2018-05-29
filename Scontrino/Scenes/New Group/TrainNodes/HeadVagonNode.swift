@@ -13,6 +13,7 @@ class HeadVagonNode : SKSpriteNode {
         let texture = SKTexture(imageNamed: imageNamed)
         self.init(texture: texture)
         self.setScale(Consts.Graphics.scale)
+//        self.setScale(0.1)
 //        self.anchorPoint = CGPoint(x: self.frame.size.width, y: self.frame.size.height / 2)
 //        self.anchorPoint = CGPoint(x: 0, y: 0.5)
     }
