@@ -303,7 +303,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     
     //ui
     func createFerrisWheel() {
-        ferrisWheel = SKSpriteNode.init(texture: SKTexture(imageNamed: "wheel"))
+        ferrisWheel = SKSpriteNode.init(texture: SKTexture(imageNamed: "Wheel"))
         ferrisWheel.name = "wheel"
         ferrisWheel.zPosition = 2
         ferrisWheel.anchorPoint = CGPoint(x: 0.5, y: 0.5) // default
