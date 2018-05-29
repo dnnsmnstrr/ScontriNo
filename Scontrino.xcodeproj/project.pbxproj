@@ -277,7 +277,6 @@
 				1570D58420B6E35300AAF28A /* TailVagonNode.swift in Sources */,
 				8B03E0A020B6DDDB00004D7E /* MovingShapeNode.swift in Sources */,
 				8B03E09D20B6DDDB00004D7E /* ButtonNode.swift in Sources */,
-				B9A5A63D20BC65060021501C /* CabinNode.swift in Sources */,
 				8B03E09C20B6DDDB00004D7E /* LogNode.swift in Sources */,
 				2A2B4A42209213C2009B81FB /* RollerCoasterGameScreen.swift in Sources */,
 				2A2B4A3E2091FF5A009B81FB /* SpeechRecognitionScreen.swift in Sources */,
@@ -423,7 +422,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8FSL5MASH7;
+				DEVELOPMENT_TEAM = 7Z8RE768WQ;
 				INFOPLIST_FILE = Scontrino/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ADA.Scontrino;
@@ -438,7 +437,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8FSL5MASH7;
+				DEVELOPMENT_TEAM = 7Z8RE768WQ;
 				INFOPLIST_FILE = Scontrino/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ADA.Scontrino;

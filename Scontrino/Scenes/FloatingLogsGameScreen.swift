@@ -12,9 +12,8 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
     let dataSource = GameDataSource()
     var logNode: [LogNode] = []
     var movingNode: MovingContextNode = MovingContextNode()
-    var cont = 0
-    let numberOfComprarison = 5
     var endComparison = false
+    var remainingContextMovingNode = 0
     
     override init() {
         super.init()
@@ -29,6 +28,7 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
         self.physicsWorld.contactDelegate = self
         createLog()
         createMovingNode()
+        remainingContextMovingNode = dataSource.countMovingNode(from: logNode)
     }
     
     func  createLog(){
@@ -48,6 +48,8 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
         movingNode = dataSource.nextMovingContextNode(from: logNode)
 //        movingNode.position = CGPoint(x: 200, y: 200)
         self.addChild(movingNode)
+        remainingContextMovingNode -= 1
+        print("nodi rimasti: \(remainingContextMovingNode)")
     }
     
     
@@ -168,9 +170,9 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
     
     func checkRightCategory () {
       
-        cont += 1
+//        cont += 1
         
-        if cont == numberOfComprarison {
+        if remainingContextMovingNode == 0 {
             endComparison = true
         }
         
@@ -183,15 +185,23 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
         print("log category: " + movingNode.category)
         print("log[0] : " + logNode[0].nodeFlag.name!)
         print("log[1] : " + logNode[1].nodeFlag.name!)
+            
         if logNode[0].nodeFlag.name == movingNode.category {
+            if remainingContextMovingNode <= 1 {
+                
+            }else{
             print("first one")
             logPosition = logNode[0].position
             index = 0
-            
+            }
         } else if logNode[1].nodeFlag.name == movingNode.category {
+            if remainingContextMovingNode <= 1 {
+                logNode[1].removeFromParent()
+            }else{
             print("second")
             logPosition = logNode[1].position
             index = 1
+            }
         }
         
         
@@ -235,10 +245,13 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
         
         logNode[index].run(logInitialPoisition)
             
-        } else {
+        remainingContextMovingNode -= 1
+        print("nodi rimasti: \(remainingContextMovingNode)")
             
-            //create new log or exit
-            RootViewController.shared.skView.presentScene(MenuScreen())
+//        } else {
+            
+//         //   create new log or exit
+//            RootViewController.shared.skView.presentScene(MenuScreen())
             
         }
         
