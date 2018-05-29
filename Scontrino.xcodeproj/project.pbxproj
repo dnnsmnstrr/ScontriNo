@@ -66,7 +66,6 @@
 		8B03E09A20B6DDDB00004D7E /* MovingShapeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovingShapeNode.swift; path = Scontrino/Scenes/Nodes/MovingShapeNode.swift; sourceTree = SOURCE_ROOT; };
 		8B03E0A620B6E0DE00004D7E /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		B91713F420B6EA2F0071D78F /* TrialScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrialScreen.swift; sourceTree = "<group>"; };
-		B9A5A63C20BC65060021501C /* CabinNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CabinNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,7 +169,6 @@
 			children = (
 				158720AA20BC6520001A6B59 /* CabinNode.swift */,
 				8B03E09720B6DDDB00004D7E /* ButtonNode.swift */,
-				B9A5A63C20BC65060021501C /* CabinNode.swift */,
 				1570D57C20B6E30100AAF28A /* TrainNodes */,
 				8B03E09520B6DDDB00004D7E /* HoleNode.swift */,
 				8B03E09620B6DDDB00004D7E /* LogNode.swift */,
@@ -277,7 +275,6 @@
 				1570D58420B6E35300AAF28A /* TailVagonNode.swift in Sources */,
 				8B03E0A020B6DDDB00004D7E /* MovingShapeNode.swift in Sources */,
 				8B03E09D20B6DDDB00004D7E /* ButtonNode.swift in Sources */,
-				B9A5A63D20BC65060021501C /* CabinNode.swift in Sources */,
 				8B03E09C20B6DDDB00004D7E /* LogNode.swift in Sources */,
 				2A2B4A42209213C2009B81FB /* RollerCoasterGameScreen.swift in Sources */,
 				2A2B4A3E2091FF5A009B81FB /* SpeechRecognitionScreen.swift in Sources */,

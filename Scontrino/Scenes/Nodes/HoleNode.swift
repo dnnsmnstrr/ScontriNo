@@ -27,7 +27,7 @@ class HoleNode: SKSpriteNode {
         let presentationAnimation = SKAction.sequence([
             SKAction.scale(to: CGSize.zero, duration: 0),
             isVisible,
-            SKAction.scale(to: self.size, duration: 0.5)
+            SKAction.scale(to: Consts.Graphics.scale, duration: 0.5)
             ])
         self.run(presentationAnimation)
     }
