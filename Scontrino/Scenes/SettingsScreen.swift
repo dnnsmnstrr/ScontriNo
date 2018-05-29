@@ -26,8 +26,9 @@ class SettingsScreen: SKScene, ButtonNodeDelegate, SwitchNodeDelegate {
         
         let backButton = ButtonNode(imageNamed: "back button", for: .normal)
         backButton.delegate = self
-        backButton.position = CGPoint(x: 100, y: Consts.Graphics.screenHeight - 100)
         backButton.name = "backButton"
+        backButton.setScale(Consts.Graphics.scale)
+        backButton.position = CGPoint(x: 100, y: Consts.Graphics.screenHeight - 100)
         self.addChild(backButton)
         
         let cameraNode = SKCameraNode()
