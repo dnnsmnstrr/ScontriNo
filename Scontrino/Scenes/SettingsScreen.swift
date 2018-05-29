@@ -24,7 +24,7 @@ class SettingsScreen: SKScene, ButtonNodeDelegate, SwitchNodeDelegate {
         self.scaleMode = .resizeFill
         self.backgroundColor = .white
         
-        let backButton = ButtonNode(imageNamed: "back button")
+        let backButton = ButtonNode(imageNamed: "back button", for: .normal)
         backButton.delegate = self
         backButton.position = CGPoint(x: 100, y: Consts.Graphics.screenHeight - 100)
         backButton.name = "backButton"
@@ -34,7 +34,6 @@ class SettingsScreen: SKScene, ButtonNodeDelegate, SwitchNodeDelegate {
         cameraNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight / 2)
         scene?.addChild(cameraNode)
         scene?.camera = cameraNode
-        
         
         let tableHeaderNode = SKSpriteNode(imageNamed: "settings table header")
         tableHeaderNode.setScale(Consts.Graphics.scale)
