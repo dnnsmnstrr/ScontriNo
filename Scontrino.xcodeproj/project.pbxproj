@@ -23,6 +23,7 @@
 		2A2B4A4B2092286F009B81FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A2B4A4A2092286F009B81FB /* Assets.xcassets */; };
 		2A2B4A5620976FCF009B81FB /* GameDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A5520976FCF009B81FB /* GameDataSource.swift */; };
 		2A5493F020BC5DE10077C600 /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5493EF20BC5DE10077C600 /* StartScreen.swift */; };
+		2A56760920BD75C1000F5388 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A56760820BD75C1000F5388 /* SettingsScreen.swift */; };
 		2A5B5E4B209A21F8001D4985 /* FloatingLogsGameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B5E4A209A21F8001D4985 /* FloatingLogsGameScreen.swift */; };
 		8B03E08F20B6DD5700004D7E /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E08D20B6DD5700004D7E /* RootViewController.swift */; };
 		8B03E09020B6DD5700004D7E /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E08E20B6DD5700004D7E /* CameraViewController.swift */; };
@@ -55,6 +56,7 @@
 		2A2B4A4A2092286F009B81FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A2B4A5520976FCF009B81FB /* GameDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDataSource.swift; sourceTree = "<group>"; };
 		2A5493EF20BC5DE10077C600 /* StartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
+		2A56760820BD75C1000F5388 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		2A5B5E4A209A21F8001D4985 /* FloatingLogsGameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingLogsGameScreen.swift; sourceTree = "<group>"; };
 		8B03E08D20B6DD5700004D7E /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootViewController.swift; path = Scontrino/View/RootViewController.swift; sourceTree = SOURCE_ROOT; };
 		8B03E08E20B6DD5700004D7E /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = Scontrino/View/CameraViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				2A5493EF20BC5DE10077C600 /* StartScreen.swift */,
+				2A56760820BD75C1000F5388 /* SettingsScreen.swift */,
 				2A2B4A45209217F6009B81FB /* MenuScreen.swift */,
 				2A2B4A41209213C2009B81FB /* RollerCoasterGameScreen.swift */,
 				2A5B5E4A209A21F8001D4985 /* FloatingLogsGameScreen.swift */,
@@ -280,6 +283,7 @@
 				2A2B4A3E2091FF5A009B81FB /* SpeechRecognitionScreen.swift in Sources */,
 				8B03E09B20B6DDDB00004D7E /* HoleNode.swift in Sources */,
 				8B03E09E20B6DDDB00004D7E /* MovingNode.swift in Sources */,
+				2A56760920BD75C1000F5388 /* SettingsScreen.swift in Sources */,
 				2A5B5E4B209A21F8001D4985 /* FloatingLogsGameScreen.swift in Sources */,
 				1570D58120B6E35300AAF28A /* HeadVagonNode.swift in Sources */,
 				8B03E09020B6DD5700004D7E /* CameraViewController.swift in Sources */,
