@@ -12,12 +12,18 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
     let dataSource = GameDataSource()
     var logNode: [LogNode] = []
     var movingNode: MovingContextNode = MovingContextNode()
-    var cont = 0
-    let numberOfComprarison = 5
     var endComparison = false
+    var remainingContextMovingNode = 0
+    var logIndex = 0
     
     override init() {
         super.init()
+        let backgroundNode = SKSpriteNode(imageNamed: "backgroundLog")
+        backgroundNode.zPosition = -10
+        backgroundNode.size = CGSize(width: self.size.width, height: self.size.height)
+        backgroundNode.position = CGPoint(x: size.width/2, y: size.height/2)
+        //        backgroundNode.frame =
+        self.addChild(backgroundNode)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -29,6 +35,9 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
         self.physicsWorld.contactDelegate = self
         createLog()
         createMovingNode()
+        remainingContextMovingNode = dataSource.countMovingNode(from: logNode)
+        remainingContextMovingNode -= 1
+        print("nodi rimasti: \(remainingContextMovingNode)")
     }
     
     func  createLog(){
@@ -48,6 +57,8 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
         movingNode = dataSource.nextMovingContextNode(from: logNode)
 //        movingNode.position = CGPoint(x: 200, y: 200)
         self.addChild(movingNode)
+        remainingContextMovingNode -= 1
+        print("nodi rimasti: \(remainingContextMovingNode)")
     }
     
     
@@ -168,13 +179,13 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
     
     func checkRightCategory () {
       
-        cont += 1
+//        cont += 1
         
-        if cont == numberOfComprarison {
+        if remainingContextMovingNode == 0 {
             endComparison = true
         }
         
-        if !endComparison {
+//        if !endComparison {
         
         var index = 0
         var logPosition: CGPoint = CGPoint.zero
@@ -183,15 +194,17 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
         print("log category: " + movingNode.category)
         print("log[0] : " + logNode[0].nodeFlag.name!)
         print("log[1] : " + logNode[1].nodeFlag.name!)
+            
         if logNode[0].nodeFlag.name == movingNode.category {
             print("first one")
             logPosition = logNode[0].position
             index = 0
-            
+            logIndex = index
         } else if logNode[1].nodeFlag.name == movingNode.category {
             print("second")
             logPosition = logNode[1].position
             index = 1
+            logIndex = index
         }
         
         
@@ -199,7 +212,7 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
             movingNode.moveTo(position: logPosition)
             ])
         
-        movingNode.run(newSequence)
+//        movingNode.run(newSequence)
         
         
         
@@ -208,8 +221,8 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
         
         //creating animation to get a new hole after the shape is in his center
         
-        
-        
+        if !endComparison {
+         movingNode.run(newSequence)
         //creating animation to get a new shape
         let createNewMovingNode = SKAction.run {
             
@@ -235,10 +248,28 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
         
         logNode[index].run(logInitialPoisition)
             
-        } else {
             
-            //create new log or exit
-            RootViewController.shared.skView.presentScene(MenuScreen())
+        } else {
+//            let removeMovingNode = SKAction.run{
+//            self.movingNode.removeFromParent()
+//            }
+            
+            let goBack = SKAction.run {
+                RootViewController.shared.skView.presentScene(MenuScreen())
+            }
+//
+            let finalLogInitialPoisition = SKAction.sequence([
+                SKAction.wait(forDuration: newSequence.duration),
+                SKAction.wait(forDuration: 0.2),
+                logNode[index].moveTo(position: newPosition, startingPoint: logNode[index].position),
+                goBack
+//                logNode[index].moveTo(position: self.logNode[index].initialPosition, startingPoint: CGPoint(x: newPosition.x, y: 0 - self.logNode[index].size.height)),
+                ])
+            movingNode.run( movingNode.moveTo(position: newPosition))
+             logNode[index].run(finalLogInitialPoisition)
+            
+//         //   create new log or exit
+            
             
         }
         

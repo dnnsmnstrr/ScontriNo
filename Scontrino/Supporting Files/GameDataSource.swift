@@ -93,6 +93,27 @@ struct GameDataSource {
         return newNode
     }
 
+    func countMovingNode(from logNodes: [LogNode]) -> Int {
+        var num = 0
+        for index in 0...1{
+            let node = logNodes[index]
+            
+            switch node.nodeFlag.name {
+            case "flag fruits":
+                num += Consts.FloatingLogsGameScreen.fruits.count
+            case "flag animals":
+                num += Consts.FloatingLogsGameScreen.animals.count
+            case "flag clothes":
+                num += Consts.FloatingLogsGameScreen.clothes.count
+            default:
+                num += 0
+            }
+            
+        }
+        return num
+        
+    }
+    
     func nextWord() -> String {
 //        return Consts.words[GKRandomSource.sharedRandom().nextInt(upperBound: Consts.words.count)]
         return "luna"

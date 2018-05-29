@@ -12,7 +12,7 @@ class MenuScreen: SKScene, ButtonNodeDelegate {
     var touchLocation: CGPoint!
     
     override init() {
-        super.init(size: CGSize(width: Consts.Graphics.screenWidth, height: Consts.Graphics.screenHeight))
+        super.init(size: Consts.Graphics.screenResolution)
         createSceneContent()
     }
     

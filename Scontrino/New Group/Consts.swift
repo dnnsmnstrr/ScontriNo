@@ -224,7 +224,7 @@ struct Consts {
     
     struct NodePositions {
         static let movingCategInitialPos = CGPoint(x: Graphics.screenWidth / 2 , y: 0 - Graphics.screenHeight / 6)
-        static let movingCategFinalPos = CGPoint(x: Graphics.screenWidth / 2 , y: Graphics.screenHeight / 6)
+        static let movingCategFinalPos = CGPoint(x: Graphics.screenWidth / 2 , y: Graphics.screenHeight / 3)
         
         static let firstLogPosition = CGPoint(x: Graphics.screenWidth / 4 , y: Graphics.screenHeight / 2)
         

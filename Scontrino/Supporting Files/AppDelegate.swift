@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        UserDefaults.standard.register(defaults: ["a" : true, "e": true, "ɛ": true, "i": true, "o": true, "ɔ": true, "u": true, "b": true, "d": true, "dz": true, "dʒ": true, "f": true, "g": true, "k": true, "l": true, "ʎ": true, "m": true, "ɱ": true, "n": true, "ŋ": true, "ɲ": true, "p": true, "r": true, "s": true, "ʃ": true, "t": true, "ts": true, "tʃ": true, "v": true, "w": true, "j": true, "z": true])
+        
         window = UIWindow()
         window?.rootViewController = RootViewController.shared
         window?.makeKeyAndVisible()

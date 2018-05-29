@@ -11,7 +11,7 @@ import SpriteKit
 class MovingContextNode: MovingNode {
     var isInTheRightCategory = false
     var isFitting = false
-    var fittingSpeed: CGFloat = 150
+    var fittingSpeed: CGFloat = 200
     var category: String = ""
     
     convenience init(imageNamed: String) {
