@@ -14,7 +14,7 @@ class TableNode: SKNode {
     var numberOfRows: Int = 1 {
         willSet {
             self.bodyNode.yScale = CGFloat(newValue)
-            self.bodyNode.position.y = -bodyNode.size.height / 2
+            self.bodyNode.position.y = 0
         }
     }
     var rowHeight: Int = 100
@@ -33,7 +33,8 @@ class TableNode: SKNode {
         bodyNode = SKSpriteNode(imageNamed: "table body")
         super.init()
         headerNode.position = CGPoint(x: 0.0, y: headerNode.size.height / 2)
-        bodyNode.position = CGPoint(x: 0.0, y: -bodyNode.size.height / 2)
+        bodyNode.anchorPoint = CGPoint(x: 0.5, y: 1.0)
+        bodyNode.position = CGPoint(x: 0.0, y: 0.0)
         bodyNode.centerRect = CGRect(x: 50.0/500.0, y: 50.0/200.0, width: 400.0/500.0, height: 100.0/200.0)
         self.addChild(headerNode)
         self.addChild(bodyNode)
