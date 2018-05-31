@@ -12,7 +12,7 @@ class SettingsScreen: SKScene, ButtonNodeDelegate, SwitchNodeDelegate {
     var touchLocation: CGPoint!
     
     override init() {
-        super.init(size: CGSize(width: Consts.Graphics.screenWidth, height: 5 * Consts.Graphics.screenHeight))
+        super.init(size: CGSize(width: Consts.Graphics.screenWidth, height: Consts.Graphics.screenHeight))
         createSceneContents()
     }
     
@@ -36,7 +36,7 @@ class SettingsScreen: SKScene, ButtonNodeDelegate, SwitchNodeDelegate {
         scene?.addChild(cameraNode)
         scene?.camera = cameraNode
         
-        let tableHeaderNode = SKSpriteNode(imageNamed: "settings table header")
+        let tableHeaderNode = SKSpriteNode(imageNamed: "table header")
         tableHeaderNode.setScale(Consts.Graphics.scale)
         tableHeaderNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight - tableHeaderNode.size.height)
         scene?.addChild(tableHeaderNode)
@@ -48,7 +48,7 @@ class SettingsScreen: SKScene, ButtonNodeDelegate, SwitchNodeDelegate {
         tableTitleNode.position = CGPoint(x: 0.0, y: -tableTitleNode.fontSize / 2)
         tableHeaderNode.addChild(tableTitleNode)
         
-        let tableBodyNode = SKSpriteNode(imageNamed: "settings table body")
+        let tableBodyNode = SKSpriteNode(imageNamed: "table body")
         tableBodyNode.anchorPoint = CGPoint(x: 0.5, y: 1.0)
         tableBodyNode.centerRect = CGRect(x: 10.0 / 500.0, y: 10.0 / 200.0, width: 480.0 / 500, height: 180.0 / 200.0)
         tableBodyNode.setScale(Consts.Graphics.scale)
@@ -158,7 +158,6 @@ class SettingsScreen: SKScene, ButtonNodeDelegate, SwitchNodeDelegate {
                 Consts.FerrisWheelGameScreen.words.append(contentsOf: Consts.availableWords[Difficulty.easy]![.initial]![phoneme]!)
             }
         }
-        print(Consts.FerrisWheelGameScreen.words)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -173,10 +172,10 @@ class SettingsScreen: SKScene, ButtonNodeDelegate, SwitchNodeDelegate {
             if let cameraNode = self.camera {
                 let dy = location.y - touchLocation.y
                 if dy > 0 {
-                    if cameraNode.position.y - dy > -3.5 * Consts.Graphics.screenHeight {
+                    if cameraNode.position.y - dy > -self.size.height {
                         cameraNode.position.y -= dy
                     } else {
-                        cameraNode.position.y = -3.5 * Consts.Graphics.screenHeight
+                        cameraNode.position.y = -self.size.height
                     }
                 } else {
                     if cameraNode.position.y - dy < Consts.Graphics.screenHeight / 2 {
