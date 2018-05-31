@@ -26,7 +26,7 @@ class SettingsScreen: SKScene, ButtonNodeDelegate, SwitchNodeDelegate {
         
         let backButton = ButtonNode(imageNamed: "back button", for: .normal)
         backButton.delegate = self
-        backButton.name = "backButton"
+        backButton.name = "StartScreen"
         backButton.setScale(Consts.Graphics.scale)
         backButton.position = CGPoint(x: 100, y: Consts.Graphics.screenHeight - 100)
         self.addChild(backButton)
@@ -56,7 +56,7 @@ class SettingsScreen: SKScene, ButtonNodeDelegate, SwitchNodeDelegate {
         tableBodyNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: tableHeaderNode.position.y - tableHeaderNode.size.height / 2)
         scene?.addChild(tableBodyNode)
         
-        for (index, phoneme) in Consts.phonems.enumerated() {
+        for (index, phoneme) in Consts.phonemes.enumerated() {
             let switchNode = SwitchNode(isOn: UserDefaults.standard.bool(forKey: phoneme), onImage: "switch control \(phoneme) on", offImage: "switch control \(phoneme) off")
             switchNode.delegate = self
             switchNode.name = phoneme
@@ -67,7 +67,15 @@ class SettingsScreen: SKScene, ButtonNodeDelegate, SwitchNodeDelegate {
     }
     
     func buttonNodeTapped(_ sender: ButtonNode) {
-        RootViewController.shared.skView.presentScene(StartScreen())
+        if let name = sender.name {
+            switch name {
+            case "StartScreen":
+                updateSettings()
+                RootViewController.shared.skView.presentScene(StartScreen())
+            default:
+                break
+            }
+        }
     }
     
     func switchNodeTapped(_ sender: SwitchNode) {
@@ -141,6 +149,16 @@ class SettingsScreen: SKScene, ButtonNodeDelegate, SwitchNodeDelegate {
                 break
             }
         }
+    }
+    
+    private func updateSettings() {
+        Consts.FerrisWheelGameScreen.words.removeAll()
+        for phoneme in Consts.phonemes {
+            if UserDefaults.standard.bool(forKey: phoneme) {
+                Consts.FerrisWheelGameScreen.words.append(contentsOf: Consts.availableWords[Difficulty.easy]![.initial]![phoneme]!)
+            }
+        }
+        print(Consts.FerrisWheelGameScreen.words)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

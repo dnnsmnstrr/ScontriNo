@@ -54,7 +54,7 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
         background.name = "background"
         background.position = CGPoint(x: size.width/2, y: size.height/2)
         background.size = CGSize(width: self.frame.width, height: self.frame.height)
-        background.zPosition = Consts.CarGameScreen.zPositions.background
+        background.zPosition = Consts.RollerCoasterGameScreen.zPositions.background
         addChild(background)
     }
     func createTrain() {

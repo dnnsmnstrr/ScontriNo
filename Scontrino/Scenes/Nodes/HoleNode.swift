@@ -35,6 +35,6 @@ class HoleNode: SKSpriteNode {
     }
     func setup(pos: CGPoint) {
         self.position = pos
-        self.zPosition = Consts.CarGameScreen.zPositions.hole
+        self.zPosition = Consts.RollerCoasterGameScreen.zPositions.hole
     }
 }
