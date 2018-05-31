@@ -16,7 +16,7 @@ class MovingShapeNode: MovingNode {
     convenience init(imageNamed: String) {
         let texture = SKTexture(imageNamed: imageNamed)
         self.init(texture: texture)
-        self.zPosition = Consts.CarGameScreen.zPositions.shapes
+        self.zPosition = Consts.RollerCoasterGameScreen.zPositions.shapes
         var texSize = texture.size()
         texSize.width = (texSize.width) * 0.65
         texSize.height = (texSize.height) * 0.65

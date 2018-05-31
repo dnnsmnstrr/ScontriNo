@@ -21,7 +21,7 @@ class HeadVagonNode : SKSpriteNode {
     func setup() {
         self.position.y = Consts.Graphics.screenHeight - Consts.Graphics.screenHeight / 1.7
         self.position.x = 0 - (self.size.width / 2)
-        self.zPosition = Consts.CarGameScreen.zPositions.vagons
+        self.zPosition = Consts.RollerCoasterGameScreen.zPositions.vagons
 //        self.position.x = 0 - self.size.width / 2
         
     }

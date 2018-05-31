@@ -54,8 +54,26 @@ class ButtonNode: SKSpriteNode {
         state = .highlighted
     }
     
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            let touchLocation = touch.location(in: self)
+            let locationInParent = self.convert(touchLocation, to: self.parent!)
+            let isTouchInside = self.contains(locationInParent)
+            if isTouchInside {
+                state = .highlighted
+            } else {
+                state = .normal
+            }
+        }
+    }
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard state == .highlighted else { return }
         state = .normal
         delegate?.buttonNodeTapped(self)
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        state = .normal
     }
 }
