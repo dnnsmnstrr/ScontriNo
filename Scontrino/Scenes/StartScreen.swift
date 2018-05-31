@@ -27,10 +27,10 @@ class StartScreen: SKScene, ButtonNodeDelegate {
         
         let settingsButtonNode = ButtonNode(imageNamed: "settings button normal", for: .normal)
         settingsButtonNode.delegate = self
+        settingsButtonNode.setTexture(imageNamed: "settings button highlighted", for: .highlighted)
         settingsButtonNode.name = "SettingsScreen"
         settingsButtonNode.setScale(Consts.Graphics.scale)
         settingsButtonNode.position = CGPoint(x: Consts.Graphics.screenWidth - settingsButtonNode.size.width / 2, y: Consts.Graphics.screenHeight - settingsButtonNode.size.height / 2)
-        settingsButtonNode.setTexture(imageNamed: "settings button highlighted", for: .highlighted)
         scene?.addChild(settingsButtonNode)
         
         let leftDoorGateNode = SKSpriteNode(imageNamed: "gate left door")
@@ -50,10 +50,10 @@ class StartScreen: SKScene, ButtonNodeDelegate {
 
         let playButtonNode = ButtonNode(imageNamed: "play button normal", for: .normal)
         playButtonNode.delegate = self
+        playButtonNode.setTexture(imageNamed: "play button highlighted", for: .highlighted)
         playButtonNode.name = "MenuScreen"
         playButtonNode.setScale(Consts.Graphics.scale)
         playButtonNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight / 2)
-        playButtonNode.setTexture(imageNamed: "play button highlighted", for: .highlighted)
         scene?.addChild(playButtonNode)
     }
     
