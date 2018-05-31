@@ -26,8 +26,9 @@ class MenuScreen: SKScene, ButtonNodeDelegate {
         backgroundNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight / 2)
         self.addChild(backgroundNode)
         
-        let backButton = ButtonNode(imageNamed: "back button", for: .normal)
+        let backButton = ButtonNode(imageNamed: "back button normal", for: .normal)
         backButton.delegate = self
+        backButton.setTexture(imageNamed: "back button highlighted", for: .highlighted)
         backButton.name = "StartScreen"
         backButton.setScale(Consts.Graphics.scale)
         backButton.position = CGPoint(x: 100, y: self.size.height - 100)

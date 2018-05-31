@@ -26,6 +26,7 @@ class SettingsScreen: SKScene, ButtonNodeDelegate, SwitchNodeDelegate {
         
         let backButton = ButtonNode(imageNamed: "back button", for: .normal)
         backButton.delegate = self
+        backButton.setTexture(imageNamed: "back button highlighted", for: .highlighted)
         backButton.name = "StartScreen"
         backButton.setScale(Consts.Graphics.scale)
         backButton.position = CGPoint(x: 100, y: Consts.Graphics.screenHeight - 100)
