@@ -55,6 +55,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     var end: CGPoint?
     var wheelSpeed: CGFloat = 1000
     var zoomedIn: Bool = false
+    var zooming: Bool = false
     var zoomPoint: CGFloat?
     var justSkipped: Bool = false
     var screenScale: CGFloat = UIScreen.main.scale
@@ -117,27 +118,20 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
             let touchPosition = touch.location(in: self)
             if touchPosition.x < (self.frame.width / 2) {
                 self.ferrisWheel.physicsBody?.applyAngularImpulse(-(wheelSpeed/10))
+                if magnitude > 100 {
+                    nextCabin()
+                }
             } else {
                 self.ferrisWheel.physicsBody?.applyAngularImpulse(wheelSpeed/10)
             }
+            
         }
         if magnitude < 25 {
-            if !zoomedIn{
+            if !zoomedIn && !zooming{
                 zoomIn()
-                //                for cabin in cabins {
-                //                    if !cabin.doorsOpen{
-                //                        cabin.openDoors()
-                //                    }
-                //                    else {
-                //                        cabin.closeDoors()
-                //                    }
-                //                }
             }
-            else {
+            else if !zooming {
                 zoomOut()
-                //                for cabin in cabins {
-                //                    cabin.openDoors()
-                //                }
             }
             
             let touchPosition = touch.location(in: self)
@@ -156,15 +150,27 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         let zoomInAction = SKAction.scale(to: scalingFactor, duration: duration)
         let positioning = SKAction.moveTo(y: zoomPoint!, duration: duration)
         let group = SKAction.group([zoomInAction, positioning])
-        cameraNode.run(group)
-        zoomedIn = true
+        
+        if !zooming{
+            zooming = true
+            cameraNode.run(group) {
+                self.zooming = false
+                self.zoomedIn = true
+            }
+        }
+        
     }
     
     func zoomOut(scalingFactor: CGFloat = 1, duration: TimeInterval = 1) {
         let zoomInAction = SKAction.scale(to: scalingFactor, duration: duration)
         let positioning = SKAction.moveTo(y: self.size.height / 2, duration: duration)
         let group = SKAction.group([zoomInAction, positioning])
-        cameraNode.run(group)
+        if !zooming{
+            zooming = true
+            cameraNode.run(group) {
+                self.zooming = false
+            }
+        }
         zoomedIn = false
     }
     
@@ -262,7 +268,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                     self.currentWordOnScreen = self.currentWords[self.index]
                     
                     
-                    print("Entered the control, the new word on screen is: \(self.currentWordOnScreen!)\n")
+                    print("Word recognized, the new word on screen is: \(self.currentWordOnScreen!)\n")
                     
                 }
                     //skip if too many words were said
@@ -274,7 +280,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                     
                     self.justSkipped = true
                     
-                    print("Entered the control, the new word on screen is: \(self.currentWordOnScreen!)\n")
+                    print("Skipped, the new word on screen is: \(self.currentWordOnScreen!)\n")
                 }
                 
                 
@@ -374,7 +380,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         zoomIn(scalingFactor: 0.2, duration: 15/Double(screenScale))
         currentWordOnScreen = currentWords[index]
         print("Current word: \(self.currentWordOnScreen!)\n")
-        cabins[index].physicsBody?.mass=4
+        cabins[index].physicsBody?.mass=5
         cabins[index].openDoors(duration: 1.5, wait: true, waitDuration: 4.3)
         
     }
