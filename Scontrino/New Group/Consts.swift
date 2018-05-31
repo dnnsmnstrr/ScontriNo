@@ -24,7 +24,25 @@ struct Consts {
         static let screenResolution = screenBounds.size
         static let scale = screenWidth / 1336
     }
-    static let phonems = ["a", "b", "d", "dz", "dʒ", "e", "ɛ", "f", "g", "i", "j", "k", "l", "ʎ", "m", "ɱ", "n", "ɲ", "ŋ", "o", "ɔ", "p", "r", "s", "ʃ", "t", "ts", "tʃ", "u", "v", "w", "z"]
+    static let phonemes = ["a", "b", "d", "dz", "dʒ", "e", "ɛ", "f", "g", "i", "j", "k", "l", "ʎ", "m", "ɱ", "n", "ɲ", "ŋ", "o", "ɔ", "p", "r", "s", "ʃ", "t", "ts", "tʃ", "u", "v", "w", "z"]
+    static let availableWords = [
+        Difficulty.easy: [
+            Position.initial: [
+                "a": ["ago"],
+                "b": ["banana"],
+                "d": ["dado"],
+                "g": ["gufo"],
+                "k": ["cane", "capotto"],
+                "m": ["mela", "mattone", "maglia"],
+                "n": ["neve", "nave"],
+                "p": ["pipa", "palla", "panino"],
+                "r": ["rosa", "razzo"],
+                "s": ["sole", "sapone"],
+                "t": ["tavolo"],
+                "u": ["uva"]
+            ]
+        ]
+    ]
     private static let words = [
         Difficulty.easy: [
             Position.initial: [
@@ -183,6 +201,9 @@ struct Consts {
         "yellow"
     ]
     
+    struct FerrisWheelGameScreen {
+        static var words: [String] = []
+    }
     
     struct FloatingLogsGameScreen {
         static let categories = [
@@ -225,7 +246,7 @@ struct Consts {
             "neve"
         ]
     }
-    struct CarGameScreen {
+    struct RollerCoasterGameScreen {
         struct zPositions {
             static let hole: CGFloat = 50
             static let background: CGFloat = -100

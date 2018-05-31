@@ -19,7 +19,6 @@ struct GameDataSource {
     var mezziDie: GKShuffledDistribution!
     var stagioniDie: GKShuffledDistribution!
     
-    
     init() {
         initializeDice()
     }
@@ -39,8 +38,6 @@ struct GameDataSource {
         flagNode.name = "flag" + " " + cat
         return flagNode
     }
-    
-    
     
     // This method returns a gray shape based on an array of moving nodes received as parameter
     func nextStaticNode(from movingNodes: [MovingShapeNode]) -> HoleNode { // changed from skspritenode in holenode and movingNode to MovingShapeNode
@@ -69,15 +66,15 @@ struct GameDataSource {
         
         switch node.nodeFlag.name {
         case "flag cibo":
-            res  = nextCibo()
+            res  = nextFood()
         case "flag animali":
             res = nextAnimal()
         case "flag abbigliamento":
-            res = nextDress()
+            res = nextClothing()
         case "flag oggetti":
             res = nextObject()
         case "flag mezziDiTrasporto":
-            res = nextTransport()
+            res = nextMeanOfTransportation()
         case "flag stagioni":
             res = nextSeason()
             
@@ -133,7 +130,7 @@ struct GameDataSource {
     
     func nextWord() -> String {
 //        return Consts.words[GKRandomSource.sharedRandom().nextInt(upperBound: Consts.words.count)]
-        return "luna"
+          return "luna"
     }
     
     func getWord() -> String {
@@ -166,7 +163,7 @@ struct GameDataSource {
         return Consts.FloatingLogsGameScreen.categories[categorizationDie.nextInt() - 1]
     }
     
-    private func nextCibo() -> String {
+    private func nextFood() -> String {
         return Consts.FloatingLogsGameScreen.cibo[ciboDie.nextInt() - 1]
     }
     
@@ -174,7 +171,7 @@ struct GameDataSource {
         return Consts.FloatingLogsGameScreen.animali[animalsDie.nextInt() - 1]
     }
     
-    private func nextDress() -> String {
+    private func nextClothing() -> String {
         return Consts.FloatingLogsGameScreen.abbigliamento[clothesDie.nextInt() - 1]
     }
     
@@ -182,7 +179,7 @@ struct GameDataSource {
         return Consts.FloatingLogsGameScreen.oggetti[objectDie.nextInt() - 1]
     }
     
-    private func nextTransport() -> String {
+    private func nextMeanOfTransportation() -> String {
         return Consts.FloatingLogsGameScreen.mezziDiTrasporto[mezziDie.nextInt() - 1]
     }
     
