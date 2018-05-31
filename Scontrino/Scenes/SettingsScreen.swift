@@ -36,33 +36,18 @@ class SettingsScreen: SKScene, ButtonNodeDelegate, SwitchNodeDelegate {
         scene?.addChild(cameraNode)
         scene?.camera = cameraNode
         
-        let tableHeaderNode = SKSpriteNode(imageNamed: "table header")
-        tableHeaderNode.setScale(Consts.Graphics.scale)
-        tableHeaderNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight - tableHeaderNode.size.height)
-        scene?.addChild(tableHeaderNode)
+        let tableNode = TableNode(headerTitle: "Fonemi")
+        tableNode.setNumberOfRows(to: Consts.availablePhonemes.count)
+        tableNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight - tableNode.headerNode.size.height - 100)
+        scene?.addChild(tableNode)
         
-        let tableTitleNode = SKLabelNode(text: "Fonemi")
-        tableTitleNode.fontName = "Helvetica"
-        tableTitleNode.fontSize = 48.0
-        tableTitleNode.fontColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-        tableTitleNode.position = CGPoint(x: 0.0, y: -tableTitleNode.fontSize / 2)
-        tableHeaderNode.addChild(tableTitleNode)
-        
-        let tableBodyNode = SKSpriteNode(imageNamed: "table body")
-        tableBodyNode.anchorPoint = CGPoint(x: 0.5, y: 1.0)
-        tableBodyNode.centerRect = CGRect(x: 10.0 / 500.0, y: 10.0 / 200.0, width: 480.0 / 500, height: 180.0 / 200.0)
-        tableBodyNode.setScale(Consts.Graphics.scale)
-        tableBodyNode.yScale = 23.5
-        tableBodyNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: tableHeaderNode.position.y - tableHeaderNode.size.height / 2)
-        scene?.addChild(tableBodyNode)
-        
-        for (index, phoneme) in Consts.phonemes.enumerated() {
+        for (index, phoneme) in Consts.availablePhonemes.enumerated() {
             let switchNode = SwitchNode(isOn: UserDefaults.standard.bool(forKey: phoneme), onImage: "switch control \(phoneme) on", offImage: "switch control \(phoneme) off")
             switchNode.delegate = self
             switchNode.name = phoneme
-            switchNode.yScale = 1 / 23.5
-            switchNode.position = CGPoint(x: 0.0, y: -CGFloat(23.5 * switchNode.size.height + CGFloat(150 * index)) / 23.5)
-            tableBodyNode.addChild(switchNode)
+            switchNode.yScale = CGFloat(1.0 / Double(Consts.availablePhonemes.count))
+            switchNode.position = CGPoint(x: 0.0, y: -switchNode.size.height - CGFloat(150 * CGFloat(index) / CGFloat(Consts.availablePhonemes.count)))
+            tableNode.bodyNode.addChild(switchNode)
         }
     }
     
@@ -158,6 +143,7 @@ class SettingsScreen: SKScene, ButtonNodeDelegate, SwitchNodeDelegate {
                 Consts.FerrisWheelGameScreen.words.append(contentsOf: Consts.availableWords[Difficulty.easy]![.initial]![phoneme]!)
             }
         }
+        print(Consts.FerrisWheelGameScreen.words)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
