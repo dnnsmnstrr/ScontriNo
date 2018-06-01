@@ -17,6 +17,8 @@ class MovingShapeNode: MovingNode {
         let texture = SKTexture(imageNamed: imageNamed)
         self.init(texture: texture)
         self.zPosition = Consts.RollerCoasterGameScreen.zPositions.shapes
+        self.setScale(Consts.Graphics.scale)
+        let mySize = self.size
         var texSize = texture.size()
         texSize.width = (texSize.width) * 0.65
         texSize.height = (texSize.height) * 0.65
@@ -32,7 +34,7 @@ class MovingShapeNode: MovingNode {
         }
         let presentationAnimation = SKAction.sequence([SKAction.scale(to: CGSize.zero, duration: 0),
                                                        isVisible,
-                                                       SKAction.scale(to: self.size, duration: 0.5)
+                                                       SKAction.scale(to: mySize, duration: 0.5)
             ])
         self.run(presentationAnimation)
     }

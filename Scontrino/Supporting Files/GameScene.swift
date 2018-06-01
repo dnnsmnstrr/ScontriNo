@@ -25,7 +25,7 @@ class GameScene: SKScene, ButtonNodeDelegate {
         backButton.setTexture(imageNamed: "back button highlighted", for: .highlighted)
         backButton.name = "backButton"
         backButton.setScale(Consts.Graphics.scale)
-        backButton.position = CGPoint(x: 100, y: self.size.height - 100)
+        backButton.position = CGPoint(x: 0.1 * Consts.Graphics.screenWidth, y: 0.9 * Consts.Graphics.screenHeight)
         backButton.zPosition = 100
         self.addChild(backButton)
     }
