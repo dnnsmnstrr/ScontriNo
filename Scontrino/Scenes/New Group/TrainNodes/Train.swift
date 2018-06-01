@@ -78,6 +78,7 @@ struct Train {
         }
         
         let fillInHoleAnimation = SKAction.sequence([
+//            SKAction.follow(<#T##path: CGPath##CGPath#>, duration: <#T##TimeInterval#>)
             SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: trainSpeed),
             anim
             ])

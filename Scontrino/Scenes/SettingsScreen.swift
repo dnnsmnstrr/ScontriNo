@@ -29,7 +29,7 @@ class SettingsScreen: SKScene, ButtonNodeDelegate, SwitchNodeDelegate {
         backButton.setTexture(imageNamed: "back button highlighted", for: .highlighted)
         backButton.name = "StartScreen"
         backButton.setScale(Consts.Graphics.scale)
-        backButton.position = CGPoint(x: 100, y: Consts.Graphics.screenHeight - 100)
+        backButton.position = CGPoint(x: 0.1 * Consts.Graphics.screenWidth, y: 0.9 * Consts.Graphics.screenHeight)
         self.addChild(backButton)
         
         let cameraNode = SKCameraNode()
