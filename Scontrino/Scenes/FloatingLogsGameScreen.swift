@@ -265,6 +265,7 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
             logIndex = index
         }
         
+        self.movingNode.isUserInteractionEnabled = false
         
         let newSequence = SKAction.sequence([
             movingNode.moveTo(position: logPosition)
