@@ -17,23 +17,28 @@ class MovingContextNode: MovingNode {
     convenience init(imageNamed: String) {
         let texture = SKTexture(imageNamed: imageNamed)
         self.init(texture: texture)
-        self.position = Consts.NodePositions.movingCategInitialPos
+        self.position = Consts.NodePositions.movingCategFinalPos
         
         var texSize = texture.size()
+        let mySize = self.size
         texSize.width = (texSize.width) * 0.65
         texSize.height = (texSize.height) * 0.65
-//        self.isHidden = true
+        self.isHidden = true
         self.isUserInteractionEnabled = true
         self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: imageNamed), size: texSize)
         self.physicsBody?.affectedByGravity = false
         self.physicsBody?.categoryBitMask = Consts.PhysicsMask.shapeNodes
         self.physicsBody?.contactTestBitMask = Consts.PhysicsMask.holeNode
         self.physicsBody?.collisionBitMask = 0
-//        let isVisible = SKAction.run {
-//            self.isHidden = false
-//        }
+        let isVisible = SKAction.run {
+            self.isHidden = false
+        }
         let presentationAnimation = SKAction.sequence([
-            moveTo(position: Consts.NodePositions.movingCategFinalPos),
+//            moveTo(position: Consts.NodePositions.movingCategFinalPos),
+//            isVisible,
+            SKAction.scale(to: CGSize.zero, duration: 0),
+            isVisible,
+            SKAction.scale(to: mySize, duration: 0.3)
             ])
         self.run(presentationAnimation)
     }
