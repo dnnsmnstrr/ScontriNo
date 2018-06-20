@@ -13,6 +13,7 @@ class MovingContextNode: MovingNode {
     var isFitting = false
     var fittingSpeed: CGFloat = 200
     var category: String = ""
+    let mySize = Consts.Graphics.screenHeight / 1100
     
     convenience init(imageNamed: String) {
         let texture = SKTexture(imageNamed: imageNamed)
@@ -20,7 +21,7 @@ class MovingContextNode: MovingNode {
         self.position = Consts.NodePositions.movingCategFinalPos
         
         var texSize = texture.size()
-        let mySize = self.size
+//        let mySize = self.size
         texSize.width = (texSize.width) * 0.65
         texSize.height = (texSize.height) * 0.65
         self.isHidden = true

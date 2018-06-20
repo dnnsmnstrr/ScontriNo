@@ -26,6 +26,11 @@ class LogNode: SKSpriteNode {
         self.physicsBody?.affectedByGravity = false
         self.physicsBody?.categoryBitMask = Consts.PhysicsMask.holeNode
         self.physicsBody?.contactTestBitMask = Consts.PhysicsMask.shapeNodes
+        
+       
+        
+//        self.setScale(newDimension)
+        
 //        let isVisible = SKAction.run{
 //            self.isHidden = false
 //        }
@@ -37,18 +42,26 @@ class LogNode: SKSpriteNode {
 //        self.run(presentationAnimation)
         
         flag.position = CGPoint(x: self.frame.midX, y: self.frame.maxY - flag.frame.maxY - 5)
+//        flag.setScale(newDimension)
 //        flag.name = "flag" + " " + imageNamed
         nodeFlag = flag
         self.addChild(flag)
     }
     
     func setup(pos: CGPoint){
+        
+         let newDimension = Consts.Graphics.screenHeight / 1024
+        print("dimensione: \(newDimension)")
+        
         self.position = pos
         self.initialPosition = pos
-        let scaleNumberHeight = Consts.Graphics.screenResolution.height / 2
-        let scaleNumberWidth = Consts.Graphics.screenResolution.width / 5
-        self.size.height = scaleNumberHeight
-        self.size.width = scaleNumberWidth
+//        let scaleNumberHeight = Consts.Graphics.screenResolution.height / 2
+//        let scaleNumberWidth = Consts.Graphics.screenResolution.width / 5
+//        self.size.height = scaleNumberHeight
+//        self.size.width = scaleNumberWidth
+        
+                self.setScale(newDimension)
+        
     }
     
     func moveTo(position: CGPoint, startingPoint: CGPoint) -> SKAction {
