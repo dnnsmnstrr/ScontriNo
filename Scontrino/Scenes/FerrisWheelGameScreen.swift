@@ -67,6 +67,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     
     override func createSceneContents() {
         super.createSceneContents()
+        
         let center: CGPoint = CGPoint(x: self.size.width / 2,y: self.size.height / 2)
         
         //camera
@@ -80,17 +81,16 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         background.position = center
         background.setScale(Consts.Graphics.scale)
         addChild(background)
-
+        
         //create ferris wheel
         createFerrisWheel()
         self.physicsWorld.gravity = CGVector(dx: 0, dy: -30/screenScale)
         
         //set up the first round
         startGame()
-        
-        //start the recording process
-        checkAuthorization()
-        
+
+        //Start the session
+        settingUpSpeechSession()
     }
     
     //touch handling
@@ -103,7 +103,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         /* TEXT TO SPEECH
         self.recognitionRequest?.endAudio()
         self.recognitionRequest = nil
-        self.recognitionTask = nil*/
+        self.recognitionTask = nil
         
         let utterance = AVSpeechUtterance(string: self.currentWordOnScreen)
         utterance.voice = AVSpeechSynthesisVoice(language: "it-IT")
@@ -117,7 +117,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
             try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
         } catch {
             print("Error in starting the audio session")
-        }
+        }*/
  
     }
     
@@ -199,51 +199,25 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     
     //MARK: Speech
     
-    func checkAuthorization() {
+    func settingUpSpeechSession() {
         
-        SFSpeechRecognizer.requestAuthorization { authStatus in
+        self.listen = true
+        self.recordingNode.texture = SKTexture(imageNamed: "recording on")
+        
+        if self.audio.isRunning {
+            self.audio.stop()
+            self.recognitionRequest?.endAudio()
+        }
             
-            OperationQueue.main.addOperation {
-                switch authStatus {
-                    
-                case .authorized:
-                    
-                    self.listen = true
-                    
-                    self.recordingNode.texture = SKTexture(imageNamed: "recording on")
-                    
-                    if self.audio.isRunning {
-                        self.audio.stop()
-                        self.recognitionRequest?.endAudio()
-                    } else {
-                        self.recordingNode.texture = SKTexture(imageNamed: "recording on")
-//                        try! self.startRecording()
-                        
-                        do {
-                            try self.startRecording()
-                            
-                        } catch {
-                            print("error unknown")
-                        }
-                    }
-                    
-                case .denied:
-                    
-                    self.recordingNode.texture = SKTexture(imageNamed: "recording denied")
-                    
-                case .restricted:
-                    
-                    self.recordingNode.texture = SKTexture(imageNamed: "recording denied")
-                    
-                case .notDetermined:
-                    
-                    self.recordingNode.texture = SKTexture(imageNamed: "recording denied")
-                    
-                }
+        else {
+            self.recordingNode.texture = SKTexture(imageNamed: "recording on")
+            do {
+                try self.startRecording()
+            } catch {
+                print("error unknown")
             }
         }
-    }
-    
+    }    
     
     private func startRecording() throws {
         
