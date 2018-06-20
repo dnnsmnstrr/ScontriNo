@@ -28,6 +28,7 @@
 		2A56760B20BD9D6A000F5388 /* SwitchNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A56760A20BD9D6A000F5388 /* SwitchNode.swift */; };
 		2A5B5E4B209A21F8001D4985 /* FloatingLogsGameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B5E4A209A21F8001D4985 /* FloatingLogsGameScreen.swift */; };
 		2ACE41D120C00C03008C4A77 /* TableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACE41D020C00C03008C4A77 /* TableNode.swift */; };
+		425A6A3420D854CD00DDF39E /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425A6A3320D854CD00DDF39E /* Tools.swift */; };
 		8B03E08F20B6DD5700004D7E /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E08D20B6DD5700004D7E /* RootViewController.swift */; };
 		8B03E09020B6DD5700004D7E /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E08E20B6DD5700004D7E /* CameraViewController.swift */; };
 		8B03E09B20B6DDDB00004D7E /* HoleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E09520B6DDDB00004D7E /* HoleNode.swift */; };
@@ -64,6 +65,7 @@
 		2A56760A20BD9D6A000F5388 /* SwitchNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchNode.swift; sourceTree = "<group>"; };
 		2A5B5E4A209A21F8001D4985 /* FloatingLogsGameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingLogsGameScreen.swift; sourceTree = "<group>"; };
 		2ACE41D020C00C03008C4A77 /* TableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableNode.swift; sourceTree = "<group>"; };
+		425A6A3320D854CD00DDF39E /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 		8B03E08D20B6DD5700004D7E /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootViewController.swift; path = "Scontrino/Supporting Files/RootViewController.swift"; sourceTree = SOURCE_ROOT; };
 		8B03E08E20B6DD5700004D7E /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = "Scontrino/Supporting Files/CameraViewController.swift"; sourceTree = SOURCE_ROOT; };
 		8B03E09520B6DDDB00004D7E /* HoleNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HoleNode.swift; path = Scontrino/Scenes/Nodes/HoleNode.swift; sourceTree = SOURCE_ROOT; };
@@ -163,6 +165,7 @@
 				2A2B4A292091FBD4009B81FB /* AppDelegate.swift */,
 				2A2B4A3F2091FF86009B81FB /* GameScene.swift */,
 				2A2B4A5520976FCF009B81FB /* GameDataSource.swift */,
+				425A6A3320D854CD00DDF39E /* Tools.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				2A2B4A42209213C2009B81FB /* RollerCoasterGameScreen.swift in Sources */,
 				B9A5A64820BD8CAB0021501C /* Consts.swift in Sources */,
 				2A2B4A3E2091FF5A009B81FB /* SpeechRecognitionScreen.swift in Sources */,
+				425A6A3420D854CD00DDF39E /* Tools.swift in Sources */,
 				8B03E09B20B6DDDB00004D7E /* HoleNode.swift in Sources */,
 				8B03E09E20B6DDDB00004D7E /* MovingNode.swift in Sources */,
 				2A56760920BD75C1000F5388 /* SettingsScreen.swift in Sources */,
@@ -453,7 +457,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KUSE58VWBE;
+				DEVELOPMENT_TEAM = MC89RN7CV7;
 				INFOPLIST_FILE = Scontrino/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -469,7 +473,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KUSE58VWBE;
+				DEVELOPMENT_TEAM = MC89RN7CV7;
 				INFOPLIST_FILE = Scontrino/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

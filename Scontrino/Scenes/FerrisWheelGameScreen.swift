@@ -22,6 +22,9 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     private var currentWords: [String] = []
     var index: Int = 0
     
+    //synthesizer
+    let synthesizer = AVSpeechSynthesizer()
+    
     let recordingNode = SKSpriteNode(imageNamed: "recording off")
     var recognizedSentence = ""
     var recognizedWords = [Substring]()
@@ -96,6 +99,16 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         guard let touch = touches.first else {return}
         self.start = touch.location(in: self)
         self.startTime = touch.timestamp
+        
+        /* TEXT TO SPEECH
+        self.recognitionRequest?.endAudio()
+        self.recognitionRequest = nil
+        self.recognitionTask = nil
+        
+        let utterance = AVSpeechUtterance(string: self.currentWordOnScreen)
+        utterance.voice = AVSpeechSynthesisVoice(language: "it-IT")
+        utterance.rate = 0.5
+        self.synthesizer.speak(utterance)*/
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -258,7 +271,11 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                 print("Current word: \(self.currentWordOnScreen!)\n")
                 
                 // Control if the array of words has the current word (needs to be set empty or to reinitialize the session)
-                if self.recognizedSentence.contains(self.currentWordOnScreen) {
+                // or it is found a high similarity in the words spoken by Levenshtein distance
+                
+                for each in result.bestTranscription.segments {
+                
+                    if self.recognizedSentence.contains(self.currentWordOnScreen) || Tools.levenshtein(aStr: each.substring.lowercased(), bStr: self.currentWordOnScreen) < 4 {
                     
                     self.audio.stop()
                     self.recognitionRequest?.endAudio()
@@ -283,19 +300,29 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                     print("Skipped, the new word on screen is: \(self.currentWordOnScreen!)\n")
                 }
                 
-                
+                }
             }
             
-            if error != nil || isFinal {
+            if isFinal {
                 
                 self.audio.stop()
                 inputNode.removeTap(onBus: 0)
+                
                 self.nextCabin()
                 
                 //                if !self.justSkipped{
                 //                    self.nextCabin()
                 //                    self.justSkipped = false
                 //                }
+                
+                if self.listen {
+                    try! self.startRecording()
+                }
+            } else if error != nil {
+                print("\nregisterrr")
+                
+                self.audio.stop()
+                inputNode.removeTap(onBus: 0)
                 
                 if self.listen {
                     try! self.startRecording()
