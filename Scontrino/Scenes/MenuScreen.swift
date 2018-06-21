@@ -85,8 +85,8 @@ class MenuScreen: SKScene, ButtonNodeDelegate, UIPageViewControllerDelegate {
     var firstTime = true
     
     func checkForAuthorizations() {
-        checkSpeechRecognizerAuthorization()
         checkMicrophoneAuthorization()
+        checkSpeechRecognizerAuthorization()
         AVCaptureDevice.requestAccess(for: .audio) { granted in
             DispatchQueue.main.async {
                 if Consts.FerrisWheelAuthorizationStatus.speechRecognizerAuth && Consts.FerrisWheelAuthorizationStatus.microphoneAuth {
@@ -95,7 +95,7 @@ class MenuScreen: SKScene, ButtonNodeDelegate, UIPageViewControllerDelegate {
                     if self.firstTime {
                         self.firstTime = false
                     } else if !self.firstTime {
-                        self.alertSettings(title: "Microphone and Speech Recognition permissions", message: "In order to play the game, please go to the app settings and give permissions to the microphone and speech recognition usage.")
+                        self.alertSettings(title: "Richiesta permessi", message: "In modo da poter giocare, vai in Impostazioni e dai il permesso all'utilizzo del microfono e dell'opzione di riconoscimento vocale.")
                     }
                 }
             }
@@ -104,12 +104,12 @@ class MenuScreen: SKScene, ButtonNodeDelegate, UIPageViewControllerDelegate {
     
     func alertSettings(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: { (action: UIAlertAction!) in
+        alert.addAction(UIAlertAction(title: "Impostazioni", style: .default, handler: { (action: UIAlertAction!) in
             let url = URL(string:UIApplicationOpenSettingsURLString)
             _ =  UIApplication.shared.open(url!, options: [:], completionHandler: nil)
             
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+        alert.addAction(UIAlertAction(title: "Cancella", style: .cancel, handler: { (action: UIAlertAction!) in
             alert.dismiss(animated: true, completion: nil)
             
         }))

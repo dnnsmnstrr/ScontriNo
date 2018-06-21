@@ -103,12 +103,10 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         /* TEXT TO SPEECH
         self.recognitionRequest?.endAudio()
         self.recognitionRequest = nil
-        self.recognitionTask = nil
+        self.recognitionTask = nil*/
         
         let utterance = AVSpeechUtterance(string: self.currentWordOnScreen)
         utterance.voice = AVSpeechSynthesisVoice(language: "it-IT")
-        utterance.rate = 0.5
-        utterance.volume = 1.0
         self.synthesizer.speak(utterance)
         
         let audioSession = AVAudioSession.sharedInstance()
@@ -117,7 +115,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
             try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
         } catch {
             print("Error in starting the audio session")
-        }*/
+        }
  
     }
     
@@ -259,7 +257,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                 
                 for each in result.bestTranscription.segments {
                 
-                    if self.recognizedSentence.contains(self.currentWordOnScreen) || Tools.levenshtein(aStr: each.substring.lowercased(), bStr: self.currentWordOnScreen) < 4 {
+                    if self.recognizedSentence.contains(self.currentWordOnScreen) || Tools.levenshtein(aStr: each.substring.lowercased(), bStr: self.currentWordOnScreen) < 3 {
                     
                     self.audio.stop()
                     self.recognitionRequest?.endAudio()
@@ -267,7 +265,6 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                     self.recognitionTask = nil
                     
                     self.currentWordOnScreen = self.currentWords[self.index]
-                    
                     
                     print("Word recognized, the new word on screen is: \(self.currentWordOnScreen!)\n")
                     
@@ -303,7 +300,6 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                     try! self.startRecording()
                 }
             } else if error != nil {
-                
                 self.audio.stop()
                 inputNode.removeTap(onBus: 0)
                 
@@ -408,6 +404,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         }
         else{
             self.index += 1
+            self.currentWordOnScreen = self.currentWords[index]
         }
         cabins[index].physicsBody?.mass = 9/screenScale
         
