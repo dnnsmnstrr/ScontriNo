@@ -24,6 +24,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     
     //synthesizer
     let synthesizer = AVSpeechSynthesizer()
+    var changingCabins = true
     
     let recordingNode = SKSpriteNode(imageNamed: "recording off")
     var recognizedSentence = ""
@@ -105,17 +106,21 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         self.recognitionRequest = nil
         self.recognitionTask = nil*/
         
-        let utterance = AVSpeechUtterance(string: self.currentWordOnScreen)
-        utterance.voice = AVSpeechSynthesisVoice(language: "it-IT")
-        self.synthesizer.speak(utterance)
-       
-        let audioSession = AVAudioSession.sharedInstance()
-        do {
-            try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
-            try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
-        } catch {
-            print("Error in starting the audio session")
+        if !changingCabins {
+            let utterance = AVSpeechUtterance(string: self.currentWordOnScreen)
+            utterance.voice = AVSpeechSynthesisVoice(language: "it-IT")
+            self.synthesizer.speak(utterance)
+            
+            let audioSession = AVAudioSession.sharedInstance()
+            do {
+                try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+                try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
+            } catch {
+                print("Error in starting the audio session")
+            }
         }
+        
+        
     }
     
     
@@ -139,8 +144,10 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
             let touchPosition = touch.location(in: self)
             if touchPosition.x < (self.frame.width / 2) {
                 self.ferrisWheel.physicsBody?.applyAngularImpulse(-(wheelSpeed/10))
-                if magnitude > 100 {
+                if magnitude > 100 && !justSkipped { //skip on long swipe
                     nextCabin()
+                    justSkipped = true
+                    print("Skipped by swiping")
                 }
             } else {
                 self.ferrisWheel.physicsBody?.applyAngularImpulse(wheelSpeed/10)
@@ -149,6 +156,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         }
         if magnitude < 25 {
             if !zoomedIn && !zooming{
+//                zooming = true
                 zoomIn()
             }
             else if !zooming {
@@ -171,31 +179,25 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         let zoomInAction = SKAction.scale(to: scalingFactor, duration: duration)
         let positioning = SKAction.moveTo(y: zoomPoint!, duration: duration)
         let group = SKAction.group([zoomInAction, positioning])
-        
-        if !zooming{
-            zooming = true
-            cameraNode.run(group) {
-                self.zooming = false
-                self.zoomedIn = true
-            }
+        zooming = true
+        cameraNode.run(group) {
+            self.zooming = false
+            self.zoomedIn = true
         }
-        
     }
     
     func zoomOut(scalingFactor: CGFloat = 1, duration: TimeInterval = 1) {
         let zoomInAction = SKAction.scale(to: scalingFactor, duration: duration)
         let positioning = SKAction.moveTo(y: self.size.height / 2, duration: duration)
         let group = SKAction.group([zoomInAction, positioning])
-        if !zooming{
-            zooming = true
-            cameraNode.run(group) {
-                self.zooming = false
-            }
+        zooming = true
+        cameraNode.run(group) {
+            self.zooming = false
+            self.zoomedIn = false
         }
-        zoomedIn = false
     }
     
-    //MARK: Speech
+    //MARK: Speech Recognition
     
     func settingUpSpeechSession() {
         
@@ -259,17 +261,13 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                 
                     if self.recognizedSentence.contains(self.currentWordOnScreen) || Tools.levenshtein(aStr: each.substring.lowercased(), bStr: self.currentWordOnScreen) < 3 {
                     
-                    self.audio.stop()
-                    self.recognitionRequest?.endAudio()
-                    self.recognitionRequest = nil
-                    self.recognitionTask = nil
-                    
-                    self.currentWordOnScreen = self.currentWords[self.index]
-                    
-                    print("Word recognized, the new word on screen is: \(self.currentWordOnScreen!)\n")
+                        self.audio.stop()
+                        self.recognitionRequest?.endAudio()
+                        self.recognitionRequest = nil
+                        self.recognitionTask = nil
                     
                 }
-                    //skip if too many words were said
+                    //skip if many words were said and none were correct
                 else if (self.recognizedSentence.lengthOfBytes(using: String.Encoding.ascii) > 50 && !self.justSkipped) || self.recognizedSentence.contains("skip"){
                     self.audio.stop()
                     self.recognitionRequest?.endAudio()
@@ -291,10 +289,9 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                 
                 self.nextCabin()
                 
-                //                if !self.justSkipped{
-                //                    self.nextCabin()
-                //                    self.justSkipped = false
-                //                }
+                print("Word recognized, the new word on screen is: \(self.currentWordOnScreen!)\n")
+                self.justSkipped = false
+
                 
                 if self.listen {
                     sleep(1)
@@ -389,12 +386,20 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         currentWordOnScreen = currentWords[index]
         print("Current word: \(self.currentWordOnScreen!)\n")
         cabins[index].physicsBody?.mass=5
+        startingDoors {
+            _ = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (timer) in
+                self.changingCabins = false
+            }        }
+    }
+    
+    func startingDoors(finished: () -> Void) {
         cabins[index].openDoors(duration: 1.5, wait: true, waitDuration: 4.3)
-        
+        finished()
     }
     
     
     func nextCabin() {
+        changingCabins = true
         cabins[index].physicsBody?.mass = 2
         self.cabins[self.index].closeDoors()
         if index == Int(amountOfCabins)-1{
@@ -410,8 +415,17 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         }
         cabins[index].physicsBody?.mass = 9/screenScale
         
-        //default wait time is 2 seconds
-        cabins[index].openDoors(wait: true)
+        reopenDoors(){
+            _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { (timer) in
+                self.changingCabins = false
+            }
+        }
+        
+    }
+    
+    func reopenDoors(finished: () -> Void) {
+        cabins[index].openDoors(wait: true)  //default wait time is 2 seconds
+        finished()
     }
     
     func reloadWords() {
