@@ -108,7 +108,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         let utterance = AVSpeechUtterance(string: self.currentWordOnScreen)
         utterance.voice = AVSpeechSynthesisVoice(language: "it-IT")
         self.synthesizer.speak(utterance)
-        
+       
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
@@ -116,8 +116,8 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         } catch {
             print("Error in starting the audio session")
         }
- 
     }
+    
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {return}
@@ -297,6 +297,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                 //                }
                 
                 if self.listen {
+                    sleep(1)
                     try! self.startRecording()
                 }
             } else if error != nil {
@@ -304,6 +305,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                 inputNode.removeTap(onBus: 0)
                 
                 if self.listen {
+                    sleep(1)
                     try! self.startRecording()
                 }
             }
