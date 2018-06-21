@@ -10,8 +10,7 @@ import SpriteKit
 
 class MovingShapeNode: MovingNode {
     var isInTheRightHole = false
-    var isFitting = false
-    var fittingSpeed: CGFloat = 150
+    var canMove = true
     
     convenience init(imageNamed: String) {
         let texture = SKTexture(imageNamed: imageNamed)
@@ -41,7 +40,7 @@ class MovingShapeNode: MovingNode {
     
     func moveTo(position: CGPoint, onComplete: @escaping (Bool) -> Void) -> SKAction {
         
-        isFitting = true
+        canMove = false
         let path = UIBezierPath()
         path.move(to: self.position)
         path.addLine(to: position)
@@ -51,12 +50,42 @@ class MovingShapeNode: MovingNode {
         }
         
         let fillInHoleAnimation = SKAction.sequence([
-            SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: fittingSpeed),
+            SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: Consts.RollerCoasterGameScreen.speeds.shapeFittingInHole),
             completedAction
 //            SKAction.removeFromParent(),
             ])
         self.run(fillInHoleAnimation)
         return fillInHoleAnimation
+    }
+    
+    
+    func deScaling(onComplete: @escaping (Bool) -> Void){
+        
+        let completedAction = SKAction.run {
+            onComplete(true)
+        }
+        let scalingAnimation = SKAction.sequence([
+            SKAction.scale(to: CGSize.zero, duration: 0.5),
+            completedAction
+            ])
+        self.run(scalingAnimation)
+    }
+    
+    func returnInInitialPosition(onComplete: @escaping (Bool) -> Void) {
+        if let scene = self.scene as? RollerCoasterGameScreen {
+            let completedAction = SKAction.run {
+                onComplete(true)
+            }
+            let path = UIBezierPath()
+            path.move(to: self.position)
+            path.addLine(to: scene.coloredShapesInitialPositions)
+            let returnAnim = SKAction.sequence([
+                SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: Consts.RollerCoasterGameScreen.speeds.shapeReturning),
+                completedAction
+                ])
+            self.run(returnAnim)
+            
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -77,7 +106,10 @@ class MovingShapeNode: MovingNode {
         
         if let scene = self.scene as? RollerCoasterGameScreen {
             if isInTheRightHole == false {
-                scene.coloredShapesPositions[self.name!] = scene.coloredShapesInitialPositions
+//                self.returnInInitialPosition() { value in
+                    scene.coloredShapesPositions[self.name!] = scene.coloredShapesInitialPositions
+//                }
+//                scene.coloredShapesPositions[self.name!] = scene.coloredShapesInitialPositions
             }
             else {
                 scene.shapeIsGoingToRightHole(nodeName: self.name!)

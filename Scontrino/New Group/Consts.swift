@@ -254,6 +254,10 @@ struct Consts {
             static let vagons: CGFloat = 1
             static let shapes: CGFloat = 51
         }
+        struct speeds {
+            static let shapeReturning: CGFloat = 150
+            static let shapeFittingInHole: CGFloat = 1000
+        }
     }
     struct Id {
         struct RollerCoasterGameScreen {

@@ -58,6 +58,23 @@ struct GameDataSource {
 //        return SKSpriteNode(imageNamed: "gray" + " " + shape)
     }
     
+    func nextFakeShapeNode(from movingNodes: [MovingShapeNode]) -> MovingShapeNode {
+        var isTheSame = true
+        var newNode = MovingShapeNode()
+        while isTheSame {
+            isTheSame = false
+            newNode = nextMovingShapeNode()
+            for index in 0...movingNodes.count - 1 {
+                let node = movingNodes[index]
+                let shape = node.texture!.description.split(separator: "\'")[1].split(separator: " ").last!
+                if newNode.texture!.description.split(separator: "\'")[1].split(separator: " ").last! == shape {
+                    isTheSame = true
+                }
+            }
+        }
+        return newNode
+    }
+    
     func nextMovingContextNode(from logNodes: [LogNode]) -> MovingContextNode { // changed from skspritenode in holenode and movingNode to MovingShapeNode
         //ALESSIO: I'm Modifing this
         let index = GKRandomSource.sharedRandom().nextInt(upperBound: logNodes.count) //sistemare

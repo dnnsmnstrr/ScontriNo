@@ -16,6 +16,7 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
     let textureWidth = MovingShapeNode(imageNamed: "red square").size.width
     //shape arrays
     var coloredShapesNodes: [MovingShapeNode] = []
+    var coloredFakeShapesNodes: [MovingShapeNode] = []
     var coloredShapesPositions: [String: CGPoint] = [:]
     var coloredShapesInitialPositions = CGPoint.zero
     var coloredHoleNodes: [MovingShapeNode] = []
@@ -26,6 +27,7 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
     var trainXPosition: CGFloat = 0
     var trainAnimDuration: TimeInterval = 0.0
     var vagonIndex = 0
+    var coloredFakeShapesIndex = 0
     
     override init() {
         super.init()
@@ -141,15 +143,24 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
                             debugPrint("I'm changing Shape")
                             self.coloredShapesNodes[index] = self.dataSource.nextMovingShapeNode()
                             self.createOneShape(index: index, numberOfShapes: self.setDifficulty())
-                        } else {
+                        } else if self.numberShapesRemaining > 0 - self.setDifficulty() + 1 {
                             debugPrint("I'm only removing a shape")
+                            self.coloredFakeShapesNodes.append(self.dataSource.nextFakeShapeNode(from: self.coloredShapesNodes))
+                            self.coloredFakeShapesNodes[self.coloredFakeShapesIndex].name = Consts.Id.RollerCoasterGameScreen.coloredShapeNode + "\(self.coloredFakeShapesIndex + 1 * 1000)"
+                            self.coloredShapesPositions[self.coloredFakeShapesNodes[self.coloredFakeShapesIndex].name!] = self.coloredShapesInitialPositions
+                            self.coloredFakeShapesNodes[self.coloredFakeShapesIndex].position = self.coloredShapesPositions[self.coloredFakeShapesNodes[self.coloredFakeShapesIndex].name!]!
+                            
+                            self.scene?.addChild(self.coloredFakeShapesNodes[self.coloredFakeShapesIndex])
+                            self.coloredFakeShapesIndex += 1
+                            self.coloredShapesNodes.remove(at: index)
+                        } else {
                             self.coloredShapesNodes.remove(at: index)
                         }
                         
                         self.trainXPosition += self.train.headVagon.size.width + (self.train.headVagon.size.width / 100 * 5)
                         self.moveHolesWithTrain(pos: self.trainXPosition)
                         self.moveTrain() { (value) in
-                            debugPrint("I'm inside Moving Train")
+//                            debugPrint("I'm inside Moving Train")
                             if(value) {
                                 debugPrint("shapeRamaining \(self.numberShapesRemaining)")
                                 self.vagonIndex += 1
@@ -175,7 +186,7 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
     func moveHolesWithTrain(pos: CGFloat) {
         
         for index in 0...coloredHoleNodes.count - 1 {
-            debugPrint("I'm moving the hole: \(index)")
+//            debugPrint("I'm moving the hole: \(index)")
             let path = UIBezierPath()
             path.move(to: coloredHoleNodes[index].position)
             path.addLine(to: CGPoint(x: pos - (train.centralVagons[index].size.width * CGFloat(index + 1)), y: coloredHoleNodes[index].position.y))
@@ -186,98 +197,18 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
         }
     }
     
-    func controlIfRightShapeInHole(nodeName: String) {
-        var i = 0
-        while i < coloredShapesNodes.count {
-            
-            if coloredShapesNodes[i].name == nodeName {
-                let index = i
-                //creating animation to get a new shape
-                let createNewShapeNode = SKAction.run {
-                    if self.numberShapesRemaining > 0 {
-                    self.coloredShapesNodes[index] = self.dataSource.nextMovingShapeNode()
-                    self.createOneShape(index: index, numberOfShapes: self.setDifficulty())
-                    } else {
-                        self.coloredShapesNodes.remove(at: index)
-                    }
-                }
-                
-                //                coloredShapesNodes[i].isFitting = true
-                //                let path = UIBezierPath()
-                //                path.move(to: coloredShapesNodes[i].position)
-                //                path.addLine(to: holeNode.position)
-                //
-                //                let fillInHoleAnimation = SKAction.sequence([
-                //                    SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: 100),
-                //                    SKAction.removeFromParent(),
-                //                    createNewShapeNode
-                //                    ])
-                
-                
-                //creating animation to get the colored hole
-                let createColoredHole = SKAction.run {
-                    
-//                    self.addChild(self.coloredHoleNodes[self.vagonIndex])
-                }
-                
-                //creating animation to get a new hole after the shape is in his center
-                let createNewHole = SKAction.run {
-                    if self.coloredShapesNodes.count > 0{
-                    self.createHole()
-                    } else {
-                        self.endGame = true
-                    }
-                }
-                
-                let changeHoleAnimation = SKAction.sequence([
-                    //                    SKAction.wait(forDuration: newSequence.duration),
-                    //                    SKAction.wait(forDuration: moveTrainAnim.duration),
-                    SKAction.removeFromParent(),
-                    createNewHole
-                    ])
-                trainXPosition += train.headVagon.size.width - (self.train.headVagon.size.width / 100 * 15)
-                
-                let moveToAnimation = SKAction.run {
-//                    self.coloredShapesNodes[index].moveTo(position: self.holeNode.position)
-                    self.moveTrain() { (value) in
-                        if(value) {
-                            self.holeNode.run(changeHoleAnimation)
-                            self.vagonIndex += 1
-                        }
-                    }
-                }
-                
-                //creating animation sequence to move the shape to the hole and than creating a new shape
-                let newSequence = SKAction.sequence([
-                    createColoredHole,
-                    moveToAnimation,
-                    createNewShapeNode
-                    ])
-                coloredShapesNodes[index].run(newSequence)
-                
-//                let moveTrainAnim = SKAction.run {
-////                    self.trainAnimDuration = self.train.moveTrain(pos: self.train.headVagon.position.x + self.train.headVagon.size.width)
-////
-//                }
-                
-//                let moveTrainAnimationSq = SKAction.sequence([
-//                    SKAction.wait(forDuration: newSequence.duration),
-//                                  moveTrainAnim,
-////                                  self.coloredHoleNodes[self.vagonIndex].moveTo(position: CGPoint(x: self.train.headVagon.position.x + self.train.headVagon.size.width, y: self.coloredHoleNodes[self.vagonIndex].position.y))
-//                    ])
-//                self.run(moveTrainAnimationSq)
-                
-                numberShapesRemaining -= 1
-                print("number of remaining shapes are \(numberShapesRemaining)")
-            }
-            i += 1
-        }
-    }
     
     func endGameFunction() {
         print("THE END FRA'")
         endGame = false
         trainXPosition += (train.tailVagon.size.width * 2)
+        for index in 0...coloredFakeShapesNodes.count - 1 {
+            coloredFakeShapesNodes[index].deScaling() { (value) in
+                if value {
+                    self.removeFromParent()
+                }
+            }
+        }
         moveHolesWithTrain(pos: trainXPosition)
         moveTrain() { (value) in
             if(value) {
@@ -343,9 +274,12 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
         }
         
         for index in  0..<coloredShapesNodes.count {
-            if !coloredShapesNodes[index].isFitting{
+            if coloredShapesNodes[index].canMove {
                 coloredShapesNodes[index].position = coloredShapesPositions[coloredShapesNodes[index].name!]!
             }
+        }
+        for index in 0..<coloredFakeShapesIndex {
+            coloredFakeShapesNodes[index].position = coloredShapesPositions[coloredFakeShapesNodes[index].name!]!
         }
     }
 }

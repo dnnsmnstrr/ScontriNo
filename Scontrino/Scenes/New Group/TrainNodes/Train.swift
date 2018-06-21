@@ -82,7 +82,7 @@ struct Train {
             SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: trainSpeed),
             anim
             ])
-        debugPrint("fill in Hole anim: \(fillInHoleAnimation.duration)")
+//        debugPrint("fill in Hole anim: \(fillInHoleAnimation.duration)")
         vagon.run(fillInHoleAnimation)
         return fillInHoleAnimation.duration
     }
