@@ -7,8 +7,9 @@
 //
 
 import SpriteKit
+import Speech
 
-class MenuScreen: SKScene, ButtonNodeDelegate {
+class MenuScreen: SKScene, ButtonNodeDelegate, UIPageViewControllerDelegate {
     var touchLocation: CGPoint!
     
     override init() {
@@ -72,12 +73,88 @@ class MenuScreen: SKScene, ButtonNodeDelegate {
             case "FloatingLogsGameScreen":
                 RootViewController.shared.skView.presentScene(FloatingLogsGameScreen())
             case "FerrisWheelGameScreen":
-                RootViewController.shared.skView.presentScene(FerrisWheelGameScreen())
+                checkForAuthorizations()
 //            case "TrialScreen":
 //                RootViewController.shared.skView.presentScene(TrialScreen())
             default:
                 break
             }
+        }
+    }
+    
+    var firstTime = true
+    
+    func checkForAuthorizations() {
+        checkMicrophoneAuthorization()
+        checkSpeechRecognizerAuthorization()
+        AVCaptureDevice.requestAccess(for: .audio) { granted in
+            DispatchQueue.main.async {
+                if Consts.FerrisWheelAuthorizationStatus.speechRecognizerAuth && Consts.FerrisWheelAuthorizationStatus.microphoneAuth {
+                    RootViewController.shared.skView.presentScene(FerrisWheelGameScreen())
+                } else {
+                    if self.firstTime {
+                        self.firstTime = false
+                    } else if !self.firstTime {
+                        self.alertSettings(title: "Richiesta permessi", message: "In modo da poter giocare, vai in Impostazioni e dai il permesso all'utilizzo del microfono e dell'opzione di riconoscimento vocale.")
+                    }
+                }
+            }
+        }
+    }
+    
+    func alertSettings(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Impostazioni", style: .default, handler: { (action: UIAlertAction!) in
+            let url = URL(string:UIApplicationOpenSettingsURLString)
+            _ =  UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Cancella", style: .cancel, handler: { (action: UIAlertAction!) in
+            alert.dismiss(animated: true, completion: nil)
+            
+        }))
+        view?.window?.rootViewController?.present(alert, animated: true, completion: nil)
+    }
+    
+    func waitForDecision(info: String) {
+        AVCaptureDevice.requestAccess(for: .audio) { granted in
+            DispatchQueue.main.async {
+                if info == "speech" {
+                    self.checkSpeechRecognizerAuthorization()
+                } else if info == "mic" {
+                    self.checkMicrophoneAuthorization()
+                }
+            }
+        }
+    }
+    
+    func checkSpeechRecognizerAuthorization() {
+        SFSpeechRecognizer.requestAuthorization { authStatus in
+            OperationQueue.main.addOperation {
+                switch authStatus {
+                case .authorized:
+                    Consts.FerrisWheelAuthorizationStatus.speechRecognizerAuth = true
+                case .denied:
+                    Consts.FerrisWheelAuthorizationStatus.speechRecognizerAuth = false
+                case .notDetermined:
+                    self.waitForDecision(info: "speech")
+                default: break
+                }
+            }
+        }
+    }
+    
+    func checkMicrophoneAuthorization() {
+        let authStatus = AVCaptureDevice.authorizationStatus(for: .audio)
+        switch authStatus {
+            
+        case .authorized:
+            Consts.FerrisWheelAuthorizationStatus.microphoneAuth = true
+        case .denied:
+            Consts.FerrisWheelAuthorizationStatus.speechRecognizerAuth = false
+        case .notDetermined:
+            waitForDecision(info: "mic")
+        default: break
         }
     }
 }

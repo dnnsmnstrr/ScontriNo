@@ -202,6 +202,11 @@ struct Consts {
         "yellow"
     ]
     
+    struct FerrisWheelAuthorizationStatus {
+        static var speechRecognizerAuth = false
+        static var microphoneAuth = false
+    }
+    
     struct FerrisWheelGameScreen {
         static var words: [String] = []
     }

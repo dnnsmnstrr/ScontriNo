@@ -67,6 +67,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     
     override func createSceneContents() {
         super.createSceneContents()
+        
         let center: CGPoint = CGPoint(x: self.size.width / 2,y: self.size.height / 2)
         
         //camera
@@ -80,17 +81,16 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         background.position = center
         background.setScale(Consts.Graphics.scale)
         addChild(background)
-
+        
         //create ferris wheel
         createFerrisWheel()
         self.physicsWorld.gravity = CGVector(dx: 0, dy: -30/screenScale)
         
         //set up the first round
         startGame()
-        
-        //start the recording process
-        checkAuthorization()
-        
+
+        //Start the session
+        settingUpSpeechSession()
     }
     
     //touch handling
@@ -103,13 +103,21 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         /* TEXT TO SPEECH
         self.recognitionRequest?.endAudio()
         self.recognitionRequest = nil
-        self.recognitionTask = nil
+        self.recognitionTask = nil*/
         
         let utterance = AVSpeechUtterance(string: self.currentWordOnScreen)
         utterance.voice = AVSpeechSynthesisVoice(language: "it-IT")
-        utterance.rate = 0.5
-        self.synthesizer.speak(utterance)*/
+        self.synthesizer.speak(utterance)
+       
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
+        } catch {
+            print("Error in starting the audio session")
+        }
     }
+    
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {return}
@@ -189,51 +197,25 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     
     //MARK: Speech
     
-    func checkAuthorization() {
+    func settingUpSpeechSession() {
         
-        SFSpeechRecognizer.requestAuthorization { authStatus in
+        self.listen = true
+        self.recordingNode.texture = SKTexture(imageNamed: "recording on")
+        
+        if self.audio.isRunning {
+            self.audio.stop()
+            self.recognitionRequest?.endAudio()
+        }
             
-            OperationQueue.main.addOperation {
-                switch authStatus {
-                    
-                case .authorized:
-                    
-                    self.listen = true
-                    
-                    self.recordingNode.texture = SKTexture(imageNamed: "recording on")
-                    
-                    if self.audio.isRunning {
-                        self.audio.stop()
-                        self.recognitionRequest?.endAudio()
-                    } else {
-                        self.recordingNode.texture = SKTexture(imageNamed: "recording on")
-//                        try! self.startRecording()
-                        
-                        do {
-                            try self.startRecording()
-                            
-                        } catch {
-                            print("error unknown")
-                        }
-                    }
-                    
-                case .denied:
-                    
-                    self.recordingNode.texture = SKTexture(imageNamed: "recording denied")
-                    
-                case .restricted:
-                    
-                    self.recordingNode.texture = SKTexture(imageNamed: "recording denied")
-                    
-                case .notDetermined:
-                    
-                    self.recordingNode.texture = SKTexture(imageNamed: "recording denied")
-                    
-                }
+        else {
+            self.recordingNode.texture = SKTexture(imageNamed: "recording on")
+            do {
+                try self.startRecording()
+            } catch {
+                print("error unknown")
             }
         }
-    }
-    
+    }    
     
     private func startRecording() throws {
         
@@ -275,7 +257,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                 
                 for each in result.bestTranscription.segments {
                 
-                    if self.recognizedSentence.contains(self.currentWordOnScreen) || Tools.levenshtein(aStr: each.substring.lowercased(), bStr: self.currentWordOnScreen) < 4 {
+                    if self.recognizedSentence.contains(self.currentWordOnScreen) || Tools.levenshtein(aStr: each.substring.lowercased(), bStr: self.currentWordOnScreen) < 3 {
                     
                     self.audio.stop()
                     self.recognitionRequest?.endAudio()
@@ -283,7 +265,6 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                     self.recognitionTask = nil
                     
                     self.currentWordOnScreen = self.currentWords[self.index]
-                    
                     
                     print("Word recognized, the new word on screen is: \(self.currentWordOnScreen!)\n")
                     
@@ -316,15 +297,15 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                 //                }
                 
                 if self.listen {
+                    sleep(1)
                     try! self.startRecording()
                 }
             } else if error != nil {
-                print("\nregisterrr")
-                
                 self.audio.stop()
                 inputNode.removeTap(onBus: 0)
                 
                 if self.listen {
+                    sleep(1)
                     try! self.startRecording()
                 }
             }
@@ -425,6 +406,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         }
         else{
             self.index += 1
+            self.currentWordOnScreen = self.currentWords[index]
         }
         cabins[index].physicsBody?.mass = 9/screenScale
         

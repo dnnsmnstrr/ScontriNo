@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "cibo@1x.png",
+      "filename" : "cibo@1x.pdf",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "cibo@2x.png",
+      "filename" : "cibo@2x.pdf",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "cibo@3x.png",
+      "filename" : "cibo@3x.pdf",
       "scale" : "3x"
     }
   ],
