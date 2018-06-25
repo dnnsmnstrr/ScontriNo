@@ -11,6 +11,7 @@ import SpriteKit
 class MovingShapeNode: MovingNode {
     var isInTheRightHole = false
     var canMove = true
+    var initialPos = CGPoint.zero
     
     convenience init(imageNamed: String) {
         let texture = SKTexture(imageNamed: imageNamed)
@@ -52,7 +53,7 @@ class MovingShapeNode: MovingNode {
         let fillInHoleAnimation = SKAction.sequence([
             SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: Consts.RollerCoasterGameScreen.speeds.shapeFittingInHole),
             completedAction
-//            SKAction.removeFromParent(),
+            //            SKAction.removeFromParent(),
             ])
         self.run(fillInHoleAnimation)
         return fillInHoleAnimation
@@ -90,30 +91,41 @@ class MovingShapeNode: MovingNode {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let scene = self.scene as? RollerCoasterGameScreen {
-            scene.coloredShapesInitialPositions = scene.coloredShapesPositions[self.name!]!
+            if canMove {
+                scene.coloredShapesInitialPositions = scene.coloredShapesPositions[self.name!]!
+            
+            }
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            if let scene = self.scene as? RollerCoasterGameScreen {
-                let location = touch.location(in: scene)
-                scene.coloredShapesPositions[self.name!] = location
+        if canMove {
+            if let touch = touches.first {
+                if let scene = self.scene as? RollerCoasterGameScreen {
+                    let location = touch.location(in: scene)
+                    scene.coloredShapesPositions[self.name!] = location
+                }
             }
         }
-    }
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        if let scene = self.scene as? RollerCoasterGameScreen {
-            if isInTheRightHole == false {
-//                self.returnInInitialPosition() { value in
-                    scene.coloredShapesPositions[self.name!] = scene.coloredShapesInitialPositions
-//                }
-//                scene.coloredShapesPositions[self.name!] = scene.coloredShapesInitialPositions
-            }
-            else {
-                scene.shapeIsGoingToRightHole(nodeName: self.name!)
-//                scene.controlIfRightShapeInHole(nodeName: self.name!)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if canMove {
+            if let scene = self.scene as? RollerCoasterGameScreen {
+                if isInTheRightHole == false {
+                    //                scene.changeUserAbleToMove()
+                    self.returnInInitialPosition() { value in
+                        scene.coloredShapesPositions[self.name!] = self.initialPos
+                        //                    scene.changeUserAbleToMove()
+                    }
+                    //                scene.coloredShapesPositions[self.name!] = scene.coloredShapesInitialPositions
+                }
+                else {
+                    scene.blockUserMovements()
+                    scene.shapeIsGoingToRightHole(nodeName: self.name!)
+                    //                scene.controlIfRightShapeInHole(nodeName: self.name!)
+                }
             }
         }
         

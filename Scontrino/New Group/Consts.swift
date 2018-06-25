@@ -260,8 +260,8 @@ struct Consts {
             static let shapes: CGFloat = 51
         }
         struct speeds {
-            static let shapeReturning: CGFloat = 150
-            static let shapeFittingInHole: CGFloat = 1000
+            static let shapeReturning: CGFloat = 1000
+            static let shapeFittingInHole: CGFloat = 150
         }
     }
     struct Id {
