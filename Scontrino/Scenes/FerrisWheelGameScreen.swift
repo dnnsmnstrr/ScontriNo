@@ -95,41 +95,49 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     }
     
     //touch handling
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {return}
-        self.start = touch.location(in: self)
-        self.startTime = touch.timestamp
-        
-        /* TEXT TO SPEECH
-        self.recognitionRequest?.endAudio()
-        self.recognitionRequest = nil
-        self.recognitionTask = nil*/
-        
-        if !changingCabins {
+
+    override func buttonNodeTapped(_ sender: ButtonNode) {
+        if sender.name == "backButton"{
+            listen = false
+            RootViewController.shared.skView.presentScene(MenuScreen())
+        }
+        else if !changingCabins {
             let utterance = AVSpeechUtterance(string: self.currentWordOnScreen)
             utterance.voice = AVSpeechSynthesisVoice(language: "it-IT")
             self.synthesizer.speak(utterance)
-            
+
+            //        TEXT TO SPEECH
+//            self.recognitionRequest?.endAudio()
+//            self.recognitionRequest = nil
+//            self.recognitionTask = nil
+
             let audioSession = AVAudioSession.sharedInstance()
             do {
                 try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
                 try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
+
             } catch {
                 print("Error in starting the audio session")
             }
         }
         
-        
+        print("\(String(describing: currentWordOnScreen)) spoken")
     }
     
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {return}
+        self.start = touch.location(in: self)
+        self.startTime = touch.timestamp
+    }
+
+//
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {return}
         self.end = touch.location(in: self)
         var dx = ((self.end?.x)! - (self.start?.x)!)
         var dy = ((self.end?.y)! - (self.start?.y)!)
         
+
         let magnitude:CGFloat = sqrt(dx*dx+dy*dy)
         print(magnitude)
         if magnitude >= 25 {
@@ -139,7 +147,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                 dx = dx / magnitude
                 dy = dy / magnitude
                 print("dx: \(dx), dy: \(dy), speed: \(wheelSpeed) ")
-                
+
             }
             let touchPosition = touch.location(in: self)
             if touchPosition.x < (self.frame.width / 2) {
@@ -152,17 +160,17 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
             } else {
                 self.ferrisWheel.physicsBody?.applyAngularImpulse(wheelSpeed/10)
             }
-            
+
         }
-        if magnitude < 25 {
+        
+        else if magnitude < 25 {
             if !zoomedIn && !zooming{
-//                zooming = true
                 zoomIn()
             }
             else if !zooming {
                 zoomOut()
             }
-            
+
             let touchPosition = touch.location(in: self)
             if touchPosition.x < (self.frame.width / 2) {
                 self.ferrisWheel.physicsBody?.angularVelocity = 0
@@ -170,7 +178,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                 self.ferrisWheel.physicsBody?.angularVelocity = 0
             }
         }
-        
+
     }
     
     //MARK: camera functions
@@ -325,9 +333,9 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         ferrisWheel.name = "wheel"
         ferrisWheel.zPosition = 2
         ferrisWheel.anchorPoint = CGPoint(x: 0.5, y: 0.5) // default
-        ferrisWheel.position = CGPoint(x: size.width/2, y: size.height/1.6)
+        ferrisWheel.position = CGPoint(x: size.width/2, y: size.height/1.5)
         ferrisWheel.size = CGSize(width: size.height/1.2, height: size.height/1.2)
-        zoomPoint = ferrisWheel.frame.minY - size.height/14
+        zoomPoint = ferrisWheel.frame.minY - size.height/19
         ferrisWheel.physicsBody = SKPhysicsBody(circleOfRadius: max((ferrisWheel.size.width) / 2,
                                                                     (ferrisWheel.size.height) / 2))
         ferrisWheel.zRotation = CGFloat.pi / 2
@@ -344,12 +352,20 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         placeCabins(amount: amountOfCabins)
     }
     
+    
+    //cabin creation loop
+    
     func placeCabins(amount: Float = 6) {
-        let radius = ferrisWheel.size.width/2 - 10
+        let radius = ferrisWheel.size.width/2 - 16
         for i in 1...Int(amount) {
             
-            let newCabin = CabinNode.init(imageNamed: "cabin body")
+            let newOccupant: String = dataSource.getWord()
+            currentWords.append(newOccupant)
+
+            let newCabin = CabinNode.init(imageNamed: "cabin body", occupantName: newOccupant)
             
+            newCabin.occupant?.delegate = self
+            newCabin.name = newOccupant
             newCabin.zPosition = 3
             newCabin.size = CGSize(width: ferrisWheel.size.width/5, height: ferrisWheel.size.height/5)
             
@@ -366,16 +382,10 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
             newCabin.rightDoor?.size = CGSize(width: newCabin.size.width/3.1, height: newCabin.size.height/1.3)
             newCabin.occupant?.size = CGSize(width: newCabin.size.width/2, height: newCabin.size.height/2)
             
-            
-            //occupant
-            let newOccupant: String = dataSource.getWord()
-            currentWords.append(newOccupant)
-            newCabin.occupant?.texture = SKTexture(imageNamed: newOccupant)
-            
             self.addChild(newCabin)
             cabins.append(newCabin)
             
-            let joint = SKPhysicsJointPin.joint(withBodyA: ferrisWheel.physicsBody! , bodyB: newCabin.physicsBody!, anchor: CGPoint(x: currentX, y: currentY))
+            let joint = SKPhysicsJointPin.joint(withBodyA: ferrisWheel.physicsBody! , bodyB: newCabin.physicsBody!, anchor: CGPoint(x: currentX, y: currentY-4))
             self.physicsWorld.add(joint)
             
         }
@@ -434,7 +444,9 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         for cabin in cabins {
             let newOccupant: String = dataSource.getWord()
             currentWords.append(newOccupant)
-            cabin.occupant?.texture = SKTexture(imageNamed: newOccupant)
+            cabin.occupant?.setTexture(imageNamed: newOccupant, for: .normal)
+            cabin.occupant?.setTexture(imageNamed: newOccupant + " highlighted", for: .highlighted)
+
             
         }
         print("The new words are: \(self.currentWords)")

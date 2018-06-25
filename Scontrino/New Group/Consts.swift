@@ -7,6 +7,7 @@
 //funzionerà?
 
 import UIKit
+import SpriteKit
 
 enum Difficulty {
     case easy, normal
@@ -17,6 +18,10 @@ enum Position {
 }
 
 struct Consts {
+    
+    static var allTextures: [SKTexture] = []
+    static var endBackground = ""
+    
     struct Graphics {
         static let screenBounds = UIScreen.main.bounds
         static let screenWidth = screenBounds.width

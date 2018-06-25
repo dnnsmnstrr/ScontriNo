@@ -314,7 +314,8 @@ class FloatingLogsGameScreen: GameScene, SKPhysicsContactDelegate  {
 //            }
             
             let goBack = SKAction.run {
-                RootViewController.shared.skView.presentScene(MenuScreen())
+                Consts.endBackground = "backgroundLog"
+                RootViewController.shared.skView.presentScene(GameEndScene())
             }
 //
             let finalLogInitialPoisition = SKAction.sequence([
