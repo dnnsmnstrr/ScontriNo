@@ -95,34 +95,42 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     }
     
     //touch handling
+//
+//    override func buttonNodeTapped(_ sender: ButtonNode) {
+//        if !changingCabins {
+//            let utterance = AVSpeechUtterance(string: self.currentWordOnScreen)
+//            utterance.voice = AVSpeechSynthesisVoice(language: "it-IT")
+//            self.synthesizer.speak(utterance)
+//
+//            //        TEXT TO SPEECH
+////            self.recognitionRequest?.endAudio()
+////            self.recognitionRequest = nil
+////            self.recognitionTask = nil
+//
+//            let audioSession = AVAudioSession.sharedInstance()
+//            do {
+//                try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+//                try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
+//
+//            } catch {
+//                print("Error in starting the audio session")
+//            }
+//        }
+//    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {return}
         self.start = touch.location(in: self)
         self.startTime = touch.timestamp
-        
+
         /* TEXT TO SPEECH
         self.recognitionRequest?.endAudio()
         self.recognitionRequest = nil
         self.recognitionTask = nil*/
-        
-        if !changingCabins {
-            let utterance = AVSpeechUtterance(string: self.currentWordOnScreen)
-            utterance.voice = AVSpeechSynthesisVoice(language: "it-IT")
-            self.synthesizer.speak(utterance)
-            
-            let audioSession = AVAudioSession.sharedInstance()
-            do {
-                try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
-                try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
-            } catch {
-                print("Error in starting the audio session")
-            }
-        }
-        
-        
+
+
     }
-    
+
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {return}
@@ -130,6 +138,10 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         var dx = ((self.end?.x)! - (self.start?.x)!)
         var dy = ((self.end?.y)! - (self.start?.y)!)
         
+        
+        let touchedNode = self.nodes(at: start!).first
+        
+
         let magnitude:CGFloat = sqrt(dx*dx+dy*dy)
         print(magnitude)
         if magnitude >= 25 {
@@ -139,7 +151,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                 dx = dx / magnitude
                 dy = dy / magnitude
                 print("dx: \(dx), dy: \(dy), speed: \(wheelSpeed) ")
-                
+
             }
             let touchPosition = touch.location(in: self)
             if touchPosition.x < (self.frame.width / 2) {
@@ -152,17 +164,34 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
             } else {
                 self.ferrisWheel.physicsBody?.applyAngularImpulse(wheelSpeed/10)
             }
-            
+
         }
-        if magnitude < 25 {
+        
+        if let name = touchedNode?.name{
+            if name == currentWordOnScreen{
+                if !changingCabins {
+                    let utterance = AVSpeechUtterance(string: self.currentWordOnScreen)
+                    utterance.voice = AVSpeechSynthesisVoice(language: "it-IT")
+                    self.synthesizer.speak(utterance)
+                    
+                    let audioSession = AVAudioSession.sharedInstance()
+                    do {
+                        try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+                        try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
+                    } catch {
+                        print("Error in starting the audio session")
+                    }
+                }
+            }
+        }
+        else if magnitude < 25 {
             if !zoomedIn && !zooming{
-//                zooming = true
                 zoomIn()
             }
             else if !zooming {
                 zoomOut()
             }
-            
+
             let touchPosition = touch.location(in: self)
             if touchPosition.x < (self.frame.width / 2) {
                 self.ferrisWheel.physicsBody?.angularVelocity = 0
@@ -170,7 +199,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                 self.ferrisWheel.physicsBody?.angularVelocity = 0
             }
         }
-        
+
     }
     
     //MARK: camera functions
@@ -344,12 +373,19 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         placeCabins(amount: amountOfCabins)
     }
     
+    
+    //cabin creation loop
+    
     func placeCabins(amount: Float = 6) {
         let radius = ferrisWheel.size.width/2 - 10
         for i in 1...Int(amount) {
             
-            let newCabin = CabinNode.init(imageNamed: "cabin body")
+            let newOccupant: String = dataSource.getWord()
+            currentWords.append(newOccupant)
+
+            let newCabin = CabinNode.init(imageNamed: "cabin body", occupantName: newOccupant)
             
+            newCabin.name = newOccupant
             newCabin.zPosition = 3
             newCabin.size = CGSize(width: ferrisWheel.size.width/5, height: ferrisWheel.size.height/5)
             
@@ -365,12 +401,6 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
             newCabin.leftDoor?.size = CGSize(width: newCabin.size.width/3.1, height: newCabin.size.height/1.3)
             newCabin.rightDoor?.size = CGSize(width: newCabin.size.width/3.1, height: newCabin.size.height/1.3)
             newCabin.occupant?.size = CGSize(width: newCabin.size.width/2, height: newCabin.size.height/2)
-            
-            
-            //occupant
-            let newOccupant: String = dataSource.getWord()
-            currentWords.append(newOccupant)
-            newCabin.occupant?.texture = SKTexture(imageNamed: newOccupant)
             
             self.addChild(newCabin)
             cabins.append(newCabin)

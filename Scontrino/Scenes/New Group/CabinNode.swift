@@ -13,7 +13,7 @@ class CabinNode: SKSpriteNode {
     
     var leftDoor: SKSpriteNode?
     var rightDoor: SKSpriteNode?
-    var occupant: SKSpriteNode?
+    var occupant: ButtonNode?
     
     let screenScale: CGFloat = UIScreen.main.scale
 
@@ -27,17 +27,19 @@ class CabinNode: SKSpriteNode {
     var doorsOpen: Bool = false
     
     
-    convenience init(imageNamed: String) {
+    convenience init(imageNamed: String, occupantName: String) {
         let texture = SKTexture(imageNamed: imageNamed)
         self.init(texture: texture)
         
-        var texSize = texture.size()
+        let texSize = texture.size()
         self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: imageNamed), size: texSize)
         self.physicsBody?.isDynamic = true
         self.physicsBody?.affectedByGravity = true
         
         //MARK: cabin occupant
-        occupant = SKSpriteNode.init(imageNamed: "moon")
+        occupant = ButtonNode.init(imageNamed: occupantName, for: .normal)
+        occupant?.setTexture(imageNamed: occupantName, for: .normal)
+        occupant?.setTexture(imageNamed: occupantName, for: .highlighted) // "+ highlighted"
         occupant?.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         occupant?.zPosition = 4
         
