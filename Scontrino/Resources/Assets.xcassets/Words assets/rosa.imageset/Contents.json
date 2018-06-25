@@ -2,17 +2,15 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "rosa@1x.pdf",
+      "filename" : "rosa.pdf",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "rosa@2x.pdf",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "rosa@3x.pdf",
       "scale" : "3x"
     }
   ],
