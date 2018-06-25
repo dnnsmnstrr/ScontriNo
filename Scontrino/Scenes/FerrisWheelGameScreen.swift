@@ -95,51 +95,47 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     }
     
     //touch handling
-//
-//    override func buttonNodeTapped(_ sender: ButtonNode) {
-//        if !changingCabins {
-//            let utterance = AVSpeechUtterance(string: self.currentWordOnScreen)
-//            utterance.voice = AVSpeechSynthesisVoice(language: "it-IT")
-//            self.synthesizer.speak(utterance)
-//
-//            //        TEXT TO SPEECH
-////            self.recognitionRequest?.endAudio()
-////            self.recognitionRequest = nil
-////            self.recognitionTask = nil
-//
-//            let audioSession = AVAudioSession.sharedInstance()
-//            do {
-//                try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
-//                try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
-//
-//            } catch {
-//                print("Error in starting the audio session")
-//            }
-//        }
-//    }
+
+    override func buttonNodeTapped(_ sender: ButtonNode) {
+        if sender.name == "backButton"{
+            listen = false
+            RootViewController.shared.skView.presentScene(MenuScreen())
+        }
+        else if !changingCabins {
+            let utterance = AVSpeechUtterance(string: self.currentWordOnScreen)
+            utterance.voice = AVSpeechSynthesisVoice(language: "it-IT")
+            self.synthesizer.speak(utterance)
+
+            //        TEXT TO SPEECH
+//            self.recognitionRequest?.endAudio()
+//            self.recognitionRequest = nil
+//            self.recognitionTask = nil
+
+            let audioSession = AVAudioSession.sharedInstance()
+            do {
+                try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+                try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
+
+            } catch {
+                print("Error in starting the audio session")
+            }
+        }
+        
+        print("\(String(describing: currentWordOnScreen)) spoken")
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {return}
         self.start = touch.location(in: self)
         self.startTime = touch.timestamp
-
-        /* TEXT TO SPEECH
-        self.recognitionRequest?.endAudio()
-        self.recognitionRequest = nil
-        self.recognitionTask = nil*/
-
-
     }
 
-    
+//
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {return}
         self.end = touch.location(in: self)
         var dx = ((self.end?.x)! - (self.start?.x)!)
         var dy = ((self.end?.y)! - (self.start?.y)!)
-        
-        
-        let touchedNode = self.nodes(at: start!).first
         
 
         let magnitude:CGFloat = sqrt(dx*dx+dy*dy)
@@ -167,23 +163,6 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
 
         }
         
-        if let name = touchedNode?.name{
-            if name == currentWordOnScreen{
-                if !changingCabins {
-                    let utterance = AVSpeechUtterance(string: self.currentWordOnScreen)
-                    utterance.voice = AVSpeechSynthesisVoice(language: "it-IT")
-                    self.synthesizer.speak(utterance)
-                    
-                    let audioSession = AVAudioSession.sharedInstance()
-                    do {
-                        try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
-                        try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
-                    } catch {
-                        print("Error in starting the audio session")
-                    }
-                }
-            }
-        }
         else if magnitude < 25 {
             if !zoomedIn && !zooming{
                 zoomIn()
@@ -354,9 +333,9 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         ferrisWheel.name = "wheel"
         ferrisWheel.zPosition = 2
         ferrisWheel.anchorPoint = CGPoint(x: 0.5, y: 0.5) // default
-        ferrisWheel.position = CGPoint(x: size.width/2, y: size.height/1.6)
+        ferrisWheel.position = CGPoint(x: size.width/2, y: size.height/1.5)
         ferrisWheel.size = CGSize(width: size.height/1.2, height: size.height/1.2)
-        zoomPoint = ferrisWheel.frame.minY - size.height/14
+        zoomPoint = ferrisWheel.frame.minY - size.height/19
         ferrisWheel.physicsBody = SKPhysicsBody(circleOfRadius: max((ferrisWheel.size.width) / 2,
                                                                     (ferrisWheel.size.height) / 2))
         ferrisWheel.zRotation = CGFloat.pi / 2
@@ -377,7 +356,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     //cabin creation loop
     
     func placeCabins(amount: Float = 6) {
-        let radius = ferrisWheel.size.width/2 - 10
+        let radius = ferrisWheel.size.width/2 - 16
         for i in 1...Int(amount) {
             
             let newOccupant: String = dataSource.getWord()
@@ -385,6 +364,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
 
             let newCabin = CabinNode.init(imageNamed: "cabin body", occupantName: newOccupant)
             
+            newCabin.occupant?.delegate = self
             newCabin.name = newOccupant
             newCabin.zPosition = 3
             newCabin.size = CGSize(width: ferrisWheel.size.width/5, height: ferrisWheel.size.height/5)
@@ -405,7 +385,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
             self.addChild(newCabin)
             cabins.append(newCabin)
             
-            let joint = SKPhysicsJointPin.joint(withBodyA: ferrisWheel.physicsBody! , bodyB: newCabin.physicsBody!, anchor: CGPoint(x: currentX, y: currentY))
+            let joint = SKPhysicsJointPin.joint(withBodyA: ferrisWheel.physicsBody! , bodyB: newCabin.physicsBody!, anchor: CGPoint(x: currentX, y: currentY-4))
             self.physicsWorld.add(joint)
             
         }
@@ -464,7 +444,9 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         for cabin in cabins {
             let newOccupant: String = dataSource.getWord()
             currentWords.append(newOccupant)
-            cabin.occupant?.texture = SKTexture(imageNamed: newOccupant)
+            cabin.occupant?.setTexture(imageNamed: newOccupant, for: .normal)
+            cabin.occupant?.setTexture(imageNamed: newOccupant + " highlighted", for: .highlighted)
+
             
         }
         print("The new words are: \(self.currentWords)")

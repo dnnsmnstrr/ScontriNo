@@ -19,10 +19,8 @@ class CabinNode: SKSpriteNode {
 
     var offsetClosed: CGFloat? = nil
     var offsetOpened: CGFloat? = nil
-    var sizeWidth: CGFloat = 25+2
-    var sizeHeight: CGFloat = 11+2
-    
-    
+    var sizeWidth: CGFloat = 27
+    var sizeHeight: CGFloat = 13
     
     var doorsOpen: Bool = false
     
@@ -38,16 +36,15 @@ class CabinNode: SKSpriteNode {
         
         //MARK: cabin occupant
         occupant = ButtonNode.init(imageNamed: occupantName, for: .normal)
-        occupant?.setTexture(imageNamed: occupantName, for: .normal)
-        occupant?.setTexture(imageNamed: occupantName, for: .highlighted) // "+ highlighted"
+        occupant?.setTexture(imageNamed: occupantName + " highlighted", for: .highlighted)
         occupant?.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         occupant?.zPosition = 4
         
         
         //MARK: doors
         //stupidly hardcoded
-        offsetClosed = self.frame.width/(22*screenScale*(screenScale/2))
-        offsetOpened = self.frame.width/(10*screenScale*(screenScale/2))
+        offsetClosed = self.frame.width/(19*screenScale*(screenScale/2))
+        offsetOpened = self.frame.width/(12*screenScale*(screenScale/2))
         
         leftDoor = SKSpriteNode.init(imageNamed: "left door")
         rightDoor = SKSpriteNode.init(imageNamed: "right door")
