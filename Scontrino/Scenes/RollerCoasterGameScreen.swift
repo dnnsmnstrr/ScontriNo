@@ -92,6 +92,7 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
 //        coloredShapesPositions[coloredShapesNodes[index].name!] = (CGPoint(x: CGFloat(UIScreen.main.bounds.width / CGFloat(numberOfShapes) + spacing + (CGFloat(index) * textureWidth ) ), y: UIScreen.main.bounds.height / 2))
         coloredShapesPositions[coloredShapesNodes[index].name!] = (CGPoint(x: (Consts.Graphics.screenWidth / 11) * CGFloat((index + 1) * 3) , y: Consts.Graphics.screenHeight - (coloredShapesNodes[index].size.height / 2) - spacing))
         coloredShapesNodes[index].position = coloredShapesPositions[coloredShapesNodes[index].name!]!
+        coloredShapesNodes[index].initialPos = coloredShapesNodes[index].position
         self.addChild(coloredShapesNodes[index])
     }
     
@@ -149,6 +150,7 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
                             self.coloredFakeShapesNodes[self.coloredFakeShapesIndex].name = Consts.Id.RollerCoasterGameScreen.coloredShapeNode + "\(self.coloredFakeShapesIndex + 1 * 1000)"
                             self.coloredShapesPositions[self.coloredFakeShapesNodes[self.coloredFakeShapesIndex].name!] = self.coloredShapesInitialPositions
                             self.coloredFakeShapesNodes[self.coloredFakeShapesIndex].position = self.coloredShapesPositions[self.coloredFakeShapesNodes[self.coloredFakeShapesIndex].name!]!
+                            self.coloredFakeShapesNodes[self.coloredFakeShapesIndex].initialPos = self.coloredFakeShapesNodes[self.coloredFakeShapesIndex].position 
                             
                             self.scene?.addChild(self.coloredFakeShapesNodes[self.coloredFakeShapesIndex])
                             self.coloredFakeShapesIndex += 1
@@ -167,6 +169,7 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
                                 if self.coloredShapesNodes.count > 0{
                                     debugPrint("creating a hole node")
                                     self.createHole()
+                                    self.allowUserMovements()
                                 } else {
                                     self.endGame = true
                                 }
@@ -194,6 +197,24 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
             
             
                 coloredHoleNodes[index].run(SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: train.trainSpeed))
+        }
+    }
+    
+    func blockUserMovements(){
+        for index in  0..<coloredShapesNodes.count {
+            coloredShapesNodes[index].canMove = false
+        }
+        for index in 0..<coloredFakeShapesNodes.count {
+            coloredFakeShapesNodes[index].canMove = false
+        }
+    }
+    
+    func allowUserMovements(){
+        for index in  0..<coloredShapesNodes.count {
+            coloredShapesNodes[index].canMove = true
+        }
+        for index in 0..<coloredFakeShapesNodes.count {
+            coloredFakeShapesNodes[index].canMove = true
         }
     }
     
