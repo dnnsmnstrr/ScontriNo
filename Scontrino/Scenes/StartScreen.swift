@@ -20,6 +20,17 @@ class StartScreen: SKScene, ButtonNodeDelegate {
     }
     
     func createSceneContent() {
+        
+        let playerAtlas = SKTextureAtlas(named: "Sprites")
+        
+        //get the list of texture names, and sort them
+        let textureNames = playerAtlas.textureNames.sorted { (first, second) -> Bool in
+            return first < second
+        }
+        Consts.allTextures = textureNames.map {
+            return playerAtlas.textureNamed($0)
+        }
+        
         let backgroundNode = SKSpriteNode(imageNamed: "start screen background")
         backgroundNode.setScale(Consts.Graphics.scale)
         backgroundNode.position = CGPoint(x: Consts.Graphics.screenWidth / 2, y: Consts.Graphics.screenHeight / 2)
