@@ -94,7 +94,8 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
         let spacing: CGFloat = Consts.Graphics.screenHeight / 100
         coloredShapesNodes[index].name = Consts.Id.RollerCoasterGameScreen.coloredShapeNode + "\(index)"
 //        coloredShapesPositions[coloredShapesNodes[index].name!] = (CGPoint(x: CGFloat(UIScreen.main.bounds.width / CGFloat(numberOfShapes) + spacing + (CGFloat(index) * textureWidth ) ), y: UIScreen.main.bounds.height / 2))
-        coloredShapesPositions[coloredShapesNodes[index].name!] = (CGPoint(x: (Consts.Graphics.screenWidth / 11) * CGFloat((index + 1) * 3) , y: Consts.Graphics.screenHeight - (coloredShapesNodes[index].size.height / 2) - spacing))
+//        coloredShapesPositions[coloredShapesNodes[index].name!] = (CGPoint(x: (Consts.Graphics.screenWidth / 11) * CGFloat((index + 1) * 3) , y: Consts.Graphics.screenHeight - (coloredShapesNodes[index].size.height / 2) - spacing))
+        coloredShapesPositions[coloredShapesNodes[index].name!] = CGPoint(x: Consts.RollerCoasterGameScreen.NodePositions.shapeX + (CGFloat(index) * Consts.RollerCoasterGameScreen.NodePositions.shapeSpacing), y: Consts.RollerCoasterGameScreen.NodePositions.shapeY) 
         coloredShapesNodes[index].position = coloredShapesPositions[coloredShapesNodes[index].name!]!
         coloredShapesNodes[index].initialPos = coloredShapesNodes[index].position
         self.addChild(coloredShapesNodes[index])

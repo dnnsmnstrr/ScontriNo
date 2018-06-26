@@ -273,7 +273,9 @@ struct Consts {
         struct NodePositions {
             static let vagonYPos = Consts.Graphics.screenHeight - Consts.Graphics.screenHeight / 1.438
             static let hole = CGPoint(x: 0, y: 0)
-            static let shape = CGPoint(x: 0, y: 0)
+            static let shapeX = Consts.Graphics.screenWidth / 3
+            static let shapeY = Consts.Graphics.screenHeight / 1.38
+            static let shapeSpacing = Consts.Graphics.screenWidth / 5.99
         }
     }
     struct Id {
