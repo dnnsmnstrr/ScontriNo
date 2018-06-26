@@ -82,7 +82,8 @@ class StartScreen: SKScene, ButtonNodeDelegate {
                 let transition = SKAction.run {
                     RootViewController.shared.skView.presentScene(MenuScreen())
                 }
-                let playSequence = SKAction.sequence([fadeOut, SKAction.wait(forDuration: 0.5), transition])
+                let gateSound = SKAction.playSoundFileNamed("gateSound.mp3", waitForCompletion: false)
+                let playSequence = SKAction.sequence([gateSound,fadeOut, SKAction.wait(forDuration: 0.5), transition])
                 let leftDoorGroup = SKAction.group([moveGateLeft, fadeOut])
                 let rightDoorGroup = SKAction.group([moveGateRight, fadeOut])
                 playButton.run(playSequence)
