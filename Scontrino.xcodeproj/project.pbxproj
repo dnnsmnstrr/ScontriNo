@@ -37,6 +37,7 @@
 		8B03E0A020B6DDDB00004D7E /* MovingShapeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03E09A20B6DDDB00004D7E /* MovingShapeNode.swift */; };
 		8BF6F1E120DD4C3300969139 /* GameEndScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF6F1E020DD4C3300969139 /* GameEndScreen.swift */; };
 		8BF6F1E520DD4FD500969139 /* MonkeyPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF6F1E420DD4FD500969139 /* MonkeyPlayer.swift */; };
+		8BF85B9520E24F0700B18CDC /* Sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8BF85B9420E24F0700B18CDC /* Sprites.atlas */; };
 		B91713F520B6EA2F0071D78F /* TrialScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91713F420B6EA2F0071D78F /* TrialScreen.swift */; };
 		B9A5A64820BD8CAB0021501C /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A5A64720BD8CAB0021501C /* Consts.swift */; };
 /* End PBXBuildFile section */
@@ -75,6 +76,7 @@
 		8B10DF1D20BE02CF0045E4C5 /* Scontrino.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scontrino.entitlements; sourceTree = "<group>"; };
 		8BF6F1E020DD4C3300969139 /* GameEndScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEndScreen.swift; sourceTree = "<group>"; };
 		8BF6F1E420DD4FD500969139 /* MonkeyPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonkeyPlayer.swift; sourceTree = "<group>"; };
+		8BF85B9420E24F0700B18CDC /* Sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Sprites.atlas; sourceTree = "<group>"; };
 		B91713F420B6EA2F0071D78F /* TrialScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrialScreen.swift; sourceTree = "<group>"; };
 		B9A5A64720BD8CAB0021501C /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Consts.swift; path = "New Group/Consts.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,6 +137,7 @@
 		2A2B4A4720922241009B81FB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8BF85B9420E24F0700B18CDC /* Sprites.atlas */,
 				2A2B4A4A2092286F009B81FB /* Assets.xcassets */,
 				2A2B4A322091FBD7009B81FB /* LaunchScreen.storyboard */,
 			);
@@ -280,6 +283,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BF85B9520E24F0700B18CDC /* Sprites.atlas in Resources */,
 				2A2B4A4B2092286F009B81FB /* Assets.xcassets in Resources */,
 				2A2B4A342091FBD7009B81FB /* LaunchScreen.storyboard in Resources */,
 			);

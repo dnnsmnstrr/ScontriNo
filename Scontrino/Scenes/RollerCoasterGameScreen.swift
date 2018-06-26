@@ -239,7 +239,8 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
         moveTrain() { (value) in
             if(value) {
 //                I should come back here
-                RootViewController.shared.skView.presentScene(MenuScreen())
+                Consts.endBackground = "roller coaster background"
+                RootViewController.shared.skView.presentScene(GameEndScene())
             }
         }
         
