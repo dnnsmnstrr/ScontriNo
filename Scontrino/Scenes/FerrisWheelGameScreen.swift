@@ -64,7 +64,8 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     var justSkipped: Bool = false
     var screenScale: CGFloat = UIScreen.main.scale
     var correctWords = 0
-    var roundsToPlay = 1
+    let roundsToPlay = 1
+    var wordAmount = 6
     
     
     
@@ -72,7 +73,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         super.createSceneContents()
         
         let center: CGPoint = CGPoint(x: self.size.width / 2,y: self.size.height / 2)
-//        roundsToPlay = Int(amountOfCabins) * 2
+        wordAmount = Int(amountOfCabins) * roundsToPlay
         
         //camera
         cameraNode.position = center
@@ -300,7 +301,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                 
                 self.nextCabin()
                 self.correctWords += 1
-                if self.correctWords >= self.roundsToPlay{
+                if self.correctWords >= self.wordAmount{
                     self.listen = false
                     Consts.endBackground = "ferris wheel background"
                     RootViewController.shared.skView.presentScene(GameEndScene())
