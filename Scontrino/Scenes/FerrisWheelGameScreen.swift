@@ -63,6 +63,8 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     var zoomPoint: CGFloat?
     var justSkipped: Bool = false
     var screenScale: CGFloat = UIScreen.main.scale
+    var correctWords = 0
+    var roundsToPlay = 1
     
     
     
@@ -70,6 +72,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
         super.createSceneContents()
         
         let center: CGPoint = CGPoint(x: self.size.width / 2,y: self.size.height / 2)
+//        roundsToPlay = Int(amountOfCabins) * 2
         
         //camera
         cameraNode.position = center
@@ -296,6 +299,13 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
                 inputNode.removeTap(onBus: 0)
                 
                 self.nextCabin()
+                self.correctWords += 1
+                if self.correctWords >= self.roundsToPlay{
+                    self.listen = false
+                    Consts.endBackground = "ferris wheel background"
+                    RootViewController.shared.skView.presentScene(GameEndScene())
+                }
+                
                 
                 print("Word recognized, the new word on screen is: \(self.currentWordOnScreen!)\n")
                 self.justSkipped = false
@@ -330,7 +340,7 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
     //ui
     func createFerrisWheel() {
         ferrisWheel = SKSpriteNode.init(texture: SKTexture(imageNamed: "Wheel"))
-        ferrisWheel.name = "wheel"
+        ferrisWheel.name = "Wheel"
         ferrisWheel.zPosition = 2
         ferrisWheel.anchorPoint = CGPoint(x: 0.5, y: 0.5) // default
         ferrisWheel.position = CGPoint(x: size.width/2, y: size.height/1.5)
@@ -450,6 +460,8 @@ class FerrisWheelGameScreen: GameScene, SFSpeechRecognizerDelegate {
             
         }
         print("The new words are: \(self.currentWords)")
+        
+        
     }
     
     override init() {
