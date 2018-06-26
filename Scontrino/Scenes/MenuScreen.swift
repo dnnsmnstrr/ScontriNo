@@ -61,6 +61,7 @@ class MenuScreen: SKScene, ButtonNodeDelegate, UIPageViewControllerDelegate {
 //        trialNode.name = "TrialScreen"
 //        trialNode.position = CGPoint(x: self.size.width / 2, y: 1.5 * self.size.height / 8)
 //        self.addChild(trialNode)
+        
     }
     
     func buttonNodeTapped(_ sender: ButtonNode) {
