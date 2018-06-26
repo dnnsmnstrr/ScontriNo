@@ -271,11 +271,12 @@ struct Consts {
             static let shapeFittingInHole: CGFloat = 150
         }
         struct NodePositions {
-            static let vagonYPos = Consts.Graphics.screenHeight - Consts.Graphics.screenHeight / 1.438
+            static let vagonYPos = Consts.Graphics.screenHeight - Consts.Graphics.screenHeight / 1.438 // this will change the y position of the train
             static let hole = CGPoint(x: 0, y: 0)
             static let shapeX = Consts.Graphics.screenWidth / 3
             static let shapeY = Consts.Graphics.screenHeight / 1.38
-            static let shapeSpacing = Consts.Graphics.screenWidth / 5.99
+            
+            static let shapeSpacing = Consts.Graphics.screenWidth / 5.99 //Decrease this number to have more spaces between shapes
         }
     }
     struct Id {
@@ -291,7 +292,6 @@ struct Consts {
     struct NodePositions {
         static let movingCategInitialPos = CGPoint(x: Graphics.screenWidth / 2 , y: 0 - Graphics.screenHeight / 6)
         static let movingCategFinalPos = CGPoint(x: Graphics.screenWidth / 2 , y: Graphics.screenHeight / 3)
-        static let vagonRollerYPos = Consts.Graphics.screenHeight - Consts.Graphics.screenHeight / 1.3
         static let firstLogPosition = CGPoint(x: Graphics.screenWidth / 4 , y: Graphics.screenHeight / 2)
         
         static let secondLogPosition = CGPoint(x: (3 * Graphics.screenWidth) / 4 , y: Graphics.screenHeight / 2)
