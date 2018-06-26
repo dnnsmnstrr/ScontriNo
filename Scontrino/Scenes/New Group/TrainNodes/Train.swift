@@ -22,21 +22,19 @@ struct Train {
     
     mutating func setupTrain(numberOfShapes: Int) {
         headVagon.setup()
-        var vagonXPosition = headVagon.position.x - (headVagon.size.width / 2) + (headVagon.size.width / 100 * 5)
+        var vagonXPosition = (Consts.Graphics.screenWidth / 2) - (headVagon.size.width / 2)
+//            + (headVagon.size.width / 100 * 5)
+        debugPrint(vagonXPosition)
         debugPrint(numberOfShapes)
-        for index in 0...numberOfShapes - 1 {
-            centralVagons.append(CentralVagonNode(imageNamed: "central"))
+        for index in 0..<numberOfShapes {
+            centralVagons.append(CentralVagonNode(imageNamed: "middle"))
             centralVagons[index].setup(posX: vagonXPosition)
-            vagonXPosition -= centralVagons[index].size.width + (centralVagons[index].size.width / 100 * 5)
+            vagonXPosition -= centralVagons[index].size.width
+//                + (centralVagons[index].size.width / 100 * 5)
         }
         tailVagon.setup(posX: vagonXPosition)
     }
     
-    mutating func instanziateCentralVagons(numberOfShapes: Int) {
-        for index in 0...Consts.shapes.count - 1 {
-            
-        }
-    }
     
     func moveTrain(pos: CGFloat, onComplete: @escaping (Bool) -> Void) -> TimeInterval {
         var position = pos - (centralVagons[0].size.width * CGFloat(centralVagons.count + 1))
@@ -76,10 +74,10 @@ struct Train {
         let anim = SKAction.run {
             onComplete(true)
         }
-        
+        let vect = CGVector(dx: Int(headVagon.size.width), dy: 0)
         let fillInHoleAnimation = SKAction.sequence([
-//            SKAction.follow(<#T##path: CGPath##CGPath#>, duration: <#T##TimeInterval#>)
-            SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: trainSpeed),
+            SKAction.move(by: vect, duration: 1),
+//            SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: trainSpeed),
             anim
             ])
 //        debugPrint("fill in Hole anim: \(fillInHoleAnimation.duration)")

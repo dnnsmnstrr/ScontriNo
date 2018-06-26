@@ -8,7 +8,29 @@
 
 import SpriteKit
 
+enum HoleState {
+    case normal, noBorder
+}
+
 class HoleNode: SKSpriteNode {
+    
+    var normalImageName: String!
+    var noBorderImageName: String!
+    var state = HoleState.normal {
+        willSet {
+            switch newValue {
+            case .normal:
+                let texture = SKTexture(imageNamed: normalImageName)
+                self.texture = texture
+            case .noBorder:
+                let texture = SKTexture(imageNamed: noBorderImageName)
+                self.texture = texture
+            
+        
+            }
+    
+        }
+    }
     convenience init(imageNamed: String) {
         let texture = SKTexture(imageNamed: imageNamed)
         self.init(texture: texture)
@@ -18,7 +40,11 @@ class HoleNode: SKSpriteNode {
         var texSize = texture.size()
         texSize.width = (texSize.width) * 0.55
         texSize.height = (texSize.height) * 0.55
-        self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "red square"), size: texSize)
+        self.normalImageName = imageNamed
+        let shapeName = texture.description.split(separator: "\'")[1].split(separator: " ").first!
+        self.noBorderImageName = shapeName.description
+        
+        self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "square normal"), size: texSize)
         self.physicsBody?.isDynamic = false
         self.physicsBody?.affectedByGravity = false
         self.physicsBody?.categoryBitMask = Consts.PhysicsMask.holeNode
@@ -27,14 +53,15 @@ class HoleNode: SKSpriteNode {
             self.isHidden = false
         }
         let presentationAnimation = SKAction.sequence([
-            SKAction.scale(to: CGSize.zero, duration: 0),
+            SKAction.scale(to: 0, duration: 0),
             isVisible,
-            SKAction.scale(to: mySize, duration: 0.5)
+            SKAction.scale(to: 1, duration: 0.5)
             ])
         self.run(presentationAnimation)
     }
     func setup(pos: CGPoint) {
         self.position = pos
         self.zPosition = Consts.RollerCoasterGameScreen.zPositions.hole
+        state = .normal
     }
 }

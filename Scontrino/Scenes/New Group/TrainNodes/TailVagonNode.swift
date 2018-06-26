@@ -16,7 +16,7 @@ class TailVagonNode : SKSpriteNode {
 //        self.setScale(0.1)
     }
     func setup(posX: CGFloat) {
-        self.position.y = Consts.Graphics.screenHeight - Consts.Graphics.screenHeight / 1.7
+        self.position.y = Consts.RollerCoasterGameScreen.NodePositions.vagonYPos
         self.position.x = posX - self.size.width / 2
         self.zPosition = Consts.RollerCoasterGameScreen.zPositions.vagons
     }

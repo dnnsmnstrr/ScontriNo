@@ -8,12 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1570D58120B6E35300AAF28A /* HeadVagonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570D57D20B6E35300AAF28A /* HeadVagonNode.swift */; };
-		1570D58220B6E35300AAF28A /* TrainNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570D57E20B6E35300AAF28A /* TrainNode.swift */; };
 		1570D58320B6E35300AAF28A /* CentralVagonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570D57F20B6E35300AAF28A /* CentralVagonNode.swift */; };
 		1570D58420B6E35300AAF28A /* TailVagonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570D58020B6E35300AAF28A /* TailVagonNode.swift */; };
 		1570D58820B6FB5C00AAF28A /* Train.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570D58720B6FB5C00AAF28A /* Train.swift */; };
 		158720AB20BC6520001A6B59 /* CabinNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158720AA20BC6520001A6B59 /* CabinNode.swift */; };
-		15F24B1520BDA556004919B8 /* background.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 15F24B1420BDA556004919B8 /* background.pdf */; };
 		2A2B4A2A2091FBD4009B81FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A292091FBD4009B81FB /* AppDelegate.swift */; };
 		2A2B4A342091FBD7009B81FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A2B4A322091FBD7009B81FB /* LaunchScreen.storyboard */; };
 		2A2B4A3C2091FF42009B81FB /* FerrisWheelGameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4A3B2091FF42009B81FB /* FerrisWheelGameScreen.swift */; };
@@ -43,12 +41,10 @@
 
 /* Begin PBXFileReference section */
 		1570D57D20B6E35300AAF28A /* HeadVagonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadVagonNode.swift; sourceTree = "<group>"; };
-		1570D57E20B6E35300AAF28A /* TrainNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainNode.swift; sourceTree = "<group>"; };
 		1570D57F20B6E35300AAF28A /* CentralVagonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralVagonNode.swift; sourceTree = "<group>"; };
 		1570D58020B6E35300AAF28A /* TailVagonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TailVagonNode.swift; sourceTree = "<group>"; };
 		1570D58720B6FB5C00AAF28A /* Train.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Train.swift; sourceTree = "<group>"; };
 		158720AA20BC6520001A6B59 /* CabinNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CabinNode.swift; sourceTree = "<group>"; };
-		15F24B1420BDA556004919B8 /* background.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = background.pdf; sourceTree = "<group>"; };
 		2A2B4A262091FBD4009B81FB /* Scontrino.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scontrino.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A2B4A292091FBD4009B81FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2A2B4A332091FBD7009B81FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -96,7 +92,6 @@
 				1570D57D20B6E35300AAF28A /* HeadVagonNode.swift */,
 				1570D57F20B6E35300AAF28A /* CentralVagonNode.swift */,
 				1570D58020B6E35300AAF28A /* TailVagonNode.swift */,
-				1570D57E20B6E35300AAF28A /* TrainNode.swift */,
 				1570D58720B6FB5C00AAF28A /* Train.swift */,
 			);
 			path = TrainNodes;
@@ -136,7 +131,6 @@
 		2A2B4A4720922241009B81FB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				15F24B1420BDA556004919B8 /* background.pdf */,
 				2A2B4A4A2092286F009B81FB /* Assets.xcassets */,
 				2A2B4A322091FBD7009B81FB /* LaunchScreen.storyboard */,
 			);
@@ -281,7 +275,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A2B4A4B2092286F009B81FB /* Assets.xcassets in Resources */,
-				15F24B1520BDA556004919B8 /* background.pdf in Resources */,
 				2A2B4A342091FBD7009B81FB /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,7 +286,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1570D58220B6E35300AAF28A /* TrainNode.swift in Sources */,
 				2A56760B20BD9D6A000F5388 /* SwitchNode.swift in Sources */,
 				2A2B4A402091FF86009B81FB /* GameScene.swift in Sources */,
 				2A5493F020BC5DE10077C600 /* StartScreen.swift in Sources */,

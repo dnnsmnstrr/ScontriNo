@@ -11,9 +11,10 @@ import SpriteKit
 
 class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
     let dataSource = GameDataSource()
+    //MARK: Eliminate + 3
     var numberShapesRemaining = Consts.shapes.count
     var holeNode: HoleNode!
-    let textureWidth = MovingShapeNode(imageNamed: "red square").size.width
+    let textureWidth = MovingShapeNode(imageNamed: "square normal").size.width
     //shape arrays
     var coloredShapesNodes: [MovingShapeNode] = []
     var coloredFakeShapesNodes: [MovingShapeNode] = []
@@ -27,6 +28,7 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
     var trainXPosition: CGFloat = 0
     var trainAnimDuration: TimeInterval = 0.0
     var vagonIndex = 0
+    
     var coloredFakeShapesIndex = 0
     
     override init() {
@@ -61,6 +63,8 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
     }
     func createTrain() {
         train.setupTrain(numberOfShapes: Consts.shapes.count - 1)
+//        test number
+//        train.setupTrain(numberOfShapes: 5)
         self.addChild(train.headVagon)
         for index in 0...train.centralVagons.count - 1 {
             self.addChild(train.centralVagons[index])
@@ -78,7 +82,7 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
     
     func createShapes() {
         let numberOfShapes = setDifficulty()
-        for index in  0..<numberOfShapes{
+        for index in  0..<numberOfShapes {
             coloredShapesNodes.append(dataSource.nextMovingShapeNode())
             createOneShape(index: index, numberOfShapes: numberOfShapes)
         }
@@ -132,11 +136,12 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
                 coloredShapesNodes[index].moveTo(position: holeNode.position) { (value) in
                     if value {
                         debugPrint("finito il move to")
-                        debugPrint("coloreDHOleNodes.count \(self.coloredHoleNodes.count)")
+//                        debugPrint("coloreDHOleNodes.count \(self.coloredHoleNodes.count)")
                         self.coloredHoleNodes.append(self.coloredShapesNodes[index])
-                        debugPrint("aggiunto coloreDHOleNodes.count \(self.coloredHoleNodes.count)")
+                        self.coloredHoleNodes.last?.state = .noBorder
+//                        debugPrint("aggiunto coloreDHOleNodes.count \(self.coloredHoleNodes.count)")
                         self.coloredHoleNodes[self.vagonIndex].position = self.holeNode.position
-                        debugPrint("shapeRamaining \(self.numberShapesRemaining)")
+//                        debugPrint("shapeRamaining \(self.numberShapesRemaining)")
                         debugPrint("Deleting a hole node")
                         self.holeNode.removeFromParent()
                         if self.numberShapesRemaining > 0 {
@@ -173,10 +178,8 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
                                 } else {
                                     self.endGame = true
                                 }
-                                
                             }
                         }
-                        
                     }
                 }
                 numberShapesRemaining -= 1
@@ -196,7 +199,9 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
             
             
             
-                coloredHoleNodes[index].run(SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: train.trainSpeed))
+//                coloredHoleNodes[index].run(SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: train.trainSpeed))
+            let vect = CGVector(dx: train.headVagon.size.width, dy: 0)
+            coloredHoleNodes[index].run(SKAction.move(by: vect, duration: 1))
         }
     }
     
@@ -234,6 +239,7 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
         moveTrain() { (value) in
             if(value) {
 //                I should come back here
+                RootViewController.shared.skView.presentScene(MenuScreen())
             }
         }
         
@@ -245,15 +251,15 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
         if contact.bodyA.categoryBitMask > contact.bodyB.categoryBitMask {
             bodyA = contact.bodyB
             bodyB = contact.bodyA
-            debugPrint("A Better then B")
+//            debugPrint("A Better then B")
         }else{
-            debugPrint("B Better then A")
+//            debugPrint("B Better then A")
             //            nodeA = contact.bodyA.node
             //            nodeB = contact.bodyB.node
         }
         if bodyA.categoryBitMask == Consts.PhysicsMask.shapeNodes {
             if bodyB.categoryBitMask == Consts.PhysicsMask.holeNode {
-                debugPrint("scontro")
+//                debugPrint("scontro")
                 if bodyA.node?.name == bodyB.node?.name {
                     debugPrint("same Shape")
                     let contactNode = bodyA.node as! MovingShapeNode
@@ -269,9 +275,9 @@ class RollerCoasterGameScreen: GameScene, SKPhysicsContactDelegate {
         if contact.bodyA.categoryBitMask > contact.bodyB.categoryBitMask {
             bodyA = contact.bodyB
             bodyB = contact.bodyA
-            debugPrint("A Better then B")
+//            debugPrint("A Better then B")
         }else{
-            debugPrint("B Better then A")
+//            debugPrint("B Better then A")
             //            nodeA = contact.bodyA.node
             //            nodeB = contact.bodyB.node
         }

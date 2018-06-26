@@ -29,7 +29,8 @@ struct GameDataSource {
     
     //ALessio: added this one
     func nextMovingShapeNode() -> MovingShapeNode {
-        return MovingShapeNode(imageNamed: nextColor() + " " + nextShape())
+//        return MovingShapeNode(imageNamed: nextColor() + " " + nextShape())
+        return MovingShapeNode(imageNamed: nextShape() + " normal")
     }
     
     func nextFlagNode() -> SKSpriteNode {
@@ -44,10 +45,10 @@ struct GameDataSource {
         //ALESSIO: I'm Modifing this
         let index = GKRandomSource.sharedRandom().nextInt(upperBound: movingNodes.count)
         let node = movingNodes[index]
-        let shape = node.texture!.description.split(separator: "\'")[1].split(separator: " ").last!
-        let grayNode = HoleNode(imageNamed: "gray" + " " + shape)
+        let shape = node.texture!.description.split(separator: "\'")[1].split(separator: " ").first!
+        let grayNode = HoleNode(imageNamed: shape + " outline")
         debugPrint("Shape of the gray node is: \(shape)")
-        debugPrint("name of gray node is: \(node.name)")
+//        debugPrint("name of gray node is: \(node.name)")
         grayNode.name = node.name
         return grayNode
         //End of my changes, I commented the original lines
@@ -66,10 +67,13 @@ struct GameDataSource {
             newNode = nextMovingShapeNode()
             for index in 0...movingNodes.count - 1 {
                 let node = movingNodes[index]
-                let shape = node.texture!.description.split(separator: "\'")[1].split(separator: " ").last!
-                if newNode.texture!.description.split(separator: "\'")[1].split(separator: " ").last! == shape {
+                let shape = node.texture!.description.split(separator: "\'")[1].split(separator: " ").first!
+                debugPrint("shape name \(shape)")
+                let newshapeName = newNode.texture!.description.split(separator: "\'")[1].split(separator: " ").first!
+                if newshapeName == shape {
                     isTheSame = true
                 }
+                debugPrint("new node name \(newshapeName)")
             }
         }
         return newNode
@@ -158,7 +162,7 @@ struct GameDataSource {
     // TODO: - initializeDice() should be updated to depend opon dificulty
     mutating func initializeDice() {
         colorsDie = GKShuffledDistribution(forDieWithSideCount: Consts.colors.count - 1)
-        shapesDie = GKShuffledDistribution(forDieWithSideCount: Consts.shapes.count - 1)
+        shapesDie = GKShuffledDistribution(forDieWithSideCount: Consts.shapes.count)
         categorizationDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.categories.count)
         animalsDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.animali.count)
         ciboDie = GKShuffledDistribution(forDieWithSideCount: Consts.FloatingLogsGameScreen.cibo.count)
@@ -169,7 +173,7 @@ struct GameDataSource {
     }
     
     private func nextShape() -> String {
-        return Consts.shapes[shapesDie.nextInt()]
+        return Consts.shapes[shapesDie.nextInt()  - 1]
     }
     
     private func nextColor() -> String {
