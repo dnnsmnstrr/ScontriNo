@@ -7,6 +7,7 @@
 //funzionerà?
 
 import UIKit
+import SpriteKit
 
 enum Difficulty {
     case easy, normal
@@ -17,6 +18,10 @@ enum Position {
 }
 
 struct Consts {
+    
+    static var allTextures: [SKTexture] = []
+    static var endBackground = ""
+    
     struct Graphics {
         static let screenBounds = UIScreen.main.bounds
         static let screenWidth = screenBounds.width
@@ -28,13 +33,15 @@ struct Consts {
     static let availableWords = [
         Difficulty.easy: [
             Position.initial: [
-                "a": ["ago"],
-                "b": ["banana"],
-                "d": ["dado"],
+                "a": ["ago", "aglio", "ape", "ascia"],
+                "b": ["banana", "balena", "biglia", "biscia"],
+                "d": ["dado", "dottore"],
+                "f": ["foglia"],
                 "g": ["gufo"],
-                "k": ["cane", "capotto"],
+                "k": ["cane", "cappotto"],
                 "m": ["mela", "mattone", "maglia"],
                 "n": ["neve", "nave"],
+                "o": ["oca"],
                 "p": ["pipa", "palla", "panino"],
                 "r": ["rosa", "razzo"],
                 "s": ["sole", "sapone"],
